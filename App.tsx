@@ -5,6 +5,7 @@ import Navigation from './navigation';
 import useColorScheme from './hooks/useColorScheme'
 import SignUp from './screens/SignUp';
 import { AuthContext } from './types/AuthContext';
+import { useReducer } from 'react';
 
 // const AuthContext = React.createContext();
 
@@ -12,8 +13,8 @@ const colorScheme = useColorScheme();
 
 export default function App({ navigation }:RootStackScreenProps<'SignUp'>) {
 
-  const [state, dispatch] = Reducer.useReducer(
-    (prevState: any, action: { type: any; token: any; }) => {
+  const [state, dispatch] = useReducer(
+    (prevState: any, action: { type: any; token?: any; }) => {
       switch (action.type) {
         case 'RESTORE_TOKEN':
           return {
@@ -73,7 +74,7 @@ export default function App({ navigation }:RootStackScreenProps<'SignUp'>) {
 
         dispatch({ type: 'SIGN_IN', token: 'dummy-auth-token' });
       },
-      signOut: () => dispatch({ type: 'SIGN_OUT' }),
+      signOut: () => dispatch({ type: 'SIGN_OUT'}),
       signUp: async (data: any) => {
         // In a production app, we need to send user data to server and get a token
         // We will also need to handle errors if sign up failed

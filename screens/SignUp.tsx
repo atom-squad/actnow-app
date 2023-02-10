@@ -9,7 +9,7 @@ import { Image } from 'react-native';
 
 type SignUpOneScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUpOne'>;
 
-function SignUpOneScreen() {
+function SignUpOneScreen({navigation}) {
 
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -25,7 +25,7 @@ function SignUpOneScreen() {
             <TextInput placeholder='Email' value={username}  onChangeText={setUsername} style={styles.input} />
             <TextInput placeholder='Password' value={password}  onChangeText={setPassword}style={styles.input} />
             {/* make function call to check if all fields are filled or not */}
-            <TouchableOpacity style={styles.button} onPress={() =>props.navigation.push("SignUpTwo") }>
+            <TouchableOpacity style={styles.button} onPress={() =>navigation.push("SignUpTwo") }>
                 <Text style={styles.buttonText} >Let's Start</Text>
             </TouchableOpacity>
         </View>
