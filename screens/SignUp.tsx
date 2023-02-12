@@ -3,11 +3,9 @@ import { Text, View } from '../components/Themed';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
 import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import icon from '../assets/images/icon.png';
 import { Image } from 'react-native';
-
-type SignUpOneScreenProps = NativeStackScreenProps<RootStackParamList, 'SignUpOne'>;
+import { NavigationContainer } from '@react-navigation/native';
 
 function SignUpOneScreen({navigation}) {
 
@@ -49,10 +47,12 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function SignUp() {
     return (
+            <NavigationContainer>
             <Stack.Navigator> 
                 <Stack.Screen name="SignUpOne" component={SignUpOneScreen} />
                 <Stack.Screen name="SignUpTwo" component={SignUpTwoScreen} />
             </Stack.Navigator> 
+            </NavigationContainer>
     );
 }
 
