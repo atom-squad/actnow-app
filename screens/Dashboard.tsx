@@ -1,6 +1,3 @@
-// import { StyleSheet } from 'react-native';
-// import EditScreenInfo from '../components/EditScreenInfo';
-// import { Text, View } from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { Box, ScrollView, Image, Flex, HStack, Text, Divider, Spacer, Progress, Heading, Pressable, VStack, Circle, Center } from "native-base";
 import icon from "../assets/images/icon.png";
@@ -8,12 +5,6 @@ import icon from "../assets/images/icon.png";
 export default function Dashboard({ navigation }: RootTabScreenProps<'Dashboard'>) {
 
   return (
-    // <View style={styles.container}>
-    //   <Text style={styles.title}>Tab One</Text>
-    //   <Box>Hello world</Box>
-    //   <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-    //   <EditScreenInfo path="/screens/Dashboard.tsx" />
-    // </View>
     <ScrollView padding={4} >
       <Flex direction='row'>
         <Box>
@@ -31,17 +22,6 @@ export default function Dashboard({ navigation }: RootTabScreenProps<'Dashboard'
           </HStack>
         </Box>
       </Flex>
-
-      {/* <Box borderColor={"#000"} borderWidth={1} borderRadius={10} >
-        <Divider orientation='horizontal' />
-      <Progress size="xl" value={65}  marginTop={4} />
-      <Flex direction='row' alignItems={"center"} paddingTop={2}>
-      <Image source={icon} alt="icon" size={50} borderRadius={100} borderColor="black" borderWidth={2}/>
-      <Text paddingLeft={2}><Text bold>Level IV </Text>- Amateur</Text>
-      <Spacer />
-      <Text>Points: <Text bold>200/500</Text></Text>
-      </Flex>
-      </Box> */}
 
 <Box borderColor={"#000"} borderWidth={1} borderRadius={10}  marginTop={4}>
 <Flex direction='row' alignItems={"center"} >
@@ -134,20 +114,3 @@ export default function Dashboard({ navigation }: RootTabScreenProps<'Dashboard'
     </ScrollView>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   title: {
-//     fontSize: 20,
-//     fontWeight: 'bold',
-//   },
-//   separator: {
-//     marginVertical: 30,
-//     height: 1,
-//     width: '80%',
-//   },
-// });
