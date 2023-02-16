@@ -8,6 +8,8 @@ import { LinkingOptions } from '@react-navigation/native';
 import * as Linking from 'expo-linking';
 
 import { RootStackParamList } from '../types';
+import LeaderboardScreen from '../screens/LeaderBoardScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [Linking.createURL('/')],
@@ -15,14 +17,29 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
       Root: {
         screens: {
-          TabOne: {
+          Dashboard: {
             screens: {
-              TabOneScreen: 'one',
+              DashboardScreen: 'dashboard',
             },
           },
-          TabTwo: {
+          Actions: {
             screens: {
-              TabTwoScreen: 'two',
+              ActionsScreen: 'actions',
+            },
+          },
+          Scan: {
+            screens: {
+              ScanScreen: 'scan',
+            },
+          },
+          Leaderboard: {
+            screens: {
+              LeaderboardScreen: 'leaderboard',
+            },
+          },
+          Settings: {
+            screens: {
+              SettingsScreen: 'settings',
             },
           },
         },
