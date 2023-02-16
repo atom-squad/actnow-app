@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Text, View } from '../components/Themed';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../types';
-import { StyleSheet, TextInput, TouchableOpacity } from 'react-native';
 import icon from '../assets/images/icon.png';
-import { Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { StyleSheet} from 'react-native';
+import { Box, Flex, FormControl, Icon, Image, Input, KeyboardAvoidingView, Pressable, Text } from 'native-base';
+import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 
 function SignUpOneScreen({navigation}) {
 
@@ -13,33 +13,65 @@ function SignUpOneScreen({navigation}) {
     const [password, setPassword] = React.useState('');
     const [organisation, setOrganisation] = React.useState('');
   const [department, setDepartment] = React.useState('');
+  const [show, setShow] = React.useState(false);
 
 
     return (
-            <View style={styles.container}>
-             <Image  source={icon} accessibilityLabel="Act Now Logo" style={styles.iconStyle} />
-            <TextInput placeholder='Organisation' value={organisation} onChangeText={setOrganisation} style={styles.input} />
-            <TextInput placeholder='Department' value={department}  onChangeText={setDepartment}  style={styles.input} />
-            <TextInput placeholder='Email' value={username}  onChangeText={setUsername} style={styles.input} />
-            <TextInput placeholder='Password' value={password}  onChangeText={setPassword}style={styles.input} />
-            {/* make function call to check if all fields are filled or not */}
-            <TouchableOpacity style={styles.button} onPress={() =>navigation.push("SignUpTwo") }>
-                <Text style={styles.buttonText} >Let's Start</Text>
-            </TouchableOpacity>
-        </View>
+        <Box safeArea>
+            <KeyboardAvoidingView>
+                <Flex direction="column" align="center">
+                    <Image source={icon} accessibilityLabel="Act Now Logo" alt="ActNow Logo" style={styles.iconStyle} />
+                    <FormControl style={styles.input} isRequired>
+                        <Input placeholder="Organisation" value={organisation} onChangeText={setOrganisation}  size="lg" />
+                    </FormControl>
+                    <FormControl style={styles.input}  isRequired>
+                        <Input placeholder="Department" value={department} onChangeText={setDepartment} size="lg" />
+                    </FormControl>
+                    <FormControl style={styles.input} isRequired>
+                        <Input placeholder="Email" value={username} onChangeText={setUsername} size="lg" />
+                    </FormControl>
+                    <FormControl style={styles.input} isRequired>
+                        <Input placeholder="Password" 
+                                        size="lg"  
+                                        value={password}
+                                        onChangeText={setPassword} 
+                                        type={show ? "text" : "password"} 
+                                        InputRightElement={
+                                            <Pressable onPress={() => setShow(!show)}>
+                                                <Icon as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />} size={5} mr="2" />
+                                            </Pressable>} />
+                    </FormControl>
+                    <Pressable style={styles.button} onPress={() => navigation.push("SignUpTwo")} >
+                        <Text style={styles.buttonText}>Let's Start</Text>
+                     </Pressable>
+                </Flex>
+            </KeyboardAvoidingView>
+        </Box>
+
     );
 }
 
 function SignUpTwoScreen() {
+
+    const [fullName, setFullName] = React.useState('');
+
     return (
-        <View>
-              <Image  source={icon} accessibilityLabel="Act Now Logo" style={styles.iconStyle} />
-              <Text>Add Picture</Text>
-            <TextInput placeholder='Full Name' style={styles.input} />
-            <TouchableOpacity style={styles.button} >
-                <Text style={styles.buttonText} >Take Survey</Text>
-            </TouchableOpacity>
-        </View>
+        <Box safeArea>
+            <KeyboardAvoidingView>
+                <Flex direction="column" align="center">
+                <Image source={icon} accessibilityLabel="Act Now Logo" alt="ActNow Logo" style={styles.iconStyleRounded} />
+                <Pressable >
+                    <Text style={styles.buttonText}>Add Picture</Text>
+                </Pressable>
+                <FormControl style={styles.inputWithMargin}  isRequired>
+                        <Input placeholder="Full Name" value={fullName} onChangeText={setFullName}  size="lg"  />
+                        <Pressable style={styles.buttonMargin}>
+                        <Text style={styles.buttonText}>Take Survey</Text>
+                     </Pressable>
+                    </FormControl>
+                </Flex>
+            </KeyboardAvoidingView>
+        </Box>
     );
 }
 
@@ -58,23 +90,10 @@ function SignUp() {
 
 const styles = StyleSheet.create({
 
-    container:{
-        flex: 1,
-        justifyContent: 'center',
-         alignItems: 'center',
-        flexDirection: 'column',
-        boxSizing: 'border-box',
-        width:'100%'
-    },
-
     input: {
         width: '85%',
-        borderWidth: 1,
-        padding: 4,
-        margin:8,
-        height: 40,
-        borderRadius: 4,
-        alignSelf: 'center'
+        marginVertical: 10 ,
+        alignItems: 'center'
       },
 
       button: {
@@ -97,9 +116,34 @@ const styles = StyleSheet.create({
         maxWidth: '100%',
          maxHeight: '20%',
         width: '50%',
+        resizeMode: 'contain'
+      },
+
+      iconStyleRounded: {
+        maxWidth: '100%',
+         maxHeight: '20%',
+        width: '50%',
         resizeMode: 'contain',
-        alignSelf: 'center',
+        borderRadius: 100
+      },
+
+        inputWithMargin: {
+        width: '85%',
+        marginTop: 40 ,
+        alignItems: 'center',
+      },
+
+      buttonMargin: {
+         alignSelf: "center",
+        borderWidth: 1,
+        width: "70%",
+       height: 40,
+        padding: 4,
+        justifyContent: 'center',
+        borderRadius: 4,
+        marginTop: 60
       }
+
 });
 
 export default SignUp;
