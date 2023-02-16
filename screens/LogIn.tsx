@@ -1,6 +1,6 @@
 import  *  as React  from   'react' ;
 import { StyleSheet } from 'react-native';
-import { KeyboardAvoidingView, Flex, FormControl, Input, Pressable, Icon, Text, Image} from 'native-base';
+import { Flex, FormControl, Input, Pressable, Icon, Text, Image} from 'native-base';
 import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import icon from '../assets/images/icon.png';
 

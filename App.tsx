@@ -1,3 +1,4 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { NativeBaseProvider } from "native-base";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -18,8 +19,8 @@ export default function App() {
       <SafeAreaProvider>
         <NativeBaseProvider>
           {/* <Navigation colorScheme={colorScheme} /> */}
-          <SignUp />
-          {/* <LogIn /> */}
+          {/* <SignUp /> */}
+          <LogIn />
           <StatusBar />
         </NativeBaseProvider>
       </SafeAreaProvider>

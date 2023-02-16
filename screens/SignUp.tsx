@@ -4,7 +4,7 @@ import { RootStackParamList } from '../types';
 import icon from '../assets/images/icon.png';
 import { NavigationContainer } from '@react-navigation/native';
 import { StyleSheet} from 'react-native';
-import { Box, Flex, FormControl, Icon, Image, Input, KeyboardAvoidingView, Pressable, Text } from 'native-base';
+import { Flex, FormControl, Icon, Image, Input, Pressable, Text } from 'native-base';
 import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 
 function SignUpOneScreen({navigation}) {
