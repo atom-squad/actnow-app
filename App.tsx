@@ -5,6 +5,7 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import SignUp from './screens/SignUp';
+import LogIn from './screens/LogIn';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -18,6 +19,7 @@ export default function App() {
         <NativeBaseProvider>
           {/* <Navigation colorScheme={colorScheme} /> */}
           <SignUp />
+          {/* <LogIn /> */}
           <StatusBar />
         </NativeBaseProvider>
       </SafeAreaProvider>

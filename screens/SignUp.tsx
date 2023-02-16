@@ -17,9 +17,7 @@ function SignUpOneScreen({navigation}) {
 
 
     return (
-        <Box safeArea>
-            <KeyboardAvoidingView>
-                <Flex direction="column" align="center">
+        <Flex direction="column" align="center" justify="center" height="100%">
                     <Image source={icon} accessibilityLabel="Act Now Logo" alt="ActNow Logo" style={styles.iconStyle} />
                     <FormControl style={styles.input} isRequired>
                         <Input placeholder="Organisation" value={organisation} onChangeText={setOrganisation}  size="lg" />
@@ -44,9 +42,7 @@ function SignUpOneScreen({navigation}) {
                     <Pressable style={styles.button} onPress={() => navigation.push("SignUpTwo")} >
                         <Text style={styles.buttonText}>Let's Start</Text>
                      </Pressable>
-                </Flex>
-            </KeyboardAvoidingView>
-        </Box>
+            </Flex>
 
     );
 }
@@ -56,9 +52,7 @@ function SignUpTwoScreen() {
     const [fullName, setFullName] = React.useState('');
 
     return (
-        <Box safeArea>
-            <KeyboardAvoidingView>
-                <Flex direction="column" align="center">
+                <Flex direction="column" justify="center" align="center" height="100%">
                 <Image source={icon} accessibilityLabel="Act Now Logo" alt="ActNow Logo" style={styles.iconStyleRounded} />
                 <Pressable >
                     <Text style={styles.buttonText}>Add Picture</Text>
@@ -70,8 +64,6 @@ function SignUpTwoScreen() {
                      </Pressable>
                     </FormControl>
                 </Flex>
-            </KeyboardAvoidingView>
-        </Box>
     );
 }
 
