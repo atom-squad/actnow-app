@@ -12,12 +12,15 @@ import { ColorSchemeName, Pressable } from 'react-native';
 
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
+import ActionsScreen from '../screens/ActionsScreen';
+import DashboardScreen from '../screens/DashboardScreen';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import Dashboard from '../screens/Dashboard';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import ScanScreen from '../screens/ScanScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
+import LeaderboardScreen from '../screens/LeaderBoardScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -64,31 +67,41 @@ function BottomTabNavigator() {
       }}>
       <BottomTab.Screen
         name="Dashboard"
-        component={Dashboard}
+        component={DashboardScreen}
         options={({ navigation }: RootTabScreenProps<'Dashboard'>) => ({
-          title: 'Tab One',
+          title: 'Dashboard',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-          headerRight: () => (
-            <Pressable
-              onPress={() => navigation.navigate('Modal')}
-              style={({ pressed }) => ({
-                opacity: pressed ? 0.5 : 1,
-              })}>
-              <FontAwesome
-                name="info-circle"
-                size={25}
-                color={Colors[colorScheme].text}
-                style={{ marginRight: 15 }}
-              />
-            </Pressable>
-          ),
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="Actions"
+        component={ActionsScreen}
         options={{
-          title: 'Tab Two',
+          title: 'Actions',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Scan"
+        component={ScanScreen}
+        options={{
+          title: 'Scan',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Leaderboard"
+        component={LeaderboardScreen}
+        options={{
+          title: 'Leaderboard',
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{
+          title: 'Settings',
           tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
         }}
       />

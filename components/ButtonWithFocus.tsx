@@ -3,7 +3,7 @@ import { Pressable, Text } from "native-base";
 
 const ButtonWithFocus = ({title, style}) => {
     return (
-        <Pressable style={style} _hover={{ backgroundColor: "coolGray.400" }} _pressed={{ backgroundColor:"coolGray.400" }}>
+        <Pressable style={style} _hover={{ backgroundColor: "white" }} _pressed={{ backgroundColor:"white" }}>
             <Text alignSelf="center" bold>{title}</Text>
       </Pressable>
     );
