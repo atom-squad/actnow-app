@@ -1,6 +1,10 @@
 import { RootTabScreenProps } from '../types';
 import { Box, ScrollView, Image, Flex, HStack, Text, Divider, Spacer, Progress, Heading, Pressable, VStack, Circle, Center } from "native-base";
 import icon from "../assets/images/icon.png";
+import ButtonNativebase from '../components/ButtonNativebase';
+import ActionDetails from '../components/ActionDetails';
+import ButtonWithFocus from '../components/ButtonwithFocus';
+import { StyleSheet } from 'react-native';
 
 export default function Dashboard({ navigation }: RootTabScreenProps<'Dashboard'>) {
 
@@ -40,9 +44,7 @@ export default function Dashboard({ navigation }: RootTabScreenProps<'Dashboard'
       <Box backgroundColor="lightgrey" marginTop={4} padding={4} borderRadius={10}>
         <Heading>Quiz</Heading>
         <Text>Take the daily quiz and try to find the correct answers.</Text>
-        <Pressable bg="coolGray.100" padding={4} borderRadius={10} marginTop={4}>
-          <Text alignSelf="center" bold>Let's Start</Text>
-        </Pressable>
+        <ButtonNativebase style={styles.button} title="Start" />
       </Box>
 
       <Flex direction='row' justifyContent="space-between" alignItems="center" padding={4}>
@@ -56,36 +58,10 @@ export default function Dashboard({ navigation }: RootTabScreenProps<'Dashboard'
       </Flex>
 
       <Box>
-        <Box backgroundColor="lightgrey">
-        <Flex direction='row' justifyContent="space-between" alignItems="center" padding={4}>
-          <Box paddingLeft={8}>
-            <Text bold>Repair instead of buying.</Text>
-            <Text bold>+10 Points !</Text>
-          </Box>
-          <Circle size="40px" bgColor="blue.100"><Text bold>&#x2713;</Text></Circle>
-          </Flex>
-          </Box>
-          <Box backgroundColor="darkgrey">
-          <Flex direction='row' justifyContent="space-between" alignItems="center" padding={4}>
-          <Box paddingLeft={8}>
-            <Text bold>Repair instead of buying.</Text>
-            <Text bold>+10 Points !</Text>
-          </Box>
-          <Circle size="40px" bgColor="blue.100"><Text bold>&#x2713;</Text></Circle>
-          </Flex>
-          </Box>
-          <Box backgroundColor="lightgrey">
-          <Flex direction='row' justifyContent="space-between" alignItems="center" padding={4}>
-          <Box paddingLeft={8}>
-            <Text bold>Repair instead of buying.</Text>
-            <Text bold>+10 Points !</Text>
-          </Box>
-          <Circle size="40px" bgColor="blue.100"><Text bold>&#x2713;</Text></Circle>
-          </Flex>
-          </Box>
-          <Pressable bg="coolGray.200" padding={4} borderRadius={10}>
-          <Text alignSelf="center" bold>View All</Text>
-        </Pressable>
+          <ActionDetails  bgcolor="lightgrey" task="Repair instead of buying." />
+          <ActionDetails  bgcolor="darkgrey" task="Repair instead of buying." />
+          <ActionDetails  bgcolor="lightgrey" task="Repair instead of buying." />
+        <ButtonNativebase style={styles.viewButton} title="View All" />
       </Box>
 
       <Box>
@@ -93,12 +69,8 @@ export default function Dashboard({ navigation }: RootTabScreenProps<'Dashboard'
         <Text marginBottom={4}>Review your actions progress.</Text>
         <Box>
         <Flex direction="row">
-          <Pressable bg="coolGray.200" padding={4} borderRadius={10} flexGrow={2} _hover={{ backgroundColor: "coolGray.400" }} _pressed={{ backgroundColor:"coolGray.400" }}>
-          <Text alignSelf="center" bold>Personal</Text>
-        </Pressable>
-        <Pressable bg="coolGray.200" padding={4} borderRadius={10} flexGrow={2} _hover={{ backgroundColor: "coolGray.400" }} _pressed={{ backgroundColor:"coolGray.400" }}>
-          <Text alignSelf="center" bold>Department</Text>
-        </Pressable>
+        <ButtonWithFocus title="Personal" style={styles.progressButton} />
+        <ButtonWithFocus title="Department" style={styles.progressButton} />
         </Flex>
         {/* Add graph here */}
         </Box>
@@ -114,3 +86,25 @@ export default function Dashboard({ navigation }: RootTabScreenProps<'Dashboard'
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: 'white',
+    padding: 16,
+    borderRadius: 8,
+    marginTop: 20,
+  },
+
+  viewButton: {
+    backgroundColor: "white",
+    padding:16,
+    borderRadius: 10,
+  },
+
+  progressButton: {
+    backgroundColor: "lightgrey",
+    padding:16,
+    borderRadius:10,
+    flexGrow:2 
+  }
+});
