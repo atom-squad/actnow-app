@@ -15,27 +15,34 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
           <Image source={icon} alt="User Profile pic" size={50} borderRadius={100} />
         </Box>
         <Box>
-         <HStack space={2}>
-            <Text>#55</Text>
-            <Text bold>ABCDEF</Text>
-          </HStack>
+          <Text>Hello,</Text>
+          <Text bold>ABCDEF username</Text>
           <HStack space={2}>
-            <Text>Department Name</Text>
+            <Text>Department</Text>
             <Divider orientation='vertical'></Divider>
-            <Text>Organisation Name</Text>
+            <Text>Organisation</Text>
           </HStack>
+        </Box>
+        <Spacer/>
+        <Box borderColor="black" borderWidth="2" paddingX="4" paddingY="1" borderRadius="8">
+          <Center>
+            <Text>Rank</Text>
+            <Text  fontSize="4xl" bold>42</Text>
+          </Center>
         </Box>
       </Flex>
 
-      <Box borderColor={"#000"} borderWidth={1} borderRadius={10}  marginTop={4}>
+      <Box  marginTop={4}>
         <Flex direction='row' alignItems={"center"} >
-          <Image source={icon} alt="icon" size={50} borderRadius={100} borderColor="black" borderWidth={2}/>
+          {/* <Image source={icon} alt="icon" size={50} borderRadius={100} borderColor="black" borderWidth={2}/> */}
           <Box flexGrow={2}>
-            <Progress size="xl" value={65} />
+          <Text>Level IV </Text>
+          <Text bold> Amateur</Text>
+            <Progress size="sm" value={65} />
             <Divider orientation='horizontal'/>
             <Flex direction='row' justifyContent={'space-between'} padding={1}>
-              <Text ><Text bold>Level IV </Text>- Amateur</Text>
-              <Text>Points: <Text bold>200/500</Text></Text>
+              <Text>200</Text>
+              <Text>500</Text>
             </Flex>
           </Box>
         </Flex>
