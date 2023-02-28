@@ -18,8 +18,8 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <NativeBaseProvider>
-          <Navigation colorScheme={colorScheme} />
-          {/* <SignUp /> */}
+          {/* <Navigation colorScheme={colorScheme} /> */}
+          <SignUp />
           {/* <LogIn /> */}
           <StatusBar />
         </NativeBaseProvider>
