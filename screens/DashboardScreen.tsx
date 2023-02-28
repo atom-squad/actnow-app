@@ -10,36 +10,43 @@ import { icon } from '../assets/images/icon.png';
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
   return (
     <ScrollView padding={4} >
-    <Flex direction='row'>
-      <Box>
-      <Image source={icon} alt="User Profile pic" size={50} borderRadius={100} />
-      </Box>
-      <Box>
-        <HStack space={2}>
-          <Text>#55</Text>
-          <Text bold>ABCDEF</Text>
-        </HStack>
-        <HStack space={2}>
-          <Text>Department Name</Text>
-          <Divider orientation='vertical'></Divider>
-          <Text>Organisation Name</Text>
-        </HStack>
-      </Box>
-    </Flex>
+      <Flex direction='row'>
+        <Box>
+          <Image source={icon} alt="User Profile pic" size={50} borderRadius={100} />
+        </Box>
+        <Box>
+          <Text>Hello,</Text>
+          <Text bold>ABCDEF username</Text>
+          <HStack space={2}>
+            <Text>Department</Text>
+            <Divider orientation='vertical'></Divider>
+            <Text>Organisation</Text>
+          </HStack>
+        </Box>
+        <Spacer/>
+        <Box borderColor="black" borderWidth="2" paddingX="4" paddingY="1" borderRadius="8">
+          <Center>
+            <Text>Rank</Text>
+            <Text  fontSize="4xl" bold>42</Text>
+          </Center>
+        </Box>
+      </Flex>
 
-<Box borderColor={"#000"} borderWidth={1} borderRadius={10}  marginTop={4}>
-<Flex direction='row' alignItems={"center"} >
-<Image source={icon} alt="icon" size={50} borderRadius={100} borderColor="black" borderWidth={2}/>
-<Box flexGrow={2}>
-<Progress size="xl" value={65} />
-      <Divider orientation='horizontal'/>
-      <Flex direction='row' justifyContent={'space-between'} padding={1}>
-    <Text ><Text bold>Level IV </Text>- Amateur</Text>
-    <Text>Points: <Text bold>200/500</Text></Text>
-    </Flex>
-    </Box>
-    </Flex>
-    </Box>
+      <Box  marginTop={4}>
+        <Flex direction='row' alignItems={"center"} >
+          {/* <Image source={icon} alt="icon" size={50} borderRadius={100} borderColor="black" borderWidth={2}/> */}
+          <Box flexGrow={2}>
+          <Text>Level IV </Text>
+          <Text bold> Amateur</Text>
+            <Progress size="sm" value={65} />
+            <Divider orientation='horizontal'/>
+            <Flex direction='row' justifyContent={'space-between'} padding={1}>
+              <Text>200</Text>
+              <Text>500</Text>
+            </Flex>
+          </Box>
+        </Flex>
+      </Box>
 
     <Box backgroundColor="lightgrey" marginTop={4} padding={4} borderRadius={10}>
       <Heading>Quiz</Heading>
@@ -52,15 +59,15 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
         <Heading>Actions Logged</Heading>
         <Text>Review your actions logged</Text>
       </VStack>
-        <Circle size="40px" bgColor="blue.100">
+      <Circle size="40px" bgColor="blue.100">
         <Text bold>+</Text>
-        </Circle>
+      </Circle>
     </Flex>
 
     <Box>
-        <ActionDetails  bgcolor="lightgrey" task="Repair instead of buying." />
-        <ActionDetails  bgcolor="darkgrey" task="Repair instead of buying." />
-        <ActionDetails  bgcolor="lightgrey" task="Repair instead of buying." />
+      <ActionDetails  bgcolor="lightgrey" task="Repair instead of buying." />
+      <ActionDetails  bgcolor="darkgrey" task="Repair instead of buying." />
+      <ActionDetails  bgcolor="lightgrey" task="Repair instead of buying." />
       <ButtonNativebase style={styles.viewButton} title="View All" />
     </Box>
 
@@ -68,19 +75,19 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       <Heading marginTop={4}>Progress</Heading>
       <Text marginBottom={4}>Review your actions progress.</Text>
       <Box>
-      <Flex direction="row">
-      <ButtonWithFocus title="Personal" style={styles.progressButton} />
-      <ButtonWithFocus title="Department" style={styles.progressButton} />
-      </Flex>
-      {/* Add graph here */}
+       <Flex direction="row">
+          <ButtonWithFocus title="Personal" style={styles.progressButton} />
+          <ButtonWithFocus title="Department" style={styles.progressButton} />
+        </Flex>
+        {/* Add graph here */}
       </Box>
     </Box>
 
     <Center padding={4}>
-    <Image source={icon} alt="icon" size={50} borderRadius={100}/>
-    <Text>Your organisation has taken</Text>
-    <Text fontSize="4xl" bold>2450</Text>
-    <Text>Actions</Text>
+      <Image source={icon} alt="icon" size={50} borderRadius={100}/>
+      <Text>Your organisation has taken</Text>
+      <Text fontSize="4xl" bold>2450</Text>
+      <Text>Actions</Text>
     </Center>
 
   </ScrollView>
