@@ -19,12 +19,12 @@ const SignUpTwoScreen = () => {
             
              <FormControl marginY="2" isRequired>
                     <FormControl.Label _text={{ bold: true }}>First Name</FormControl.Label>
-                        <Input placeholder="First Name" value={firstName} onChangeText={setFirstName} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
+                    <Input placeholder="First Name" value={firstName} onChangeText={setFirstName} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
                 </FormControl>
 
                 <FormControl marginY="2" isRequired>
                     <FormControl.Label _text={{ bold: true }}>Last Name</FormControl.Label>
-                        <Input placeholder="Last Name" value={lastName} onChangeText={setLastName} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
+                    <Input placeholder="Last Name" value={lastName} onChangeText={setLastName} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
                 </FormControl>
 
                 <Pressable borderWidth={1} style={styles.button}>
@@ -32,7 +32,7 @@ const SignUpTwoScreen = () => {
                             <Text color="white" bold>Let's Start </Text>
                             <Icon as={<MaterialIcons name="arrow-forward" />} size={6}      color="white" marginY="3" />
                         </Flex>
-                     </Pressable>
+                </Pressable>
                   
         </Flex>
     );

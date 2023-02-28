@@ -16,7 +16,7 @@ const SelectDepartment = () => {
               <Select.Item label="Finance" value="finance" />
               <Select.Item label="Human Resource" value="hr" />
               <Select.Item label="Customer Service" value="cs" />
-                <Select.Item label="IT" value="it" />
+              <Select.Item label="IT" value="it" />
             </Select>
         </FormControl>
     );

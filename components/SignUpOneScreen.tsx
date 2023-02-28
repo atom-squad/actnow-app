@@ -36,7 +36,8 @@ const SignUpOneScreen = ({navigation}) => {
                                         InputRightElement={
                                             <Pressable onPress={() => setShow(!show)}>
                                                 <Icon as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />} size={5} mr="2" />
-                                            </Pressable>} />
+                                            </Pressable>} 
+                            />
                     </FormControl>
 
                     <Link href="https://nativebase.io" alignSelf="flex-end">
