@@ -1,5 +1,5 @@
-import { CheckIcon, FormControl, Select } from "native-base";
-import React from "react";
+import { FormControl, Select } from "native-base";
+import * as React from "react";
 
 const SelectDepartment = () => {
 
