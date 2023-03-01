@@ -18,9 +18,9 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <NativeBaseProvider>
-          <Navigation colorScheme={colorScheme} />
+          {/* <Navigation colorScheme={colorScheme} /> */}
           {/* <SignUp /> */}
-          {/* <LogIn /> */}
+          <LogIn />
           <StatusBar />
         </NativeBaseProvider>
       </SafeAreaProvider>

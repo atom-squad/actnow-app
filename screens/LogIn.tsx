@@ -1,66 +1,94 @@
 import  *  as React  from   'react' ;
 import { StyleSheet } from 'react-native';
-import { Flex, FormControl, Input, Pressable, Icon, Text, Image} from 'native-base';
+import { Flex, FormControl, Input, Pressable, Icon, Text, Image, Link} from 'native-base';
 import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import icon from '../assets/images/icon.png';
 
 function Login() {
 
     const [show, setShow] = React.useState(false);
+    const [username, setUsername] = React.useState('');
+    const [password, setPassword] = React.useState('');
 
     return (
-        <Flex direction="column" align="center" justify="center" height="100%">
-            <Image source={icon} accessibilityLabel="Act Now Logo" alt="ActNow Logo" style={styles.iconStyleRounded} />
-                <FormControl style={styles.input} isRequired>
-                        <Input placeholder="Email"  size="lg"  alignSelf="center"/>
-                    </FormControl>
-                    <FormControl style={styles.input} isRequired>
-                        <Input placeholder="Password" 
-                                        size="lg"  
-                                        type={show ? "text" : "password"} 
-                                        InputRightElement={
-                                            <Pressable onPress={() => setShow(!show)}>
-                                                <Icon as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />} size={5} mr="2" />
-                                            </Pressable>} />
-                    </FormControl>
-                    <Pressable style={styles.button}>
-                        <Text style={styles.buttonText}>Sign In</Text>
-                     </Pressable>
-            </Flex>
+      <Flex direction="column" align="center"  height="100%" marginX="4">
+                
+        <Image source={icon} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={100}  borderRadius={100} style=  {styles.imagePosition} />
+
+        <FormControl marginY="2" isRequired>
+          <FormControl.Label _text={{ bold: true }}>Email</FormControl.Label>
+          <Input placeholder="Email" value={username} onChangeText={setUsername} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
+        </FormControl>
+
+        <FormControl marginY="2" isRequired>
+          <FormControl.Label _text={{ bold: true }}>Password</FormControl.Label>
+          <Input placeholder="Password" 
+            size="lg"  
+            value={password}
+            onChangeText={setPassword} 
+            marginY="1"
+            _focus={{borderColor: "#15AA5A", borderWidth: 1}}
+            type={show ? "text" : "password"} 
+            InputRightElement={
+              <Pressable onPress={() => setShow(!show)}>
+                <Icon as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />} size={5} mr="2" />
+              </Pressable>} 
+            />
+        </FormControl>
+
+        <Link href="https://nativebase.io" alignSelf="flex-end">
+          Forgot Password? 
+        </Link>
+
+        <Pressable borderWidth={1} style={styles.logInButton} alignItems="center">
+          <Text color="white" bold>Log In </Text>
+        </Pressable>
+
+        <Pressable  borderWidth={1} style={styles.signUpButton} alignItems="center">
+          <Text color="#15AA5A" bold>Sign Up </Text>
+        </Pressable>
+
+        <Link href="https://nativebase.io" _text={{color:"#005F2C"}}>
+          Terms of Privacy
+        </Link>
+
+      </Flex>
     );
 }
 
 const styles = StyleSheet.create({
 
-    input: {
-        width: '85%',
-        marginVertical: 10 ,
-        alignItems: 'center',
-        justifyContent: 'center'
-      },
-      button: {
-        alignSelf: "center",
-        borderWidth: 1,
-        width: "75%",
-       height: 40,
-        padding: 4,
-        margin: 16,
-        justifyContent: 'center',
-        borderRadius: 4
-      },
+    logInButton: {
+     borderRadius: 12,
+      borderBottomWidth: 2,
+      width: "95%",
+      paddingTop: 8,
+      paddingBottom: 8,
+      marginTop: 50,
+      backgroundColor: "#15AA5A",
+      borderBottomColor: "#005F2C",
+      borderTopColor: "#15AA5A",
+      borderLeftColor: "#15AA5A",
+      borderRightColor: "#15AA5A",
+    },
 
-      buttonText: {
-        textAlign: 'center',
-        fontWeight: 'bold'
-      },
+    signUpButton: {
+     borderRadius: 12,
+      borderWidth: 1,
+      width: "95%",
+      paddingTop: 8,
+      paddingBottom: 8,
+      marginTop: 40,
+      marginBottom: 90,
+      backgroundColor: "white",
+      borderColor: "#15AA5A"
+    },
 
-      iconStyleRounded: {
-        maxWidth: '100%',
-         maxHeight: '20%',
-        width: '50%',
-        resizeMode: 'contain',
-        borderRadius: 100
-      },
+    imagePosition: {
+      marginTop: 140,
+      marginBottom: 40
+    }
+
 });
 
 export default Login;

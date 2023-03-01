@@ -12,69 +12,67 @@ const SignUpOneScreen = ({navigation}) => {
   const [show, setShow] = React.useState(false);
 
     return (
-        <Flex direction="column" align="center" height="100%"marginX="4">
-                    <Image source={icon} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={100}  borderRadius={100} style={styles.imagePosition} />
+        <Flex direction="column" align="center" height="100%" marginX="4">
+            <Image source={icon} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={100}  borderRadius={100} style={styles.imagePosition} />
                     
-                    <SelectOrganization />
+            <SelectOrganization />
 
-                    <SelectDepartment />
+            <SelectDepartment />
                 
-                    <FormControl marginY="2" isRequired>
-                    <FormControl.Label _text={{ bold: true }}>Email</FormControl.Label>
-                        <Input placeholder="Email" value={username} onChangeText={setUsername} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
-                    </FormControl>
+            <FormControl marginY="2" isRequired>
+                <FormControl.Label _text={{ bold: true }}>Email</FormControl.Label>
+                <Input placeholder="Email" value={username} onChangeText={setUsername} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
+            </FormControl>
 
-                    <FormControl marginY="2" isRequired>
-                    <FormControl.Label _text={{ bold: true }}>Password</FormControl.Label>
-                        <Input placeholder="Password" 
-                                        size="lg"  
-                                        value={password}
-                                        onChangeText={setPassword} 
-                                        marginY="1"
-                                        _focus={{borderColor: "#15AA5A", borderWidth: 1}}
-                                        type={show ? "text" : "password"} 
-                                        InputRightElement={
-                                            <Pressable onPress={() => setShow(!show)}>
-                                                <Icon as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />} size={5} mr="2" />
-                                            </Pressable>} 
-                            />
-                    </FormControl>
+            <FormControl marginY="2" isRequired>
+                <FormControl.Label _text={{ bold: true }}>Password</FormControl.Label>
+                <Input placeholder="Password" 
+                    size="lg"  
+                    value={password}
+                    onChangeText={setPassword} 
+                    marginY="1"
+                    _focus={{borderColor: "#15AA5A", borderWidth: 1}}
+                    type={show ? "text" : "password"} 
+                    InputRightElement={
+                        <Pressable onPress={() => setShow(!show)}>
+                            <Icon as={<MaterialIcons name={show ? "visibility" : "visibility-off"} />} size={5} mr="2" />
+                        </Pressable>} 
+                    />
+            </FormControl>
 
-                    <Link href="https://nativebase.io" alignSelf="flex-end">
-                        Forgot Password? 
-                    </Link>
+            <Link href="https://nativebase.io" alignSelf="flex-end">
+                Forgot Password? 
+            </Link>
 
-                    <Pressable onPress={() => navigation.push("SignUpTwo")} borderWidth={1} style={styles.button}>
-                        <Flex direction="row" alignItems="center" justifyContent="center">
-                            <Text color="white" bold>Sign Up </Text>
-                            <Icon as={<MaterialIcons name="arrow-forward" />} size={6}      color="white" marginY="3" />
-                        </Flex>
-                     </Pressable>
+            <Pressable onPress={() => navigation.push("SignUpTwo")} borderWidth={1} style={styles.button}>
+                <Flex direction="row" alignItems="center" justifyContent="center">
+                    <Text color="white" bold>Sign Up </Text>
+                    <Icon as={<MaterialIcons name="arrow-forward" />} size={5}      color="white" marginY="3" />
+                </Flex>
+            </Pressable>
 
-            </Flex>
+        </Flex>
     );
   }
 
   const styles = {
 
-      button: {
-        borderRadius: 12,
-        borderBottomWidth: 2,
-        width: "95%",
-        paddingTop: 4,
-        paddingBottom: 4,
-        marginTop: 50,
-        backgroundColor: "#15AA5A",
-        borderBottomColor: "#005F2C",
-        borderTopColor: "#15AA5A",
-        borderLeftColor: "#15AA5A",
-        borderRightColor: "#15AA5A",
-      },
+        button: {
+            borderRadius: 12,
+            borderBottomWidth: 2,
+            width: "95%",
+            marginTop: 50,
+            backgroundColor: "#15AA5A",
+            borderBottomColor: "#005F2C",
+            borderTopColor: "#15AA5A",
+            borderLeftColor: "#15AA5A",
+            borderRightColor: "#15AA5A",
+        },
 
-      imagePosition: {
-        marginTop: 80,
-        marginBottom: 20
-    }
+        imagePosition: {
+            marginTop: 80,
+            marginBottom: 20
+        }
 
   }
 
