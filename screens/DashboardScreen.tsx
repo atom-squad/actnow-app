@@ -11,8 +11,10 @@ import { getActionsDone, getOrgActions, getProgressData, getUserSection } from "
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
 
-  let dashboardData = useAppSelector((state) => state.dashboard);
+  let {userSection, actionsLogged, progressData, orgActions} = useAppSelector((state) => state.dashboard);
   let dispatch = useAppDispatch();
+
+  const MAX_POINT_MONTH = 500;
 
   useEffect(() => {
     dispatch(getUserSection());
@@ -29,18 +31,18 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
         </Box>
         <Box>
           <Text>Hello,</Text>
-          <Text bold>ABCDEF username</Text>
+          <Text bold>{userSection.name}</Text>
           <HStack space={2}>
-            <Text>Department</Text>
+            <Text>{userSection.department}</Text>
             <Divider orientation='vertical'></Divider>
-            <Text>Organisation</Text>
+            <Text>{userSection.organization}</Text>
           </HStack>
         </Box>
         <Spacer/>
         <Box borderColor="black" borderWidth="2" paddingX="4" paddingY="1" borderRadius="8">
           <Center>
             <Text>Rank</Text>
-            <Text  fontSize="4xl" bold>42</Text>
+            <Text  fontSize="4xl" bold>{userSection.rankingPos}</Text>
           </Center>
         </Box>
       </Flex>
@@ -51,11 +53,11 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
           <Box flexGrow={2}>
           <Text>Level IV </Text>
           <Text bold> Amateur</Text>
-            <Progress size="sm" value={65} />
+            <Progress size="sm" value={userSection.monthPoints} min={0} max={MAX_POINT_MONTH}/>
             <Divider orientation='horizontal'/>
             <Flex direction='row' justifyContent={'space-between'} padding={1}>
-              <Text>200</Text>
-              <Text>500</Text>
+              <Text>0</Text>
+              <Text>{MAX_POINT_MONTH}</Text>
             </Flex>
           </Box>
         </Flex>
@@ -78,9 +80,13 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     </Flex>
 
     <Box>
-      <ActionDetails  bgcolor="lightgrey" task="Repair instead of buying." />
-      <ActionDetails  bgcolor="darkgrey" task="Repair instead of buying." />
-      <ActionDetails  bgcolor="lightgrey" task="Repair instead of buying." />
+      {(actionsLogged.length > 0)?
+      actionsLogged.map((action) => (
+        <ActionDetails key={action.id} bgcolor="lightgrey" task={action.description} points={action.points} />
+      ))
+    : <Text>You don't have any action yet</Text>
+    }
+      
       <ButtonNativebase style={styles.viewButton} title="View All" />
     </Box>
 
@@ -99,7 +105,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     <Center padding={4}>
       <Image source={icon} alt="icon" size={50} borderRadius={100}/>
       <Text>Your organisation has taken</Text>
-      <Text fontSize="4xl" bold>2450</Text>
+      <Text fontSize="4xl" bold>{orgActions.orgActions}</Text>
       <Text>Actions</Text>
     </Center>
 

@@ -16,7 +16,9 @@ const initialState = {
         personalProgress: [],
         departmentProgress: []
     },
-    orgActions: 0
+    orgActions: {
+        orgActions: 0
+    }
 }
 
 export const dashboardSlice = createSlice({
