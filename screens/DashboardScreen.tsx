@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { RootTabScreenProps } from '../types';
 import { Box, ScrollView, Image, Flex, HStack, Text, Divider, Spacer, Progress, Heading, Pressable, VStack, Circle, Center } from "native-base";
 import ButtonNativebase from '../components/ButtonNativebase';
@@ -6,8 +6,21 @@ import ActionDetails from '../components/ActionDetails';
 import ButtonWithFocus from '../components/ButtonWithFocus';
 import { StyleSheet } from 'react-native';
 import { icon } from '../assets/images/icon.png';
+import { useAppDispatch, useAppSelector } from "../stores/hooks";
+import { getActionsDone, getOrgActions, getProgressData, getUserSection } from "../stores/slices/dashboardSlice";
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
+
+  let dashboardData = useAppSelector((state) => state.dashboard);
+  let dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getUserSection());
+    dispatch(getProgressData());
+    dispatch(getOrgActions());
+    dispatch(getActionsDone());
+  }, [dispatch]);
+
   return (
     <ScrollView padding={4} >
       <Flex direction='row'>
