@@ -7,7 +7,7 @@ const SelectDepartment = () => {
 
     return (
       <FormControl marginY="2"  isRequired>
-          <FormControl.Label _text={{ bold: true }}>Department</FormControl.Label>
+          <FormControl.Label _text={{ bold: true,  color: 'black' }}>Department</FormControl.Label>
           <Select minWidth="200" accessibilityLabel="Select your Department" placeholder="Select your Department" selectedValue={department} onValueChange={itemValue => setDepartment(itemValue)}  marginY="1" size="lg" 
             _selectedItem={{
               backgroundColor: "#15AA5A"

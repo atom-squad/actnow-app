@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Image, Pressable, FormControl, Input, Text, Icon, Circle, IconButton } from "native-base";
 import icon from '../assets/images/icon.png';
-import { StyleSheet } from "react-native";
+import styles from '../scss/SignUpTwoScreenStyles';
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
 
 const SignUpTwoScreen = () => {
@@ -20,12 +20,12 @@ const SignUpTwoScreen = () => {
             </Flex>
             
             <FormControl marginY="2" isRequired>
-                <FormControl.Label _text={{ bold: true }}>First Name</FormControl.Label>
+                <FormControl.Label _text={{ bold: true,  color: 'black' }}>First Name</FormControl.Label>
                 <Input placeholder="First Name" value={firstName} onChangeText={setFirstName} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
             </FormControl>
 
             <FormControl marginY="2" isRequired>
-                <FormControl.Label _text={{ bold: true }}>Last Name</FormControl.Label>
+                <FormControl.Label _text={{ bold: true,  color: 'black' }}>Last Name</FormControl.Label>
                 <Input placeholder="Last Name" value={lastName} onChangeText={setLastName} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
             </FormControl>
 
@@ -39,26 +39,5 @@ const SignUpTwoScreen = () => {
         </Flex>
     );
   }
-
-  const styles = {
-
-    button: {
-        borderRadius: 12,
-        borderBottomWidth: 2,
-         width: "95%",
-        marginTop: 50,
-        backgroundColor: "#15AA5A",
-        borderBottomColor: "#005F2C",
-        borderTopColor: "#15AA5A",
-        borderLeftColor: "#15AA5A",
-        borderRightColor: "#15AA5A",
-    },
-
-    imagePosition: {
-        marginTop: 80,
-        marginBottom: 20
-    }
-
-    }
 
   export default SignUpTwoScreen;

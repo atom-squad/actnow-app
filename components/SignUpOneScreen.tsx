@@ -4,6 +4,7 @@ import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import icon from '../assets/images/icon.png';
 import SelectDepartment from "./SelectDepartment";
 import SelectOrganization from "./SelectOrganization";
+import styles from '../scss/SignIUpOneScreenStyles';
 
 const SignUpOneScreen = ({navigation}) => {
 
@@ -20,12 +21,12 @@ const SignUpOneScreen = ({navigation}) => {
             <SelectDepartment />
                 
             <FormControl marginY="2" isRequired>
-                <FormControl.Label _text={{ bold: true }}>Email</FormControl.Label>
+                <FormControl.Label _text={{ bold: true,  color: 'black' }}>Email</FormControl.Label>
                 <Input placeholder="Email" value={username} onChangeText={setUsername} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
             </FormControl>
 
             <FormControl marginY="2" isRequired>
-                <FormControl.Label _text={{ bold: true }}>Password</FormControl.Label>
+                <FormControl.Label _text={{ bold: true,  color: 'black' }}>Password</FormControl.Label>
                 <Input placeholder="Password" 
                     size="lg"  
                     value={password}
@@ -53,27 +54,6 @@ const SignUpOneScreen = ({navigation}) => {
 
         </Flex>
     );
-  }
-
-  const styles = {
-
-        button: {
-            borderRadius: 12,
-            borderBottomWidth: 2,
-            width: "95%",
-            marginTop: 50,
-            backgroundColor: "#15AA5A",
-            borderBottomColor: "#005F2C",
-            borderTopColor: "#15AA5A",
-            borderLeftColor: "#15AA5A",
-            borderRightColor: "#15AA5A",
-        },
-
-        imagePosition: {
-            marginTop: 80,
-            marginBottom: 20
-        }
-
   }
 
   export default SignUpOneScreen; 

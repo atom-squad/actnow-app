@@ -1,8 +1,8 @@
 import  *  as React  from   'react' ;
-import { StyleSheet } from 'react-native';
 import { Flex, FormControl, Input, Pressable, Icon, Text, Image, Link} from 'native-base';
 import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import icon from '../assets/images/icon.png';
+import styles from '../scss/LogInStyles';
 
 function Login() {
 
@@ -16,12 +16,12 @@ function Login() {
         <Image source={icon} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={100}  borderRadius={100} style=  {styles.imagePosition} />
 
         <FormControl marginY="2" isRequired>
-          <FormControl.Label _text={{ bold: true }}>Email</FormControl.Label>
+          <FormControl.Label _text={{ bold: true, color: 'black'  }}>Email</FormControl.Label>
           <Input placeholder="Email" value={username} onChangeText={setUsername} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
         </FormControl>
 
         <FormControl marginY="2" isRequired>
-          <FormControl.Label _text={{ bold: true }}>Password</FormControl.Label>
+          <FormControl.Label _text={{ bold: true, color: 'black' }}>Password</FormControl.Label>
           <Input placeholder="Password" 
             size="lg"  
             value={password}
@@ -55,40 +55,5 @@ function Login() {
       </Flex>
     );
 }
-
-const styles = StyleSheet.create({
-
-    logInButton: {
-     borderRadius: 12,
-      borderBottomWidth: 2,
-      width: "95%",
-      paddingTop: 8,
-      paddingBottom: 8,
-      marginTop: 50,
-      backgroundColor: "#15AA5A",
-      borderBottomColor: "#005F2C",
-      borderTopColor: "#15AA5A",
-      borderLeftColor: "#15AA5A",
-      borderRightColor: "#15AA5A",
-    },
-
-    signUpButton: {
-     borderRadius: 12,
-      borderWidth: 1,
-      width: "95%",
-      paddingTop: 8,
-      paddingBottom: 8,
-      marginTop: 40,
-      marginBottom: 90,
-      backgroundColor: "white",
-      borderColor: "#15AA5A"
-    },
-
-    imagePosition: {
-      marginTop: 140,
-      marginBottom: 40
-    }
-
-});
 
 export default Login;
