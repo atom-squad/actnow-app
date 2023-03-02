@@ -23,6 +23,12 @@ import LeaderboardScreen from '../screens/LeaderBoardScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import { Provider } from 'react-redux';
 import { store } from '../stores/store';
+import ActionIcon from '../assets/images/actionIcon.svg';
+import DashboardIcon from '../assets/images/dashboardIcon.svg';
+import ScanIcon from '../assets/images/scanIcon.svg';
+import LeaderboardIcon from '../assets/images/leaderboardIcon.svg';
+import SettingsIcon from '../assets/images/settingsIcon.svg';
+import { Box } from 'native-base';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -72,42 +78,44 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Dashboard"
         component={DashboardScreen}
-        options={({ navigation }: RootTabScreenProps<'Dashboard'>) => ({
-          title: 'Dashboard',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        })}
+        options={({ navigation }: RootTabScreenProps<'Dashboard'>) => {
+          return ({
+            title: 'Dashboard',
+            tabBarIcon: ({ color }) => <TabBarIcon icon={DashboardIcon} isFocussed={navigation.isFocused()}/>,
+          })}
+        }
       />
       <BottomTab.Screen
         name="Actions"
         component={ActionsScreen}
-        options={{
+        options={({ navigation }: RootTabScreenProps<'Actions'>) => ({
           title: 'Actions',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
+          tabBarIcon: ({ color }) => <TabBarIcon icon={ActionIcon} isFocussed={navigation.isFocused()}/>
+        })}
       />
       <BottomTab.Screen
         name="Scan"
         component={ScanScreen}
-        options={{
+        options={({ navigation }: RootTabScreenProps<'Scan'>) => ({
           title: 'Scan',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
+          tabBarIcon: ({ color }) => <TabBarIcon icon={ScanIcon} isFocussed={navigation.isFocused()}/>,
+        })}
       />
       <BottomTab.Screen
         name="Leaderboard"
         component={LeaderboardScreen}
-        options={{
+        options={({ navigation }: RootTabScreenProps<'Leaderboard'>) => ({
           title: 'Leaderboard',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
+          tabBarIcon: ({ color }) => <TabBarIcon icon={LeaderboardIcon} isFocussed={navigation.isFocused()}/>,
+        })}
       />
       <BottomTab.Screen
         name="Settings"
         component={SettingsScreen}
-        options={{
+        options={({ navigation }: RootTabScreenProps<'Settings'>) => ({
           title: 'Settings',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
+          tabBarIcon: ({ color }) => <TabBarIcon icon={SettingsIcon} isFocussed={navigation.isFocused()}/>,
+        })}
       />
     </BottomTab.Navigator>
   );
@@ -116,9 +124,16 @@ function BottomTabNavigator() {
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+const TabBarIcon = (props: {
+  icon: any;
+  color?: string;
+  isFocussed: boolean;
+}) => {
+
+  const Icon = props.icon;
+  return (
+    <Box opacity={props.isFocussed ? '1' : '.3'}>
+      <Icon />
+    </Box>
+  );
 }

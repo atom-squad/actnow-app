@@ -10,7 +10,23 @@ const SignUpOneScreen = ({navigation}) => {
 
     const [username, setUsername] = React.useState('');
     const [password, setPassword] = React.useState('');
-  const [show, setShow] = React.useState(false);
+    const [show, setShow] = React.useState(false);
+
+    // const signup = async () => {
+    //     if (email && password && organisation && username && department) {
+    //       const resp = await makeRequest('/auth/signup', 'post', {
+    //         body: {
+    //           email,
+    //           password,
+    //           organisation,
+    //           username,
+    //           department
+    //         }
+    //       });
+    //       console.info(resp)
+    //     }
+    //   }
+  
 
     return (
         <Flex direction="column" align="center" height="100%" marginX="4">

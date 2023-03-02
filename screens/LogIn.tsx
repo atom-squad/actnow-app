@@ -1,14 +1,29 @@
-import  *  as React  from   'react' ;
+import  React,  { useState, useEffect } from 'react' ;
 import { Flex, FormControl, Input, Pressable, Icon, Text, Image, Link} from 'native-base';
 import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import icon from '../assets/images/icon.png';
 import styles from '../css/LogInStyles';
+import { makeRequest } from '../common/api';
+import localStorage from '../common/localStorage';
 
-function Login() {
+function Login({ setToken, setScreen }) {
 
-    const [show, setShow] = React.useState(false);
-    const [username, setUsername] = React.useState('');
-    const [password, setPassword] = React.useState('');
+    const [email, setEmail] = useState();
+    const [show, setShow] = useState(false);
+    const [password, setPassword] = useState('');
+
+    const login = async () => {
+      if (email && password) {
+        const resp = await makeRequest('/auth/login', 'post', {
+          body: {
+            email,
+            password
+          }
+        });
+        setToken(resp.token);
+        localStorage.setItem('token', resp.token);
+      }
+    }
 
     return (
       <Flex direction="column" align="center"  height="100%" marginX="4">
@@ -17,7 +32,7 @@ function Login() {
 
         <FormControl marginY="2" isRequired>
           <FormControl.Label _text={{ bold: true, color: 'black'  }}>Email</FormControl.Label>
-          <Input placeholder="Email" value={username} onChangeText={setUsername} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
+          <Input placeholder="Email" value={username} onChangeText={setEmail} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
         </FormControl>
 
         <FormControl marginY="2" isRequired>
@@ -40,11 +55,11 @@ function Login() {
           Forgot Password? 
         </Link>
 
-        <Pressable borderWidth={1} style={styles.logInButton} alignItems="center">
+        <Pressable borderWidth={1} style={styles.logInButton} alignItems="center" onPress={login}>
           <Text color="white" bold>Log In </Text>
         </Pressable>
 
-        <Pressable  borderWidth={1} style={styles.signUpButton} alignItems="center">
+        <Pressable  borderWidth={1} style={styles.signUpButton} alignItems="center" onPress={() => setScreen('signup')}>
           <Text color="#15AA5A" bold>Sign Up </Text>
         </Pressable>
 

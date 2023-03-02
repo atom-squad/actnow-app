@@ -2,19 +2,37 @@ import React from 'react';
 import { StyleSheet, TouchableOpacity } from 'react-native';
 import { useState, useEffect, useRef } from 'react';
 import { Camera, CameraType } from 'expo-camera';
-import { Text, View, Image} from 'native-base';
+import { Box, View, Text, Image} from 'native-base';
 import { RootTabScreenProps } from '../types';
 import * as MediaLibrary from 'expo-media-library';
 import Button from '../components/Button';
+import { makeRequest } from '../common/api';
 
 
 export default function ScanScreen({ navigation }: RootTabScreenProps<'Scan'>) {
 
   const [hasCamPermission, setHasCamPermission] = useState(null);
   const [image, setImage] = useState(null);
-  const [type] = useState(Camera.Constants.Type.back);
+  // @ts-ignore
+    const [type] = useState(Camera.Constants.Type.back);
+  // @ts-ignore
   const [flash] = useState(Camera.Constants.FlashMode.off);
   const cameraRef = useRef(null);
+
+  const sendRequest = () => {
+    let body = new FormData();
+    body.append('file', { uri: image, name: 'photo.png',filename :'imageName.png',type: 'image/png'});
+    body.append('Content-Type', 'image/png');
+
+    makeRequest('/scanner/emission', 'POST', { headers: {  
+        "Content-Type": "multipart/form-data",
+        "otherHeader": "foo",
+        } , body :body
+      } )
+      .then((res) => res.json())
+      .then((res) => { console.log("response" +JSON.stringify(res)); })
+      .catch((e) => console.log(e))
+  }
 
   useEffect(() => {
     (async () => {
@@ -28,7 +46,6 @@ export default function ScanScreen({ navigation }: RootTabScreenProps<'Scan'>) {
     if (cameraRef) {
       try {
         const data =  await cameraRef.current.takePictureAsync();
-        console.log(data)
         setImage(data.uri);
       } catch(error) {
         console.log(error)
@@ -41,6 +58,7 @@ export default function ScanScreen({ navigation }: RootTabScreenProps<'Scan'>) {
       try {
         await MediaLibrary.createAssetAsync(image);
         alert('Image saved!')
+        sendRequest();
         setImage(null);
       } catch(error) {
         console.log(error)
@@ -54,26 +72,26 @@ export default function ScanScreen({ navigation }: RootTabScreenProps<'Scan'>) {
   }
 
   return (
-    <View style={styles.container}>
-      {!image ? <>
-      <Camera style={styles.camera} type={type} flashMode={flash} ref={cameraRef} />
-      <View>
-        <Button title={'Take a picture'} icon="camera" onPress={takePicture} color={undefined}/>
-      </View>
-      </>:
+    <Box {...styles.container}>
+      {!image ? <Box width="100%" height="80%">
+        <Camera style={styles.camera} type={type} flashMode={flash} ref={cameraRef} />
+        <Box>
+          <Button title={'Take a picture'} icon="camera" onPress={takePicture} color={undefined}/>
+        </Box>
+      </Box>:
       <>
-        <Image source={{uri: image}} styles={styles.camera} />
+        <Image source={{uri: image}} {...styles.camera} alt="capture"/>
         <View style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
           paddingHorizontal: 50
         }}>
-          <Button title={'Re-take'} icon="retweet" onPress={takePicture}/>
-          <Button title={'Save'} icon="check" onPress={savePicture}/>
+          <Button title={'Re-take'} icon="retweet" onPress={() => setImage(null)} color={undefined} />
+          <Button title={'Save'} icon="check" onPress={savePicture} color={undefined} />
         </View>
       </>
       }
-    </View>
+    </Box>
   );
 }
 
@@ -94,6 +112,7 @@ const styles = StyleSheet.create({
   },
   camera: {
     flex: 1,
+    width: '100%',
     borderRadius: 20,
   }
 });

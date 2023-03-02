@@ -1,16 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { NativeBaseProvider } from "native-base";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import useCachedResources from './hooks/useCachedResources';
-import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import SignUp from './screens/SignUp';
 import LogIn from './screens/LogIn';
+import localStorage from './common/localStorage';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
-  const colorScheme = useColorScheme();
+  const [screen, setScreen] = useState('login')
+  const [token, setToken] = useState('token')
+  
+
+  useEffect(() => {
+    (async () => {
+      const storedToken = await localStorage.getItem('token');
+      setToken(storedToken);
+    })();
+  }, []);
+  
 
   if (!isLoadingComplete) {
     return null;
@@ -18,9 +28,13 @@ export default function App() {
     return (
       <SafeAreaProvider>
         <NativeBaseProvider>
-          {/* <Navigation colorScheme={colorScheme} /> */}
-          <SignUp />
-          {/* <LogIn /> */}
+          { token ? 
+            <Navigation colorScheme={"light"} />
+            : <>
+              {/* <SignUp /> */}
+              <LogIn setToken={(newToken) => setToken(newToken)} setScreen={setScreen} />
+            </>
+          }
           <StatusBar />
         </NativeBaseProvider>
       </SafeAreaProvider>
