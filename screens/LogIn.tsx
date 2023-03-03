@@ -2,7 +2,7 @@ import  *  as React  from   'react' ;
 import { Flex, FormControl, Input, Pressable, Icon, Text, Image, Link} from 'native-base';
 import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import icon from '../assets/images/icon.png';
-import styles from '../scss/LogInStyles';
+import styles from '../css/LogInStyles';
 
 function Login() {
 

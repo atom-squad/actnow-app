@@ -4,7 +4,7 @@ import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import icon from '../assets/images/icon.png';
 import SelectDepartment from "./SelectDepartment";
 import SelectOrganization from "./SelectOrganization";
-import styles from '../scss/SignIUpOneScreenStyles';
+import styles from '../css/SignIUpOneScreenStyles';
 
 const SignUpOneScreen = ({navigation}) => {
 

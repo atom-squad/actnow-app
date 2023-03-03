@@ -1,7 +1,7 @@
 import React from "react";
 import { Flex, Image, Pressable, FormControl, Input, Text, Icon, Circle, IconButton } from "native-base";
 import icon from '../assets/images/icon.png';
-import styles from '../scss/SignUpTwoScreenStyles';
+import styles from '../css/SignUpTwoScreenStyles';
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
 
 const SignUpTwoScreen = () => {
