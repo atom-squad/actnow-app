@@ -1,15 +1,15 @@
 import React from "react";
 import { Box, Flex, Text } from "native-base";
 
-const ActionDetails = ({bgcolor, textcolor, rank, username, points}) => {
+const UsernameWithRank = ({bgcolor, textcolor, rank, username, points}) => {
     return (
         <Box backgroundColor={bgcolor} style={styles.container}>
-        <Flex direction='row' justifyContent="space-around">
+          <Flex direction='row' justifyContent="space-around">
             <Text color={textcolor} bold>#{rank}</Text>
             <Text color={textcolor}>{username}</Text>
             <Text color={textcolor} bold>{points}</Text>
           </Flex>
-          </Box>
+        </Box>
     );
   }
 
@@ -23,4 +23,4 @@ const ActionDetails = ({bgcolor, textcolor, rank, username, points}) => {
     }
   }
 
-  export default ActionDetails;
+  export default UsernameWithRank;
