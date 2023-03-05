@@ -8,7 +8,7 @@ import localStorage from '../common/localStorage';
 
 function Login({ setToken, setScreen }) {
 
-    const [email, setEmail] = useState();
+    const [email, setEmail] = useState('');
     const [show, setShow] = useState(false);
     const [password, setPassword] = useState('');
 
@@ -32,7 +32,7 @@ function Login({ setToken, setScreen }) {
 
         <FormControl marginY="2" isRequired>
           <FormControl.Label _text={{ bold: true, color: 'black'  }}>Email</FormControl.Label>
-          <Input placeholder="Email" value={username} onChangeText={setEmail} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
+          <Input placeholder="Email" value={email} onChangeText={setEmail} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
         </FormControl>
 
         <FormControl marginY="2" isRequired>

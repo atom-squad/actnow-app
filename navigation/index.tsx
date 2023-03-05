@@ -16,29 +16,28 @@ import ActionsScreen from '../screens/ActionsScreen';
 import DashboardScreen from '../screens/DashboardScreen';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import ScanScreen from '../screens/ScanScreen';
+import { ScanScreen } from '../screens/ScanScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import LeaderboardScreen from '../screens/LeaderBoardScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import { Provider } from 'react-redux';
-import { store } from '../stores/store';
+
 import ActionIcon from '../assets/images/actionIcon.svg';
 import DashboardIcon from '../assets/images/dashboardIcon.svg';
 import ScanIcon from '../assets/images/scanIcon.svg';
 import LeaderboardIcon from '../assets/images/leaderboardIcon.svg';
 import SettingsIcon from '../assets/images/settingsIcon.svg';
-import { Box } from 'native-base';
+import { Box, Button } from 'native-base';
+import { useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
-    <Provider store={store}>
-      <NavigationContainer
-        linking={LinkingConfiguration}
-        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <RootNavigator />
-      </NavigationContainer>
-    </Provider>
+    <NavigationContainer
+      linking={LinkingConfiguration}
+      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <RootNavigator />
+    </NavigationContainer>
   );
 }
 
@@ -48,11 +47,23 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
  */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+const EmptyScanTab = () => {
+  const navigation = useNavigation();
+  // useEffect(() => {
+    
+  //   navigation.navigate('ScanContainer', {
+  //     onGoBack: () => console.log('Will go back from nextComponent'),
+  //   });
+  // }, [])
+  return <></>;
+};
+
 function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      <Stack.Screen name="ScanContainer" component={ScanScreen} options={{ title: 'Scan' }  } />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
@@ -73,7 +84,7 @@ function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="Dashboard"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarActiveTintColor: 'black',
       }}>
       <BottomTab.Screen
         name="Dashboard"
@@ -95,10 +106,10 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="Scan"
-        component={ScanScreen}
+        component={EmptyScanTab}
         options={({ navigation }: RootTabScreenProps<'Scan'>) => ({
           title: 'Scan',
-          tabBarIcon: ({ color }) => <TabBarIcon icon={ScanIcon} isFocussed={navigation.isFocused()}/>,
+          tabBarIcon: ({ color }) => <Pressable onPress={() => navigation.navigate('ScanContainer')}><TabBarIcon icon={ScanIcon} isFocussed={navigation.isFocused()}/></Pressable>,
         })}
       />
       <BottomTab.Screen

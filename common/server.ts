@@ -1,4 +1,5 @@
 import axios from "axios";
+import localStorage from "./localStorage";
 
 const handleUnauthorized = () => {//TODO: CHANGES FOR TOKEN AND LOCATION
     const { pathname, search } = window.location;
@@ -31,9 +32,9 @@ const handleResponse = (response) => {
       message: error.response?.data?.message,
     };
   };
-
-const request = (url: string, data?, method: string = 'GET', options = {}) => {
-    const authToken = `myToken`/*getAccessToken()*/;//TODO: ADD TOKEN LOGIC
+  
+  const request = async (url: string, data?, method: string = 'GET', options = {}) => {
+    const authToken = await localStorage.getItem('token')
     const requestOptions = {
       url,
       method,
