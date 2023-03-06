@@ -3,17 +3,16 @@ import { StyleSheet, TouchableOpacity, useWindowDimensions } from 'react-native'
 import { useState, useEffect, useRef } from 'react';
 import { Camera, CameraType } from 'expo-camera';
 import { Box, View, Text, Image } from 'native-base';
-import { RootTabScreenProps } from '../types';
 import * as MediaLibrary from 'expo-media-library';
 import Button from '../components/Button';
-import { makeRequest } from '../common/api';
 import GalleryIcon from '../assets/images/galleryIcon.svg'
 import SearchIcon from '../assets/images/searchIcon.svg'
 import UncheckIcon from '../assets/images/uncheckIcon.svg'
-import localStorage from '../common/localStorage';
 import * as ImagePicker from 'expo-image-picker';
 import { useAppSelector, useAppDispatch } from '../stores/hooks';
 import { useNavigation } from '@react-navigation/native';
+import { API, COLORS } from '../common/constants';
+import server from '../common/server';
 
 
 export function ScanMain() {
@@ -34,13 +33,15 @@ export function ScanMain() {
     body.append('file', { uri: image, name: 'photo.png',filename :'imageName.png',type: 'image/png'});
     body.append('Content-Type', 'image/png');
 
-    const resp = await makeRequest('/scanner/emission', 'POST', { headers: {  
-      "Content-Type": "multipart/form-data",
-      } , body
-    }, true, dispatch)
+    const resp = await server.post(API.emissions, body, {
+      dispatch,
+      headers: {  
+        "Content-Type": "multipart/form-data",
+      },
+    })
     navigation.navigate('ScanResults', {
       title: 'Results',
-      response: resp
+      response: resp.data
     })
   }
 
@@ -106,22 +107,22 @@ export function ScanMain() {
       <Box width="100%" height="85%">
         <Box { ...styles.scanTopActionsContainer}>
           <TouchableOpacity onPress={() => goTo('ScanHistory')}>
-            <Text color={colorPalette.white}>History</Text>
+            <Text color={COLORS.white}>History</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => goTo('Dashboard')}>
-            <UncheckIcon fill={colorPalette.white} />
+            <UncheckIcon fill={COLORS.white} />
           </TouchableOpacity>
         </Box>
         <Camera style={styles.camera} type={type} flashMode={flash} ref={cameraRef} />
         <Box {...styles.scanBottomActionsContainer}>
           <TouchableOpacity onPress={pickImage} style={styles.actionContainer}>
-            <GalleryIcon fill={colorPalette.primary} />
-            <Text color={colorPalette.primary} >Gallery</Text>
+            <GalleryIcon fill={COLORS.primary} />
+            <Text color={COLORS.primary} >Gallery</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={takePicture} style={styles.captureButton}></TouchableOpacity>
           <TouchableOpacity style={styles.actionContainer} onPress={() => goTo('ScanSearch')}>
-            <SearchIcon fill={colorPalette.primary} />
-            <Text color={colorPalette.primary}>Text Search</Text>
+            <SearchIcon fill={COLORS.primary} />
+            <Text color={COLORS.primary}>Text Search</Text>
           </TouchableOpacity>
         </Box>
       </Box>) : (
@@ -141,11 +142,6 @@ export function ScanMain() {
   );
 }
 
-const colorPalette = {
-  primary: '#15AA5A',
-  white: '#fff',
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -160,7 +156,7 @@ const styles = StyleSheet.create({
     width: 62,
     height: 62,
     borderRadius: 50,
-    backgroundColor: colorPalette.primary,
+    backgroundColor: COLORS.primary,
   },
   scanBottomActionsContainer: {
     display: 'flex',

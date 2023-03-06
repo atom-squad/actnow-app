@@ -5,27 +5,34 @@ import icon from '../assets/images/icon.png';
 import SelectDepartment from "./SelectDepartment";
 import SelectOrganization from "./SelectOrganization";
 import styles from '../css/SignIUpOneScreenStyles';
+import { API } from "../common/constants";
+import server from "../common/server";
+import { useAppDispatch } from "../stores/hooks";
 
 const SignUpOneScreen = ({navigation}) => {
 
     const [username, setUsername] = React.useState('');
+    const [organization, setOrganization] = React.useState('');
+    const [department, setDepartment] = React.useState('');
+    const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [show, setShow] = React.useState(false);
+    const dispatch = useAppDispatch()
 
-    // const signup = async () => {
-    //     if (email && password && organisation && username && department) {
-    //       const resp = await makeRequest('/auth/signup', 'post', {
-    //         body: {
-    //           email,
-    //           password,
-    //           organisation,
-    //           username,
-    //           department
-    //         }
-    //       });
-    //       console.info(resp)
-    //     }
-    //   }
+    const signup = async () => {
+        if (email && password && organization && username && department) {
+          const resp = await server.post(API.signup, {
+            email,
+            password,
+            organization,
+            username,
+            department
+          }, { dispatch });
+          
+        }
+        // handle response
+      }
+    }
   
 
     return (

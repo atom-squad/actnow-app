@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Flex, FormControl, Input, Button, Text } from 'native-base';
-import { makeRequest } from '../common/api';
 import { useAppDispatch } from '../stores/hooks';
+import server from '../common/server';
+import { API, COLORS } from '../common/constants';
 
 export default function ScanSearch() {
   const [search, setSearch] = useState('');
@@ -10,7 +11,7 @@ export default function ScanSearch() {
 
   const sendSearchRequest = async () => {
     if (!search) return;
-    const resp = await makeRequest(`/scanner/factor/${search}`, 'GET', {}, false, dispatch)
+    const resp = await server.get(`${API.factor}/${search}`, { dispatch });
     setResult(resp)
     console.info('resp', JSON.stringify(resp));
   }
@@ -22,14 +23,14 @@ export default function ScanSearch() {
         <Input placeholder="Cotton" value={search} onChangeText={(text) => {
             setSearch(text);
             setResult('')
-          }} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
+          }} size="lg" marginY="1"  _focus={{borderColor: COLORS.primary, borderWidth: 1}} />
       </FormControl>
       {result?.label && <Text>Label: {result.label}</Text>}
       <Text>{result?.description}</Text>
       {result?.factor && <Text>Factor: {result.factor}</Text>}
 
       {!result && (
-        <Button  borderWidth={1} alignItems="center" onPress={sendSearchRequest} backgroundColor={"#15AA5A"} width="100%">
+        <Button  borderWidth={1} alignItems="center" onPress={sendSearchRequest} backgroundColor={COLORS.primary} width="100%">
           <Text color="white" bold>Submit</Text>
         </Button>
       )}

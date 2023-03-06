@@ -3,23 +3,25 @@ import { Flex, FormControl, Input, Pressable, Icon, Text, Image, Link} from 'nat
 import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import icon from '../assets/images/icon.png';
 import styles from '../css/LogInStyles';
-import { makeRequest } from '../common/api';
 import localStorage from '../common/localStorage';
+import server from '../common/server';
+import { API } from '../common/constants';
+import { useAppDispatch } from '../stores/hooks';
 
 function Login({ setToken, setScreen }) {
 
     const [email, setEmail] = useState('');
     const [show, setShow] = useState(false);
     const [password, setPassword] = useState('');
+    const dispatch = useAppDispatch();
 
     const login = async () => {
       if (email && password) {
-        const resp = await makeRequest('/auth/login', 'post', {
-          body: {
-            email,
-            password
-          }
-        });
+        const resp = await server.post(API.login, {
+          email,
+          password
+        }, { dispatch });
+        const { token } = resp.data;
         setToken(resp.token);
         localStorage.setItem('token', resp.token);
       }
