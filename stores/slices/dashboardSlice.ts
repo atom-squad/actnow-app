@@ -46,6 +46,8 @@ export const dashboardSlice = createSlice({
     const res = await server.get(`${API.dashboard}/user`);
     if(res.status === 200){
         dispatch(loadUserSection(res.data));
+    }else{
+        console.log('Error loading the dashboard data', res);
     }
   }
 
@@ -53,6 +55,8 @@ export const dashboardSlice = createSlice({
     const res = await server.get(`${API.dashboard}/progress`);
     if(res.status === 200){
         dispatch(loadProgressData(res.data));
+    }else{
+        console.log('Error loading the dashboard data', res);
     }
   }
 
@@ -60,6 +64,8 @@ export const dashboardSlice = createSlice({
     const res = await server.get(`${API.dashboard}/org-actions`);
     if(res.status === 200){
         dispatch(loadOrgActions(res.data));
+    }else{
+        console.log('Error loading the dashboard data', res);
     }
   }
 
@@ -67,6 +73,8 @@ export const dashboardSlice = createSlice({
     const res = await server.get(`${API.actions}/user`);
     if(res.status === 200){
         dispatch(loadActionsLogged(res.data));
+    }else{
+        console.log('Error loading the dashboard data', res);
     }
   }
 

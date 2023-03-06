@@ -8,6 +8,7 @@ import { StyleSheet } from 'react-native';
 import { icon } from '../assets/images/icon.png';
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { getActionsDone, getOrgActions, getProgressData, getUserSection } from "../stores/slices/dashboardSlice";
+import LineGraph from "../components/LineChart";
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
 
@@ -98,7 +99,11 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
           <ButtonWithFocus title="Personal" style={styles.progressButton} />
           <ButtonWithFocus title="Department" style={styles.progressButton} />
         </Flex>
-        {/* Add graph here */}
+        { progressData.personalProgress.length>0?
+        <LineGraph graphData={progressData.personalProgress} />
+        :
+        <Center>Sorry, no data to show</Center>
+        }
       </Box>
     </Box>
 

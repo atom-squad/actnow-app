@@ -25,6 +25,8 @@ const handleResponse = (response) => {
     if (error.response?.status === 401) {
       console.log('Not authorized for execute this operation (401)');
       handleUnauthorized();
+    }else{
+      console.log('An error has ocurred connecting with the API', error)
     }
     return {
       status: error.response?.status,
