@@ -57,7 +57,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
             <Progress size="sm" value={userSection.monthPoints} min={0} max={MAX_POINT_MONTH}/>
             <Divider orientation='horizontal'/>
             <Flex direction='row' justifyContent={'space-between'} padding={1}>
-              <Text>0</Text>
+              <Text>{userSection.monthPoints}</Text>
               <Text>{MAX_POINT_MONTH}</Text>
             </Flex>
           </Box>

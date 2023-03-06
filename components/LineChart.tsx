@@ -1,16 +1,15 @@
 import { Container, ScrollView } from "native-base"
 import React from "react"
 import { Dimensions } from "react-native";
-//import { Chart } from 'react-native-chartjs';
-//import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend } from 'react-native-chartjs';
 import {
+  AbstractChart,
     LineChart
   } from "react-native-chart-kit";
+import { G, Svg, Text } from "react-native-svg";
 
 
 const LineGraph = ({graphData}) => {
 
-  //  ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
     const options = {
         responsive: true,
         plugins: {
@@ -31,10 +30,11 @@ const LineGraph = ({graphData}) => {
     }
     
     const chartConfig = {
+        backgroundColor: "#FFFFFF",
         backgroundGradientFrom: "#FFFFFF",
         backgroundGradientFromOpacity: 0,
         backgroundGradientTo: "#FFFFFF",
-        backgroundGradientToOpacity: 0.5,
+        backgroundGradientToOpacity: 1,
         color: (opacity = 1) => "#F89344",
         strokeWidth: 3, // optional, default 3
         barPercentage: 1,
@@ -42,9 +42,6 @@ const LineGraph = ({graphData}) => {
         decimalPlaces: 0,
         labelColor: (opacity = 1) => "#000000",
       };
-
-    /*console.log('labels', labels)
-    console.log('data', data)*/
 
     const chartData = {
         labels,
@@ -55,29 +52,44 @@ const LineGraph = ({graphData}) => {
         ],
       };
 
-    /*function isInViewport(el) {
-      const rect = el.getBoundingClientRect();
-      return (
-          rect.top >= 0 &&
-          rect.left >= 0 &&
-          rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-          rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-  
-      );
+    // # of segments to divide the points data
+    const segments = 3;
+
+    const propLabels = {
+      color: chartConfig.color,
+      labelColor: chartConfig.labelColor,
+      fontSize: 12,
+      fill: chartConfig.labelColor(0.8),
     }
 
-    const box = document.querySelector('ScrollView');
+    /* LOGIC for the additional axis - INI */
+    //Code based in AbstractChart.renderHorizontalLabels from https://github.com/indiespirit/react-native-chart-kit
+    const yLabelsOffset = 12;
+    let yLabel = '';
+    const height = 220;
+    const verticalLabelsHeightPercentage = 0.75;
 
-    document.addEventListener('scroll', function () {
-      const messageText = isInViewport(box) ?
-          'The box is visible in the viewport' :
-          'The box is not visible in the viewport';
-  
-      console.log(messageText)
-  
-    }, {
-        passive: true
-    });*/
+    const extraAxis = new Array(segments + 1).fill(1).map((_, i) => {
+      const label = ((Math.max(...data, 0) - Math.min(...data, 0) || 1) / segments) * i + Math.min(...data, 0);
+      yLabel = label.toFixed(chartConfig.decimalPlaces);
+      const basePosition = height * verticalLabelsHeightPercentage;
+      const x = 0 + yLabelsOffset;
+      const y = height * verticalLabelsHeightPercentage -
+            (basePosition / segments) * i + 20;//20 is the top margin
+
+      return (
+        <Text
+          origin={`${x}, ${y}`}
+          x={x}
+          y={y}
+          key={Math.random()}
+          textAnchor="start"
+          {...propLabels}
+        >{yLabel}</Text>
+      )
+    })
+
+    /* LOGIC for the additional axis - END */
 
     return (
         <ScrollView
@@ -85,22 +97,33 @@ const LineGraph = ({graphData}) => {
         w={Dimensions.get("window").width-40} 
         showsVerticalScrollIndicator={true}
         persistentScrollbar={true}
-        contentOffset={{ x: 310, y: 0}}
+        contentOffset={{ x: 320, y: 0}}
         >
-            {/*<Line options={options} data={chartData} />*/}
             <LineChart data={chartData}
                 chartConfig={chartConfig} 
-                width={700} // from react-native
+                width={700}
                 height={220}
                 withHorizontalLines={false}
-                /*withHorizontalLabels={false}*/
-                segments={3}
+                segments={segments}
+                fromZero={true}
                 style={{
-                    marginHorizontal: 0,
+                    marginHorizontal: -30,
                     marginVertical: 20,
                     padding: 0
                 }}
              />
+             <Svg width={50} height={220}
+              style={{
+                marginHorizontal: 0,
+                marginVertical: 20,
+                padding: 0,
+                backgroundColor: 'white'
+              }}
+             >
+                <G height={220} translateX={-10}>
+                  { extraAxis }
+                </G>
+             </Svg>
         </ScrollView>
     )
 }
