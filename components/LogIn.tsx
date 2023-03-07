@@ -4,7 +4,7 @@ import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import icon from '../assets/images/icon.png';
 import styles from '../css/LogInStyles';
 
-function Login() {
+function Login({navigation}) {
 
     const [show, setShow] = React.useState(false);
     const [username, setUsername] = React.useState('');

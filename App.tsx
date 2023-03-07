@@ -6,7 +6,7 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import SignUp from './screens/SignUp';
-import LogIn from './screens/LogIn';
+import LogIn from './components/LogIn';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();

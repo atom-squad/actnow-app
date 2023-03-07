@@ -4,7 +4,7 @@ import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import icon from '../assets/images/icon.png';
 import SelectDepartment from "./SelectDepartment";
 import SelectOrganization from "./SelectOrganization";
-import styles from '../css/SignIUpOneScreenStyles';
+import styles from '../css/SignUpOneScreenStyles';
 
 const SignUpOneScreen = ({navigation}) => {
 
@@ -45,11 +45,8 @@ const SignUpOneScreen = ({navigation}) => {
                 Forgot Password? 
             </Link>
 
-            <Pressable onPress={() => navigation.push("SignUpTwo")} borderWidth={1} style={styles.button}>
-                <Flex direction="row" alignItems="center" justifyContent="center">
-                    <Text color="white" bold>Sign Up </Text>
-                    <Icon as={<MaterialIcons name="arrow-forward" />} size={5}      color="white" marginY="3" />
-                </Flex>
+            <Pressable onPress={() => navigation.push("SignUpTwo")} borderWidth={1} style={styles.button} alignItems="center" justifyContent="center">
+                <Text color="white" bold>Sign Up </Text>
             </Pressable>
 
         </Flex>
