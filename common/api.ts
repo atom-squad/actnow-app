@@ -3,7 +3,6 @@ import localStorage from "./localStorage";
 
 
 const BASE_URL = "https://actnow.wmdd4950.com";
-// const BASE_URL = "http://localhost:3000";
 
 export const makeRequest = async (path, method, params, rawBody = false, dispatch?) => {
     const fullUrl = `${BASE_URL}${path}`

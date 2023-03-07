@@ -28,7 +28,7 @@ const handleError = (error, dispatch) => {
   }
   return {
     status: error.response?.status,
-    message: error.response?.data?.message,
+    message: error.response?.data?.message || "There was an unexpected problem, please contact support",
   };
 };
   
