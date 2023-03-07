@@ -44,7 +44,7 @@ function Login({navigation}) {
           <Text color="white" bold>Log In </Text>
         </Pressable>
 
-        <Pressable  borderWidth={1} style={styles.signUpButton} alignItems="center">
+        <Pressable  onPress={() => navigation.push("SignUpOne")} borderWidth={1} style={styles.signUpButton} alignItems="center">
           <Text color="#15AA5A" bold>Sign Up </Text>
         </Pressable>
 
