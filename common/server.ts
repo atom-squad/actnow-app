@@ -32,7 +32,7 @@ const handleError = (error, dispatch) => {
   };
 };
   
-const request = async (url: string, data = {}, method: string = 'GET', options?) => {
+const request = async (url: string, data?, method: string = 'GET', options?) => {
   const authToken = await localStorage.getItem('token')
   const { headers = {}, dispatch, ...otherOptions } = options || {};
   const requestOptions = {
