@@ -8,7 +8,7 @@ import { Text, TouchableOpacity } from "react-native";
 const Button = ({ title, onPress, icon, color }) => {
   return (
     <TouchableOpacity onPress={onPress} style={styles.button}>
-      <Entypo name={icon} size={28} color={color ? color : '#f1f1f1'}/>
+      <Entypo name={icon} size={28} color={color ? color : '#000'}/>
       <Text style={styles.text}>{title}</Text>
     </TouchableOpacity>
   );

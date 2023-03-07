@@ -1,12 +1,12 @@
 import React from 'react';
-import { Text, Box } from 'native-base';
+import { Text, View } from 'native-base';
 import { RootTabScreenProps } from '../types';
 
 export default function SettingsScreen({ navigation }: RootTabScreenProps<'Settings'>) {
   return (
-    <Box {...styles.container}>
-          <Text>Settings</Text>
-      </Box>
+    <View {...styles.container}>
+        <Text>Settings</Text>
+    </View>
   );
 }
 
