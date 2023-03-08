@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { RootTabScreenProps } from '../types';
-import { Box, ScrollView, Image, Flex, HStack, Text, Divider, Spacer, Progress, Heading, Pressable, VStack, Circle, Center } from "native-base";
+import { Box, ScrollView, Image, Flex, HStack, Text, Divider, Spacer, Progress, Heading, Pressable, VStack, Circle, Center, IconButton, Icon } from "native-base";
 import ButtonNativebase from '../components/ButtonNativebase';
 import ActionDetails from '../components/ActionDetails';
 import ButtonWithFocus from '../components/ButtonWithFocus';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { icon } from '../assets/images/icon.png';
+import { CloseIcon} from '../assets/images/closeIcon.svg' ;
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { getActionsDone, getOrgActions, getProgressData, getUserSection } from "../stores/slices/dashboardSlice";
 
@@ -30,41 +31,43 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
           <Image source={icon} alt="User Profile pic" size={50} borderRadius={100} />
         </Box>
         <Box>
-          <Text>Hello,</Text>
+          <Text>Rank #{userSection.rankingPos}</Text>
           <Text bold>{userSection.name}</Text>
-          <HStack space={2}>
-            <Text>{userSection.department}</Text>
-            <Divider orientation='vertical'></Divider>
-            <Text>{userSection.organization}</Text>
-          </HStack>
-        </Box>
-        <Spacer/>
-        <Box borderColor="black" borderWidth="2" paddingX="4" paddingY="1" borderRadius="8">
-          <Center>
-            <Text>Rank</Text>
-            <Text  fontSize="4xl" bold>{userSection.rankingPos}</Text>
-          </Center>
+          <Text>{userSection.organization} {userSection.department}</Text>
         </Box>
       </Flex>
 
       <Box  marginTop={4}>
         <Flex direction='row' alignItems={"center"} >
-          {/* <Image source={icon} alt="icon" size={50} borderRadius={100} borderColor="black" borderWidth={2}/> */}
-          <Box flexGrow={2}>
-          <Text>Level IV </Text>
-          <Text bold> Amateur</Text>
-            <Progress size="sm" value={userSection.monthPoints} min={0} max={MAX_POINT_MONTH}/>
-            <Divider orientation='horizontal'/>
-            <Flex direction='row' justifyContent={'space-between'} padding={1}>
-              <Text>0</Text>
-              <Text>{MAX_POINT_MONTH}</Text>
-            </Flex>
+          <Image source={icon} alt="icon" size={50} borderColor="#FF642F" borderWidth={2} marginRight={2} />
+          <Box>
+            <Text>Level 2 </Text>
+            <Text bold> Amateur</Text>
           </Box>
+        </Flex>
+        <Progress size="lg" colorScheme="warning" value={userSection.monthPoints} min={0} max={MAX_POINT_MONTH} marginY={2} />          
+        <Flex direction='row' justifyContent={'space-between'} padding={1}>
+          <HStack>
+            <Image source={icon} alt="icon" size={5} borderColor="#15AA5A" borderWidth={2} marginRight={1} />
+            <Text>0</Text>
+          </HStack>
+          <HStack>
+            <Image source={icon} alt="icon" size={5} borderColor="#15AA5A" borderWidth={2} marginRight={1} />
+            <Text>{MAX_POINT_MONTH}</Text>
+          </HStack>
         </Flex>
       </Box>
 
     <Box backgroundColor="lightgrey" marginTop={4} padding={4} borderRadius={10}>
-      <Heading>Quiz</Heading>
+      <Flex direction="row">
+        <HStack alignItems="center">
+          <Image source={icon} alt="icon" size={5} borderColor="white" borderWidth={2} marginRight={1} />
+          <Heading>Quiz</Heading>
+        </HStack>
+        <TouchableOpacity>
+          <CloseIcon />
+        </TouchableOpacity>
+        </Flex>
       <Text>Take the daily quiz and try to find the correct answers.</Text>
       <ButtonNativebase style={styles.button} title="Start" />
     </Box>
