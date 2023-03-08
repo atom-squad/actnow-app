@@ -32,9 +32,7 @@ const SignUpOneScreen = ({navigation}) => {
         }
         // handle response
       }
-    }
   
-
     return (
         <Flex direction="column" align="center" height="100%" marginX="4">
             <Image source={icon} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={100}  borderRadius={100} style={styles.imagePosition} />

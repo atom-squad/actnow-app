@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { RootTabScreenProps } from '../types';
-import { Box, ScrollView, Image, Flex, HStack, Text, Divider, Spacer, Progress, Heading, Pressable, VStack, Circle, Center, IconButton, Icon } from "native-base";
+import { Box, ScrollView, Image, Flex, HStack, Text, Spacer, Progress, Heading, VStack, Circle, Center, IconButton, Icon, Pressable } from "native-base";
 import ButtonNativebase from '../components/ButtonNativebase';
 import ActionDetails from '../components/ActionDetails';
 import ButtonWithFocus from '../components/ButtonWithFocus';
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { icon } from '../assets/images/icon.png';
-import { CloseIcon} from '../assets/images/closeIcon.svg' ;
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { getActionsDone, getOrgActions, getProgressData, getUserSection } from "../stores/slices/dashboardSlice";
+import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
 
@@ -59,38 +59,21 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       </Box>
 
     <Box backgroundColor="lightgrey" marginTop={4} padding={4} borderRadius={10}>
-      <Flex direction="row">
+      <Flex direction="row" alignItems="center">
         <HStack alignItems="center">
-          <Image source={icon} alt="icon" size={5} borderColor="white" borderWidth={2} marginRight={1} />
+          <Image source={icon} alt="icon" size={5} borderColor="white" borderWidth={2} marginRight={2} />
           <Heading>Quiz</Heading>
         </HStack>
-        <TouchableOpacity>
-          <CloseIcon />
-        </TouchableOpacity>
+        <Spacer />
+        <IconButton icon={<Icon as={<MaterialIcons name="close" />} size={9}  color= "white" />}  />
         </Flex>
-      <Text>Take the daily quiz and try to find the correct answers.</Text>
-      <ButtonNativebase style={styles.button} title="Start" />
-    </Box>
-
-    <Flex direction='row' justifyContent="space-between" alignItems="center" padding={4}>
-      <VStack>
-        <Heading>Actions Logged</Heading>
-        <Text>Review your actions logged</Text>
-      </VStack>
-      <Circle size="40px" bgColor="blue.100">
-        <Text bold>+</Text>
-      </Circle>
-    </Flex>
-
-    <Box>
-      {(actionsLogged.length > 0)?
-      actionsLogged.map((action) => (
-        <ActionDetails key={action.id} bgcolor="lightgrey" task={action.description} points={action.points} />
-      ))
-    : <Text>You don't have any action yet</Text>
-    }
-      
-      <ButtonNativebase style={styles.viewButton} title="View All" />
+      <Text>Learn how to make better decisions in your day to day life.</Text>
+      <Pressable style={styles.button}>
+        <Flex direction="row" alignItems="center" justifyContent="center">
+          <Text color="white" bold>Start Quiz </Text>
+          <Icon as={<MaterialIcons name="arrow-forward" />} size={5} color="white" />
+        </Flex>
+      </Pressable>
     </Box>
 
     <Box>
@@ -103,6 +86,34 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
         </Flex>
         {/* Add graph here */}
       </Box>
+    </Box>
+
+    <Flex direction='row' justifyContent="space-between" alignItems="center" padding={4}>
+      <VStack>
+        <Heading>Actions Logged</Heading>
+        <Text>Review your actions logged.</Text>
+      </VStack>
+      <Pressable>
+        <Flex direction="row" alignItems="center" justifyContent="center">
+          <Text color="#15aa5a" bold>View All </Text>
+          <Icon as={<MaterialIcons name="arrow-forward" />} size={5} color="#15aa5a" />
+        </Flex>
+      </Pressable>
+    </Flex>
+    <Box>
+      {(actionsLogged.length > 0)?
+      actionsLogged.map((action) => (
+        <ActionDetails key={action.id} bgcolor="lightgrey" task={action.description} points={action.points} />
+      ))
+    : <Text marginLeft="4">You don't have any action yet.</Text>
+    }
+      
+      <Pressable style={styles.button}>
+        <Flex direction="row" alignItems="center" justifyContent="center">
+          <Text color="white" bold>Log an action  </Text>
+          <Icon as={<MaterialIcons name="arrow-forward" />} size={5} color="white" />
+        </Flex>
+      </Pressable>
     </Box>
 
     <Center padding={4}>
@@ -118,10 +129,11 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
 
   const styles = StyleSheet.create({
     button: {
-      backgroundColor: 'white',
+      backgroundColor: '#f89344',
       padding: 16,
       borderRadius: 8,
       marginTop: 20,
+      width: "40%"
     },
   
     viewButton: {
@@ -131,9 +143,6 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     },
   
     progressButton: {
-      backgroundColor: "lightgrey",
-      padding:16,
-      borderRadius:10,
       flexGrow:2 
     }
   });
