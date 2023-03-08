@@ -22,8 +22,8 @@ function Login({ setToken, setScreen }) {
           password
         }, { dispatch });
         const { token } = resp.data;
-        setToken(resp.token);
-        localStorage.setItem('token', resp.token);
+        setToken(token);
+        localStorage.setItem('token', token);
       }
     }
 

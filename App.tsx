@@ -16,7 +16,7 @@ import { store } from './stores/store';
 function App() {
   const isLoadingComplete = useCachedResources();
   const [screen, setScreen] = useState('login')
-  const [token, setToken] = useState('token')
+  const [token, setToken] = useState('')
   let { token: userToken } = useAppSelector((state) => state.user);
   let dispatch = useAppDispatch();
   
