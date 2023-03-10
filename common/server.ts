@@ -46,7 +46,7 @@ const request = async (url: string, data?, method: string = 'GET', options?) => 
     },
   };
 
-  if (authToken) {
+  if (authToken && url.indexOf('/auth/')==-1) {
     requestOptions.headers.Authorization = `Bearer ${authToken}`;
   }
 
