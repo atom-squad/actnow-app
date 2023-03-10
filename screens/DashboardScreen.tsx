@@ -9,7 +9,7 @@ import { getActionsDone, getOrgActions, getProgressData, getUserSection } from "
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
 import { COLORS } from "../common/constants";
 import LeafWhite from '../assets/images/leafWhite.svg';
-import styles from '../css/dashboardScreenstyles'
+import styles from '../css/DashboardScreenStyles'
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
 
