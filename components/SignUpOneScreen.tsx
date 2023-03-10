@@ -4,7 +4,7 @@ import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import icon from '../assets/images/icon.png';
 import SelectDepartment from "./SelectDepartment";
 import SelectOrganization from "./SelectOrganization";
-import styles from '../css/SignIUpOneScreenStyles';
+import styles from '../css/SignUpOneScreenStyles';
 import { API } from "../common/constants";
 import server from "../common/server";
 import { useAppDispatch } from "../stores/hooks";

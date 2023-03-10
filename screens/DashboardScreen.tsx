@@ -1,14 +1,15 @@
 import React, { useEffect } from "react";
 import { RootTabScreenProps } from '../types';
-import { Box, ScrollView, Image, Flex, HStack, Text, Spacer, Progress, Heading, VStack, Center, IconButton, Icon, Pressable } from "native-base";
+import { Box, ScrollView, Image, Flex, HStack, Text, Spacer, Progress, Heading, Center, IconButton, Icon, Pressable } from "native-base";
 import ActionDetails from '../components/ActionDetails';
 import ButtonWithFocus from '../components/ButtonWithFocus';
-import { StyleSheet } from 'react-native';
-import { icon } from '../assets/images/icon.png';
+import { ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { getActionsDone, getOrgActions, getProgressData, getUserSection } from "../stores/slices/dashboardSlice";
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
 import { COLORS } from "../common/constants";
+import LeafWhite from '../assets/images/leafWhite.svg';
+import styles from '../css/dashboardScreenstyles'
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
 
@@ -17,6 +18,12 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
 
   const MAX_POINT_MONTH = 500;
   const profileImage = require('../assets/images/profileImage.png');
+  const icon = require('../assets/images/icon.png');
+  const badge = require('../assets/images/badge.png');
+  const leafGreen = require('../assets/images/leafGreen.png');
+  const quizCardBackground = require('../assets/images/quizCardBackground.png');
+ const impactCardBackground = require('../assets/images/impactCardBackground.png');
+ const handLeaf = require('../assets/images/handLeaf.png');
 
   useEffect(() => {
     dispatch(getUserSection());
@@ -27,10 +34,9 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
 
   return (
     <ScrollView padding={4} >
-      <Image source={{ uri: profileImage.default.src }} alt="User Profile pic" size={50} borderRadius={100} />
       <Flex direction='row'>
         <Box>
-          
+        <Image source={profileImage} alt="User Profile pic" size={70} borderRadius={100} marginRight={3} />
         </Box>
         <Box>
           <Text color={COLORS.darkOrange}>Rank #{userSection.rankingPos}</Text>
@@ -40,49 +46,57 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       </Flex>
 
       <Box  marginTop={4}>
-        <Flex direction='row' alignItems={"center"} >
-          <Image source={icon} alt="icon" size={50} borderColor="#FF642F" borderWidth={2} marginRight={2} />
-          <Box>
+        <Flex direction='row' alignItems="center" >
+          <ImageBackground source={badge} style={styles.image}>
+            <Text color={COLORS.white} bold>2</Text>
+          </ImageBackground>
+          <Box marginLeft={3}>
             <Text color={COLORS.primaryOrange}>Level 2 </Text>
-            <Text bold> Amateur</Text>
+            <Text bold>Amateur</Text>
           </Box>
         </Flex>
-        <Progress size="lg" colorScheme="warning" value={userSection.monthPoints} min={0} max={MAX_POINT_MONTH} marginY={2} bg={COLORS.lightOrange}  _filledTrack={{
+        <Progress size="lg" colorScheme="warning" value={userSection.monthPoints} min={0} max={MAX_POINT_MONTH} marginTop={2} bg={COLORS.lightOrange}  _filledTrack={{
         bg: "#F89344"
       }}/>          
         <Flex direction='row' justifyContent={'space-between'} padding={1}>
           <HStack>
-            <Image source={icon} alt="icon" size={5} borderColor="#15AA5A" borderWidth={2} marginRight={1} />
+            <Image source={leafGreen} alt="leaf icon" size={5} resizeMode="contain" />
             <Text>0</Text>
           </HStack>
           <HStack>
-            <Image source={icon} alt="icon" size={5} borderColor="#15AA5A" borderWidth={2} marginRight={1} />
+            <Image source={leafGreen} alt="leaf icon" size={5} resizeMode="contain" />
             <Text>{MAX_POINT_MONTH}</Text>
           </HStack>
         </Flex>
       </Box>
 
-    <Box backgroundColor="lightgrey" marginTop={4} padding={4} borderRadius={10}>
-      <Flex direction="row" alignItems="center">
-        <HStack alignItems="center">
-          <Image source={icon} alt="icon" size={5} borderColor="white" borderWidth={2} marginRight={2} />
-          <Heading color={COLORS.white}>Quiz</Heading>
-        </HStack>
-        <Spacer />
-        <IconButton icon={<Icon as={<MaterialIcons name="close" />} size={9}  color= "white" />}  />
-        </Flex>
-      <Text color={COLORS.white}>Learn how to make better decisions in your day to day life.</Text>
-      <Pressable style={styles.button}>
-        <Flex direction="row" alignItems="center" justifyContent="center">
-          <Text color="white" bold>Start Quiz </Text>
-          <Icon as={<MaterialIcons name="arrow-forward" />} size={5} color="white" />
-        </Flex>
-      </Pressable>
+    <Box marginY={8}>
+     <ImageBackground source={quizCardBackground} style={styles.bgImage} borderRadius={10}>
+        <Box padding={2}>
+          <Flex direction="row" alignItems="center">
+            <HStack alignItems="center">
+              <TouchableOpacity>
+                <LeafWhite fill="white" />
+              </TouchableOpacity>
+              <Heading color={COLORS.white} marginLeft={2}>Quiz</Heading>
+            </HStack>
+            <Spacer />
+            <IconButton icon={<Icon as={<MaterialIcons name="close" />} size={9}  color= "white" />}  />
+          </Flex>
+          <Text color={COLORS.white}>Learn how to make better decisions in your day to day life.</Text>
+          <Pressable style={styles.button} paddingX={3} paddingY={2}>
+            <Flex direction="row" alignItems="center" justifyContent="center">
+              <Text color="white" bold>Start Quiz </Text>
+              <Icon as={<MaterialIcons name="arrow-forward" />} size={4} color="white" />
+            </Flex>
+          </Pressable>
+        </Box>
+      </ImageBackground>
     </Box>
 
     <Box>
-      <Heading marginTop={4}>Progress</Heading>
-      <Text marginBottom={4}>Review your actions progress.</Text>
+      <Heading>Progress</Heading>
+      <Text marginBottom={8}>Review your actions progress.</Text>
       <Box>
        <Flex direction="row">
           <ButtonWithFocus title="Personal" style={styles.progressButton} />
@@ -92,7 +106,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       </Box>
     </Box>
 
-    <Flex direction='row' justifyContent="space-between" alignItems="center">
+    <Flex direction='row' justifyContent="space-between" alignItems="center" marginTop={6}>
       <Heading>Actions Logged</Heading>
       <Pressable>
         <Flex direction="row" alignItems="center" justifyContent="center">
@@ -110,41 +124,28 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     : <Text>You don't have any action yet.</Text>
     }
       
-      <Pressable style={styles.button}>
-        <Flex direction="row" alignItems="center" justifyContent="center">
+      <Pressable style={styles.button} margin={4} borderBottomColor={COLORS.darkOrange} borderBottomWidth={2}>
+        <Flex direction="row" alignItems="center" justifyContent="center" flexBasis={2}>
           <Text color="white" bold>Log an action  </Text>
           <Icon as={<MaterialIcons name="arrow-forward" />} size={5} color="white" />
         </Flex>
       </Pressable>
     </Box>
 
-    <Center padding={4}>
-      <Image source={icon} alt="icon" size={50} borderRadius={100}/>
-      <Text>Your organisation has taken</Text>
-      <Text fontSize="4xl" bold>{orgActions.orgActions}</Text>
-      <Text>Actions</Text>
-    </Center>
+    <Box marginY={8}>
+      <ImageBackground source={impactCardBackground} style={styles.bgImage} borderRadius={10}>
+        <Flex direction="row" align="center" justify="space-beween">
+          <Image source={handLeaf} alt="hand icon" size={100}  marginRight="10" resizeMode="contain"/>
+          <Box>
+            <Text color="white">Your organisation has taken</Text>
+            <Text color="white"> has taken</Text>
+            <Text fontSize="4xl" color="white" bold>{orgActions.orgActions}</Text>
+            <Text color="white">Actions</Text>
+          </Box>
+        </Flex>
+      </ImageBackground>
+    </Box>
 
   </ScrollView>
   );
   }
-
-  const styles = StyleSheet.create({
-    button: {
-      backgroundColor: '#f89344',
-      padding: 16,
-      borderRadius: 8,
-      marginTop: 20,
-      width: "40%"
-    },
-  
-    viewButton: {
-      backgroundColor: "white",
-      padding:16,
-      borderRadius: 10,
-    },
-  
-    progressButton: {
-      flexGrow:2
-    }
-  });
