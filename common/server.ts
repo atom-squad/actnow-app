@@ -43,7 +43,7 @@ const request = (url: string, data?, method: string = 'GET', options = {}) => {
       headers: {},
     };
   
-    if (authToken) {
+    if (authToken && url.indexOf('/auth/')==-1) {
       requestOptions.headers.Authorization = `Bearer ${authToken}`;
     }
   
