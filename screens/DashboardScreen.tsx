@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { RootTabScreenProps } from '../types';
-import { Box, ScrollView, Image, Flex, HStack, Text, Spacer, Progress, Heading, VStack, Circle, Center, IconButton, Icon, Pressable } from "native-base";
-import ButtonNativebase from '../components/ButtonNativebase';
+import { Box, ScrollView, Image, Flex, HStack, Text, Spacer, Progress, Heading, VStack, Center, IconButton, Icon, Pressable } from "native-base";
 import ActionDetails from '../components/ActionDetails';
 import ButtonWithFocus from '../components/ButtonWithFocus';
 import { StyleSheet } from 'react-native';
@@ -9,6 +8,7 @@ import { icon } from '../assets/images/icon.png';
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { getActionsDone, getOrgActions, getProgressData, getUserSection } from "../stores/slices/dashboardSlice";
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
+import { COLORS } from "../common/constants";
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
 
@@ -16,6 +16,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
   let dispatch = useAppDispatch();
 
   const MAX_POINT_MONTH = 500;
+  const profileImage = require('../assets/images/profileImage.png');
 
   useEffect(() => {
     dispatch(getUserSection());
@@ -26,12 +27,13 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
 
   return (
     <ScrollView padding={4} >
+      <Image source={{ uri: profileImage.default.src }} alt="User Profile pic" size={50} borderRadius={100} />
       <Flex direction='row'>
         <Box>
-          <Image source={icon} alt="User Profile pic" size={50} borderRadius={100} />
+          
         </Box>
         <Box>
-          <Text>Rank #{userSection.rankingPos}</Text>
+          <Text color={COLORS.darkOrange}>Rank #{userSection.rankingPos}</Text>
           <Text bold>{userSection.name}</Text>
           <Text>{userSection.organization} {userSection.department}</Text>
         </Box>
@@ -41,11 +43,13 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
         <Flex direction='row' alignItems={"center"} >
           <Image source={icon} alt="icon" size={50} borderColor="#FF642F" borderWidth={2} marginRight={2} />
           <Box>
-            <Text>Level 2 </Text>
+            <Text color={COLORS.primaryOrange}>Level 2 </Text>
             <Text bold> Amateur</Text>
           </Box>
         </Flex>
-        <Progress size="lg" colorScheme="warning" value={userSection.monthPoints} min={0} max={MAX_POINT_MONTH} marginY={2} />          
+        <Progress size="lg" colorScheme="warning" value={userSection.monthPoints} min={0} max={MAX_POINT_MONTH} marginY={2} bg={COLORS.lightOrange}  _filledTrack={{
+        bg: "#F89344"
+      }}/>          
         <Flex direction='row' justifyContent={'space-between'} padding={1}>
           <HStack>
             <Image source={icon} alt="icon" size={5} borderColor="#15AA5A" borderWidth={2} marginRight={1} />
@@ -62,12 +66,12 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       <Flex direction="row" alignItems="center">
         <HStack alignItems="center">
           <Image source={icon} alt="icon" size={5} borderColor="white" borderWidth={2} marginRight={2} />
-          <Heading>Quiz</Heading>
+          <Heading color={COLORS.white}>Quiz</Heading>
         </HStack>
         <Spacer />
         <IconButton icon={<Icon as={<MaterialIcons name="close" />} size={9}  color= "white" />}  />
         </Flex>
-      <Text>Learn how to make better decisions in your day to day life.</Text>
+      <Text color={COLORS.white}>Learn how to make better decisions in your day to day life.</Text>
       <Pressable style={styles.button}>
         <Flex direction="row" alignItems="center" justifyContent="center">
           <Text color="white" bold>Start Quiz </Text>
@@ -88,11 +92,8 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       </Box>
     </Box>
 
-    <Flex direction='row' justifyContent="space-between" alignItems="center" padding={4}>
-      <VStack>
-        <Heading>Actions Logged</Heading>
-        <Text>Review your actions logged.</Text>
-      </VStack>
+    <Flex direction='row' justifyContent="space-between" alignItems="center">
+      <Heading>Actions Logged</Heading>
       <Pressable>
         <Flex direction="row" alignItems="center" justifyContent="center">
           <Text color="#15aa5a" bold>View All </Text>
@@ -100,12 +101,13 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
         </Flex>
       </Pressable>
     </Flex>
+    <Text>Review your actions logged.</Text>
     <Box>
       {(actionsLogged.length > 0)?
       actionsLogged.map((action) => (
         <ActionDetails key={action.id} bgcolor="lightgrey" task={action.description} points={action.points} />
       ))
-    : <Text marginLeft="4">You don't have any action yet.</Text>
+    : <Text>You don't have any action yet.</Text>
     }
       
       <Pressable style={styles.button}>
@@ -143,6 +145,6 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     },
   
     progressButton: {
-      flexGrow:2 
+      flexGrow:2
     }
   });
