@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { RootTabScreenProps } from '../types';
 import { Box, ScrollView, Image, Flex, HStack, Text, Divider, Spacer, Progress, Heading, Pressable, VStack, Circle, Center } from "native-base";
 import ButtonNativebase from '../components/ButtonNativebase';
@@ -14,6 +14,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
 
   let {userSection, actionsLogged, progressData, orgActions} = useAppSelector((state) => state.dashboard);
   let dispatch = useAppDispatch();
+  let [buttonOption, setButtonOption] = useState('Personal');
 
   const MAX_POINT_MONTH = 500;
 
@@ -23,6 +24,10 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     dispatch(getOrgActions());
     dispatch(getActionsDone());
   }, [dispatch]);
+
+  const onChangeGraphOption = (option) => {
+    setButtonOption(option);
+  }
 
   return (
     <ScrollView padding={4} >
@@ -83,7 +88,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     <Box>
       {(actionsLogged.length > 0)?
       actionsLogged.map((action) => (
-        <ActionDetails key={action.id} bgcolor="lightgrey" task={action.description} points={action.points} />
+        <ActionDetails key={`${action.id}-${Math.random().toFixed(5)}`} bgcolor="lightgrey" task={action.description} points={action.points} />
       ))
     : <Text>You don't have any action yet</Text>
     }
@@ -96,11 +101,13 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       <Text marginBottom={4}>Review your actions progress.</Text>
       <Box>
        <Flex direction="row">
-          <ButtonWithFocus title="Personal" style={styles.progressButton} />
-          <ButtonWithFocus title="Department" style={styles.progressButton} />
+          <ButtonWithFocus title="Personal" style={styles.progressButton} onClickAction={onChangeGraphOption}/>
+          <ButtonWithFocus title="Department" style={styles.progressButton} onClickAction={onChangeGraphOption} />
         </Flex>
         { progressData.personalProgress.length>0?
-        <LineGraph graphData={progressData.personalProgress} />
+          buttonOption=='Personal'?
+          <LineGraph graphData={progressData.personalProgress} />
+          : <LineGraph graphData={progressData.departmentProgress} />
         :
         <Center>Sorry, no data to show</Center>
         }
