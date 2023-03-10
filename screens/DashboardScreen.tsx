@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { RootTabScreenProps } from '../types';
 import { Box, ScrollView, Image, Flex, HStack, Text, Divider, Spacer, Progress, Heading, Pressable, VStack, Circle, Center } from "native-base";
 import ButtonNativebase from '../components/ButtonNativebase';
@@ -8,11 +8,13 @@ import { StyleSheet } from 'react-native';
 import { icon } from '../assets/images/icon.png';
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { getActionsDone, getOrgActions, getProgressData, getUserSection } from "../stores/slices/dashboardSlice";
+import LineGraph from "../components/LineChart";
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
 
   let {userSection, actionsLogged, progressData, orgActions} = useAppSelector((state) => state.dashboard);
   let dispatch = useAppDispatch();
+  let [buttonOption, setButtonOption] = useState('Personal');
 
   const MAX_POINT_MONTH = 500;
 
@@ -22,6 +24,10 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     dispatch(getOrgActions());
     dispatch(getActionsDone());
   }, [dispatch]);
+
+  const onChangeGraphOption = (option) => {
+    setButtonOption(option);
+  }
 
   return (
     <ScrollView padding={4} >
@@ -56,7 +62,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
             <Progress size="sm" value={userSection.monthPoints} min={0} max={MAX_POINT_MONTH}/>
             <Divider orientation='horizontal'/>
             <Flex direction='row' justifyContent={'space-between'} padding={1}>
-              <Text>0</Text>
+              <Text>{userSection.monthPoints}</Text>
               <Text>{MAX_POINT_MONTH}</Text>
             </Flex>
           </Box>
@@ -82,7 +88,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     <Box>
       {(actionsLogged.length > 0)?
       actionsLogged.map((action) => (
-        <ActionDetails key={action.id} bgcolor="lightgrey" task={action.description} points={action.points} />
+        <ActionDetails key={`${action.id}-${Math.random().toFixed(5)}`} bgcolor="lightgrey" task={action.description} points={action.points} />
       ))
     : <Text>You don't have any action yet</Text>
     }
@@ -95,10 +101,16 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       <Text marginBottom={4}>Review your actions progress.</Text>
       <Box>
        <Flex direction="row">
-          <ButtonWithFocus title="Personal" style={styles.progressButton} />
-          <ButtonWithFocus title="Department" style={styles.progressButton} />
+          <ButtonWithFocus title="Personal" style={styles.progressButton} onClickAction={onChangeGraphOption}/>
+          <ButtonWithFocus title="Department" style={styles.progressButton} onClickAction={onChangeGraphOption} />
         </Flex>
-        {/* Add graph here */}
+        { progressData.personalProgress.length>0?
+          buttonOption=='Personal'?
+          <LineGraph graphData={progressData.personalProgress} />
+          : <LineGraph graphData={progressData.departmentProgress} />
+        :
+        <Center>Sorry, no data to show</Center>
+        }
       </Box>
     </Box>
 
