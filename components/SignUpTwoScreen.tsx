@@ -3,6 +3,7 @@ import { Flex, Image, Pressable, FormControl, Input, Text, Icon, Circle, IconBut
 import icon from '../assets/images/icon.png';
 import styles from '../css/SignUpTwoScreenStyles';
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
+import { COLORS } from "../common/constants";
 
 const SignUpTwoScreen = () => {
 
@@ -15,18 +16,18 @@ const SignUpTwoScreen = () => {
             <Image source={icon} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={150}  borderRadius={100} style={styles.imagePosition} />
 
             <Flex direction="row" alignItems="center" justifyContent="center" marginBottom="20">
-                <IconButton icon={<Icon as={<MaterialIcons name="add" />} size={5}  color= "#005F2C"  />} borderRadius="50" borderWidth="1" borderColor="#005F2C" marginRight="2" padding="1" />
-                <Text color="#005F2C" bold>Add a Picture</Text>
+                <IconButton icon={<Icon as={<MaterialIcons name="add" />} size={5}  color={COLORS.green60} />} borderRadius="50" borderWidth="1" borderColor={COLORS.green60} marginRight="2" padding="1" />
+                <Text color={COLORS.green60} bold>Add a Picture</Text>
             </Flex>
             
             <FormControl marginY="2" isRequired>
                 <FormControl.Label _text={{ bold: true,  color: 'black' }}>First Name</FormControl.Label>
-                <Input placeholder="First Name" value={firstName} onChangeText={setFirstName} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
+                <Input placeholder="First Name" value={firstName} onChangeText={setFirstName} size="lg" marginY="1"  _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1}} />
             </FormControl>
 
             <FormControl marginY="2" isRequired>
                 <FormControl.Label _text={{ bold: true,  color: 'black' }}>Last Name</FormControl.Label>
-                <Input placeholder="Last Name" value={lastName} onChangeText={setLastName} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
+                <Input placeholder="Last Name" value={lastName} onChangeText={setLastName} size="lg" marginY="1"  _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1}} />
             </FormControl>
 
             <Pressable borderWidth={1} style={styles.button}>

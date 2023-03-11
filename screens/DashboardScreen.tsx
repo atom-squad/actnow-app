@@ -90,7 +90,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
             <IconButton icon={<Icon as={<MaterialIcons name="close" />} size={9}  color= "white" />}  />
           </Flex>
           <Text color={COLORS.white}>Learn how to make better decisions in your day to day life.</Text>
-          <Pressable style={styles.button} paddingX={3} paddingY={2}>
+          <Pressable style={styles.quizButton} paddingX={3} paddingY={2} marginTop={4} borderBottomColor={COLORS.darkOrange} borderBottomWidth={3}>
             <Flex direction="row" alignItems="center" justifyContent="center">
               <Text color="white" bold>Start Quiz </Text>
               <Icon as={<MaterialIcons name="arrow-forward" />} size={4} color="white" />
@@ -136,12 +136,14 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     : <Text>You don't have any action yet.</Text>
     }
       
-      <Pressable style={styles.button} margin={4} borderBottomColor={COLORS.darkOrange} borderBottomWidth={2}>
-        <Flex direction="row" alignItems="center" justifyContent="center" flexBasis={2}>
+      <Box borderWidth={1} padding={4} marginY={2}  borderColor={COLORS.gray2} borderRadius={12} >
+      <Pressable style={styles.button} borderBottomColor={COLORS.darkOrange} borderBottomWidth={2} width="100%">
+        <Flex direction="row" alignItems="center" justifyContent="center">
           <Text color="white" bold>Log an action  </Text>
           <Icon as={<MaterialIcons name="arrow-forward" />} size={5} color="white" />
         </Flex>
       </Pressable>
+      </Box>
     </Box>
 
     <Box marginY={8}>

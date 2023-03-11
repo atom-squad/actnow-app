@@ -5,7 +5,7 @@ import icon from '../assets/images/icon.png';
 import SelectDepartment from "./SelectDepartment";
 import SelectOrganization from "./SelectOrganization";
 import styles from '../css/SignUpOneScreenStyles';
-import { API } from "../common/constants";
+import { API, COLORS } from "../common/constants";
 import server from "../common/server";
 import { useAppDispatch } from "../stores/hooks";
 
@@ -43,7 +43,7 @@ const SignUpOneScreen = ({navigation}) => {
                 
             <FormControl marginY="2" isRequired>
                 <FormControl.Label _text={{ bold: true,  color: 'black' }}>Email</FormControl.Label>
-                <Input placeholder="Email" value={username} onChangeText={setUsername} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
+                <Input placeholder="Email" value={username} onChangeText={setUsername} size="lg" marginY="1"  _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1}} />
             </FormControl>
 
             <FormControl marginY="2" isRequired>
@@ -53,7 +53,7 @@ const SignUpOneScreen = ({navigation}) => {
                     value={password}
                     onChangeText={setPassword} 
                     marginY="1"
-                    _focus={{borderColor: "#15AA5A", borderWidth: 1}}
+                    _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1}}
                     type={show ? "text" : "password"} 
                     InputRightElement={
                         <Pressable onPress={() => setShow(!show)}>

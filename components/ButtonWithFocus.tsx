@@ -4,8 +4,12 @@ import { COLORS } from "../common/constants";
 
 const ButtonWithFocus = ({title, style, onClickAction}) => {
     return (
-      <Pressable style={style} borderBottomColor={COLORS.gray2} borderBottomWidth={1} paddingBottom={2} marginBottom={2} _hover={{ backgroundColor: "white" }} _pressed={{ backgroundColor:"white" }}
-      onPress={() => onClickAction(title)}>
+      <Pressable style={style} borderBottomColor={COLORS.gray2} borderBottomWidth={1} paddingBottom={2} marginBottom={2} 
+         _hover={{ borderBottomColor: COLORS.greenPrimary, borderBottomRadius: 2 }}
+        _pressed={{ borderBottomColor: COLORS.greenPrimary, borderBottomRadius: 2 }} 
+        _focus={{borderBottomColor: COLORS.greenPrimary, borderBottomRadius: 2 }}
+        onPress={() => onClickAction(title)}
+      >
         {({
           isHovered,
           isFocused,
@@ -13,7 +17,7 @@ const ButtonWithFocus = ({title, style, onClickAction}) => {
         }) => {
           return <Text 
             alignSelf="center" 
-            color={isPressed ? "#15AA5A" : isHovered ? "#15AA5A" : isFocused ? "#15AA5A"  : "#A1A5AC"}  
+            color={isPressed ? COLORS.greenPrimary : isHovered ? COLORS.greenPrimary : isFocused ? COLORS.greenPrimary  : COLORS.gray2}  
             bold>{title}</Text>
           }}
       </Pressable>

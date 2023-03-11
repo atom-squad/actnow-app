@@ -4,9 +4,15 @@ import { COLORS } from "../common/constants";
 export default StyleSheet.create ({
 
     button: {
-        backgroundColor: 'COLORS.primaryOrange',
+        backgroundColor: COLORS.primaryOrange,
+        borderRadius: 12,
+        alignSelf: "flex-start",
+        paddingVertical: 4
+    },
+
+    quizButton: {
+        backgroundColor: COLORS.primaryOrange,
         borderRadius: 8,
-        marginTop: 20,
         alignSelf: "flex-start",
     },
     

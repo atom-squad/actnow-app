@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COLORS } from '../common/constants';
 
 export default StyleSheet.create ({
 
@@ -9,11 +10,11 @@ export default StyleSheet.create ({
          paddingTop: 8,
          paddingBottom: 8,
          marginTop: 50,
-         backgroundColor: "#15AA5A",
-         borderBottomColor: "#005F2C",
-         borderTopColor: "#15AA5A",
-         borderLeftColor: "#15AA5A",
-         borderRightColor: "#15AA5A",
+         backgroundColor: COLORS.greenPrimary,
+         borderBottomColor: COLORS.green60,
+         borderTopColor: COLORS.greenPrimary,
+         borderLeftColor: COLORS.greenPrimary,
+         borderRightColor: COLORS.greenPrimary,
        },
    
        signUpButton: {
@@ -25,7 +26,7 @@ export default StyleSheet.create ({
          marginTop: 40,
          marginBottom: 90,
          backgroundColor: "white",
-         borderColor: "#15AA5A"
+         borderColor: COLORS.greenPrimary
        },
    
        imagePosition: {
