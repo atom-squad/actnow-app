@@ -2,9 +2,10 @@ import React from "react";
 import { Pressable, Text } from "native-base";
 import { COLORS } from "../common/constants";
 
-const ButtonWithFocus = ({title, style}) => {
+const ButtonWithFocus = ({title, style, onClickAction}) => {
     return (
-      <Pressable style={style} borderBottomColor={COLORS.gray2} borderBottomWidth={1} paddingBottom={2} marginBottom={2}>
+      <Pressable style={style} borderBottomColor={COLORS.gray2} borderBottomWidth={1} paddingBottom={2} marginBottom={2} _hover={{ backgroundColor: "white" }} _pressed={{ backgroundColor:"white" }}
+      onPress={() => onClickAction(title)}>
         {({
           isHovered,
           isFocused,

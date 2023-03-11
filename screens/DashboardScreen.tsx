@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { RootTabScreenProps } from '../types';
 import { Box, ScrollView, Image, Flex, HStack, Text, Spacer, Progress, Heading, Center, IconButton, Icon, Pressable } from "native-base";
 import ActionDetails from '../components/ActionDetails';
@@ -10,11 +10,13 @@ import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
 import { COLORS } from "../common/constants";
 import LeafWhite from '../assets/images/leafWhite.svg';
 import styles from '../css/DashboardScreenStyles'
+import LineGraph from "../components/LineChart";
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
 
   let {userSection, actionsLogged, progressData, orgActions} = useAppSelector((state) => state.dashboard);
   let dispatch = useAppDispatch();
+  let [buttonOption, setButtonOption] = useState('Personal');
 
   const MAX_POINT_MONTH = 500;
   const profileImage = require('../assets/images/profileImage.png');
@@ -32,6 +34,10 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     dispatch(getActionsDone());
   }, [dispatch]);
 
+  const onChangeGraphOption = (option) => {
+    setButtonOption(option);
+  }
+
   return (
     <ScrollView padding={4} >
       <Flex direction='row'>
@@ -48,7 +54,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       <Box  marginTop={4}>
         <Flex direction='row' alignItems="center" >
           <ImageBackground source={badge} style={styles.image}>
-            <Text color={COLORS.white} bold>2</Text>
+            <Text color={COLORS.white} bold>{userSection.rankingPos}</Text>
           </ImageBackground>
           <Box marginLeft={3}>
             <Text color={COLORS.primaryOrange}>Level 2 </Text>
@@ -61,7 +67,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
         <Flex direction='row' justifyContent={'space-between'} padding={1}>
           <HStack>
             <Image source={leafGreen} alt="leaf icon" size={5} resizeMode="contain" />
-            <Text>0</Text>
+            <Text>{userSection.monthPoints}</Text>
           </HStack>
           <HStack>
             <Image source={leafGreen} alt="leaf icon" size={5} resizeMode="contain" />
@@ -99,10 +105,16 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       <Text marginBottom={8}>Review your actions progress.</Text>
       <Box>
        <Flex direction="row">
-          <ButtonWithFocus title="Personal" style={styles.progressButton} />
-          <ButtonWithFocus title="Department" style={styles.progressButton} />
+          <ButtonWithFocus title="Personal" style={styles.progressButton} onClickAction={onChangeGraphOption}/>
+          <ButtonWithFocus title="Department" style={styles.progressButton} onClickAction={onChangeGraphOption} />
         </Flex>
-        {/* Add graph here */}
+        { progressData.personalProgress.length>0?
+          buttonOption=='Personal'?
+          <LineGraph graphData={progressData.personalProgress} />
+          : <LineGraph graphData={progressData.departmentProgress} />
+        :
+        <Center>Sorry, no data to show</Center>
+        }
       </Box>
     </Box>
 
@@ -119,7 +131,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     <Box>
       {(actionsLogged.length > 0)?
       actionsLogged.map((action) => (
-        <ActionDetails key={action.id} bgcolor="lightgrey" task={action.description} points={action.points} />
+        <ActionDetails key={`${action.id}-${Math.random().toFixed(5)}`} bgcolor="lightgrey" task={action.description} points={action.points} />
       ))
     : <Text>You don't have any action yet.</Text>
     }

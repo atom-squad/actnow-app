@@ -25,6 +25,8 @@ const handleError = (error, dispatch) => {
   if (error.response?.status === 401) {
     console.log('Not authorized for execute this operation (401)');
     handleUnauthorized(dispatch);
+  }else{
+    console.log('An error has ocurred connecting with the API', error)
   }
   return {
     status: error.response?.status,
@@ -44,7 +46,7 @@ const request = async (url: string, data?, method: string = 'GET', options?) => 
     },
   };
 
-  if (authToken) {
+  if (authToken && url.indexOf('/auth/')==-1) {
     requestOptions.headers.Authorization = `Bearer ${authToken}`;
   }
 
