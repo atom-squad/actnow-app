@@ -1,19 +1,23 @@
 import React from 'react';
-import { Text, Box } from 'native-base';
-import { RootTabScreenProps } from '../types';
+import { createStackNavigator } from '@react-navigation/stack';
+import ActionsMain from './ActionsMain';
+import ActionsType from './ActionsType';
+import ActionsCongrats from './ActionsCongrats';
 
-export default function ActionsScreen({ navigation }: RootTabScreenProps<'Actions'>) {
+const Stack = createStackNavigator();
+
+function ActionsScreen() {
+
   return (
-    <Box {...styles.container}>
-          <Text>Actions</Text>
-      </Box>
+
+    <Stack.Navigator>
+      <Stack.Group screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="ActionsMain" component={ActionsMain} />
+        <Stack.Screen name="ActionsType" component={ActionsType}  />
+        <Stack.Screen name="ActionsCongrats" component={ActionsCongrats} />
+      </Stack.Group>
+    </Stack.Navigator>
   );
 }
 
-const styles = {
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  }
-};
+export default ActionsScreen;
