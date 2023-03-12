@@ -25,6 +25,10 @@ export type RootStackParamList = {
   ScanHistory: undefined;
   ScanResults: { title: string, response: any };
   ScanSearch: undefined;
+  ActionsMain: undefined;
+  ActionsType: {actionType: any} ;
+  ActionsCongrats: {title: string, response: any} ;
+
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
