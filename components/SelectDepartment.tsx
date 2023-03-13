@@ -1,5 +1,6 @@
 import { FormControl, Select } from "native-base";
 import * as React from "react";
+import { COLORS } from "../common/constants";
 
 const SelectDepartment = () => {
 
@@ -10,7 +11,7 @@ const SelectDepartment = () => {
           <FormControl.Label _text={{ bold: true,  color: 'black' }}>Department</FormControl.Label>
           <Select minWidth="200" accessibilityLabel="Select your Department" placeholder="Select your Department" selectedValue={department} onValueChange={itemValue => setDepartment(itemValue)}  marginY="1" size="lg" 
             _selectedItem={{
-              backgroundColor: "#15AA5A"
+              backgroundColor: COLORS.greenPrimary
             }} >
               <Select.Item label="Marketing" value="marketing" />
               <Select.Item label="Finance" value="finance" />

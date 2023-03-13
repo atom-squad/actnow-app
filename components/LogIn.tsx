@@ -5,7 +5,7 @@ import icon from '../assets/images/icon.png';
 import styles from '../css/LogInStyles';
 import localStorage from '../common/localStorage';
 import server from '../common/server';
-import { API } from '../common/constants';
+import { API, COLORS } from '../common/constants';
 import { useAppDispatch } from '../stores/hooks';
 
 function Login({ setToken, setScreen }) {
@@ -34,7 +34,7 @@ function Login({ setToken, setScreen }) {
 
         <FormControl marginY="2" isRequired>
           <FormControl.Label _text={{ bold: true, color: 'black'  }}>Email</FormControl.Label>
-          <Input placeholder="Email" value={email} onChangeText={setEmail} size="lg" marginY="1"  _focus={{borderColor: "#15AA5A", borderWidth: 1}} />
+          <Input placeholder="Email" value={email} onChangeText={setEmail} size="lg" marginY="1"  _focus={{borderColor: COLORS.greenPrimary , borderWidth: 1}} />
         </FormControl>
 
         <FormControl marginY="2" isRequired>
@@ -44,7 +44,7 @@ function Login({ setToken, setScreen }) {
             value={password}
             onChangeText={setPassword} 
             marginY="1"
-            _focus={{borderColor: "#15AA5A", borderWidth: 1}}
+            _focus={{borderColor: COLORS.greenPrimary , borderWidth: 1}}
             type={show ? "text" : "password"} 
             InputRightElement={
               <Pressable onPress={() => setShow(!show)}>
@@ -62,10 +62,10 @@ function Login({ setToken, setScreen }) {
         </Pressable>
 
         <Pressable  borderWidth={1} style={styles.signUpButton} alignItems="center" onPress={() => setScreen('SignUpOne')}>
-          <Text color="#15AA5A" bold>Sign Up </Text>
+          <Text color={COLORS.greenPrimary} bold>Sign Up </Text>
         </Pressable>
 
-        <Link href="https://nativebase.io" _text={{color:"#005F2C"}}>
+        <Link href="https://nativebase.io" _text={{color: COLORS.green60 }}>
           Terms of Privacy
         </Link>
 
