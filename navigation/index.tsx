@@ -16,23 +16,28 @@ import ActionsScreen from '../screens/ActionsScreen';
 import DashboardScreen from '../screens/DashboardScreen';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
-import ScanScreen from '../screens/ScanScreen';
+import { ScanScreen } from '../screens/ScanScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import LeaderboardScreen from '../screens/LeaderBoardScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import { Provider } from 'react-redux';
-import { store } from '../stores/store';
+
+import ActionIcon from '../assets/images/actionIcon.svg';
+import DashboardIcon from '../assets/images/dashboardIcon.svg';
+import ScanIcon from '../assets/images/scanIcon.svg';
+import LeaderboardIcon from '../assets/images/leaderboardIcon.svg';
+import SettingsIcon from '../assets/images/settingsIcon.svg';
+import { Box, Button } from 'native-base';
+import { useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
-    <Provider store={store}>
-      <NavigationContainer
-        linking={LinkingConfiguration}
-        theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <RootNavigator />
-      </NavigationContainer>
-    </Provider>
+    <NavigationContainer
+      linking={LinkingConfiguration}
+      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+      <RootNavigator />
+    </NavigationContainer>
   );
 }
 
@@ -42,11 +47,23 @@ export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeNa
  */
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
+const EmptyScanTab = () => {
+  const navigation = useNavigation();
+  // useEffect(() => {
+    
+  //   navigation.navigate('ScanContainer', {
+  //     onGoBack: () => console.log('Will go back from nextComponent'),
+  //   });
+  // }, [])
+  return <></>;
+};
+
 function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
+      <Stack.Screen name="ScanContainer" component={ScanScreen} options={{ title: 'Scan' }  } />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>
@@ -67,47 +84,49 @@ function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="Dashboard"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarActiveTintColor: 'black',
       }}>
       <BottomTab.Screen
         name="Dashboard"
         component={DashboardScreen}
-        options={({ navigation }: RootTabScreenProps<'Dashboard'>) => ({
-          title: 'Dashboard',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        })}
+        options={({ navigation }: RootTabScreenProps<'Dashboard'>) => {
+          return ({
+            title: 'Dashboard',
+            tabBarIcon: ({ color }) => <TabBarIcon icon={DashboardIcon} isFocussed={navigation.isFocused()}/>,
+          })}
+        }
       />
       <BottomTab.Screen
         name="Actions"
         component={ActionsScreen}
-        options={{
+        options={({ navigation }: RootTabScreenProps<'Actions'>) => ({
           title: 'Actions',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
+          tabBarIcon: ({ color }) => <TabBarIcon icon={ActionIcon} isFocussed={navigation.isFocused()}/>
+        })}
       />
       <BottomTab.Screen
         name="Scan"
-        component={ScanScreen}
-        options={{
+        component={EmptyScanTab}
+        options={({ navigation }: RootTabScreenProps<'Scan'>) => ({
           title: 'Scan',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
+          tabBarIcon: ({ color }) => <Pressable onPress={() => navigation.navigate('ScanContainer')}><TabBarIcon icon={ScanIcon} isFocussed={navigation.isFocused()}/></Pressable>,
+        })}
       />
       <BottomTab.Screen
         name="Leaderboard"
         component={LeaderboardScreen}
-        options={{
+        options={({ navigation }: RootTabScreenProps<'Leaderboard'>) => ({
           title: 'Leaderboard',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
+          tabBarIcon: ({ color }) => <TabBarIcon icon={LeaderboardIcon} isFocussed={navigation.isFocused()}/>,
+        })}
       />
       <BottomTab.Screen
         name="Settings"
         component={SettingsScreen}
-        options={{
+        options={({ navigation }: RootTabScreenProps<'Settings'>) => ({
           title: 'Settings',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
-        }}
+          tabBarIcon: ({ color }) => <TabBarIcon icon={SettingsIcon} isFocussed={navigation.isFocused()}/>,
+        })}
       />
     </BottomTab.Navigator>
   );
@@ -116,9 +135,16 @@ function BottomTabNavigator() {
 /**
  * You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
  */
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
-  color: string;
-}) {
-  return <FontAwesome size={30} style={{ marginBottom: -3 }} {...props} />;
+const TabBarIcon = (props: {
+  icon: any;
+  color?: string;
+  isFocussed: boolean;
+}) => {
+
+  const Icon = props.icon;
+  return (
+    <Box opacity={props.isFocussed ? '1' : '.3'}>
+      <Icon />
+    </Box>
+  );
 }

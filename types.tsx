@@ -22,6 +22,11 @@ export type RootStackParamList = {
   SignUpTwo: undefined;
   InitialScreen: undefined;
   LogIn: undefined;
+  ScanMain: undefined;
+  ScanContainer: undefined;
+  ScanHistory: undefined;
+  ScanResults: { title: string, response: any };
+  ScanSearch: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

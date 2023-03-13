@@ -43,30 +43,38 @@ export const dashboardSlice = createSlice({
   export const { loadUserSection, loadActionsLogged, loadProgressData, loadOrgActions } = dashboardSlice.actions;
 
   export const getUserSection = () => async (dispatch) => {
-    const res = await server.get(`${API.dashboard}/user`);
+    const res = await server.get(`${API.dashboard}/user`, { dispatch });
     if(res.status === 200){
         dispatch(loadUserSection(res.data));
+    }else{
+        console.log('Error loading the dashboard data', res);
     }
   }
 
   export const getProgressData = () => async (dispatch) => {
-    const res = await server.get(`${API.dashboard}/progress`);
+    const res = await server.get(`${API.dashboard}/progress`, { dispatch });
     if(res.status === 200){
         dispatch(loadProgressData(res.data));
+    }else{
+        console.log('Error loading the dashboard data', res);
     }
   }
 
   export const getOrgActions = () => async (dispatch) => {
-    const res = await server.get(`${API.dashboard}/org-actions`);
+    const res = await server.get(`${API.dashboard}/org-actions`, { dispatch });
     if(res.status === 200){
         dispatch(loadOrgActions(res.data));
+    }else{
+        console.log('Error loading the dashboard data', res);
     }
   }
 
   export const getActionsDone = () => async (dispatch) => {
-    const res = await server.get(`${API.actions}/user`);
+    const res = await server.get(`${API.actions}/user`, { dispatch });
     if(res.status === 200){
         dispatch(loadActionsLogged(res.data));
+    }else{
+        console.log('Error loading the dashboard data', res);
     }
   }
 
