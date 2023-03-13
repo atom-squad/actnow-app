@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { COLORS } from '../common/constants';
 
 export default StyleSheet.create ({
 
@@ -7,11 +8,11 @@ export default StyleSheet.create ({
         borderBottomWidth: 2,
          width: "95%",
         marginTop: 50,
-        backgroundColor: "#15AA5A",
-        borderBottomColor: "#005F2C",
-        borderTopColor: "#15AA5A",
-        borderLeftColor: "#15AA5A",
-        borderRightColor: "#15AA5A",
+        backgroundColor: COLORS.greenPrimary,
+        borderBottomColor: COLORS.green60,
+        borderTopColor: COLORS.greenPrimary,
+        borderLeftColor: COLORS.greenPrimary,
+        borderRightColor: COLORS.greenPrimary,
     },
 
     imagePosition: {

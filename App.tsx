@@ -40,7 +40,7 @@ function App() {
     return (
       <SafeAreaProvider>
         <NativeBaseProvider>
-          { token ? 
+        { token ? 
             <Navigation colorScheme={"light"} />
             : <>
               {/* <SignUp /> */}
