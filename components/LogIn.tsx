@@ -14,7 +14,7 @@ function Login({ setToken, setScreen }) {
     const [password, setPassword] = useState('');
     const dispatch = useAppDispatch();
 
-    const logoLeaves = require('../assets/images/logoLeaves.png')
+    const logoLeaves = require('../assets/images/logoLeaves.png');
 
     const login = async () => {
       if (email && password) {

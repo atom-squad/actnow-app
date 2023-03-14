@@ -3,7 +3,7 @@ import { RootTabScreenProps } from '../types';
 import { Box, ScrollView, Image, Flex, HStack, Text, Spacer, Progress, Heading, Center, IconButton, Icon, Pressable } from "native-base";
 import ActionDetails from '../components/ActionDetails';
 import ButtonWithFocus from '../components/ButtonWithFocus';
-import { ImageBackground, StyleSheet, TouchableOpacity } from 'react-native';
+import { ImageBackground, TouchableOpacity } from 'react-native';
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { getActionsDone, getOrgActions, getProgressData, getUserSection } from "../stores/slices/dashboardSlice";
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
@@ -20,7 +20,6 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
 
   const MAX_POINT_MONTH = 500;
   const profileImage = require('../assets/images/profileImage.png');
-  const icon = require('../assets/images/icon.png');
   const badge = require('../assets/images/badge.png');
   const leafGreen = require('../assets/images/leafGreen.png');
   const quizCardBackground = require('../assets/images/quizCardBackground.png');
