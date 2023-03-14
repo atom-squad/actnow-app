@@ -20,6 +20,8 @@ export type RootStackParamList = {
   SignUp: undefined;
   SignUpOne: undefined;
   SignUpTwo: undefined;
+  InitialScreen: undefined;
+  LogIn: undefined;
   ScanMain: undefined;
   ScanContainer: undefined;
   ScanHistory: undefined;
