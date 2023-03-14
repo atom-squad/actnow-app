@@ -9,7 +9,6 @@ export default StyleSheet.create ({
          width: "95%",
          paddingTop: 8,
          paddingBottom: 8,
-         marginTop: 50,
          backgroundColor: COLORS.greenPrimary,
          borderBottomColor: COLORS.green60,
          borderTopColor: COLORS.greenPrimary,
@@ -23,15 +22,15 @@ export default StyleSheet.create ({
          width: "95%",
          paddingTop: 8,
          paddingBottom: 8,
-         marginTop: 40,
+         marginTop: 35,
          marginBottom: 90,
          backgroundColor: "white",
          borderColor: COLORS.greenPrimary
        },
    
        imagePosition: {
-         marginTop: 140,
-         marginBottom: 40
+         marginTop: 80,
+         marginBottom: 80
        }   
 
 });
