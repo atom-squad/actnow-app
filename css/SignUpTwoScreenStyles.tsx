@@ -7,7 +7,8 @@ export default StyleSheet.create ({
         borderRadius: 12,
         borderBottomWidth: 2,
          width: "95%",
-        marginTop: 50,
+        marginTop: 150,
+        marginBottom: 250,
         backgroundColor: COLORS.greenPrimary,
         borderBottomColor: COLORS.green60,
         borderTopColor: COLORS.greenPrimary,
@@ -16,7 +17,7 @@ export default StyleSheet.create ({
     },
 
     imagePosition: {
-        marginTop: 80,
+        marginTop: 150,
         marginBottom: 20
     }
 

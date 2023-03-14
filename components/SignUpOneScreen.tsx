@@ -1,7 +1,6 @@
 import React from "react";
 import { Input, FormControl, Flex, Text, Pressable, Image, Icon,  Link } from "native-base";
 import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
-import icon from '../assets/images/icon.png';
 import SelectDepartment from "./SelectDepartment";
 import SelectOrganization from "./SelectOrganization";
 import styles from '../css/SignUpOneScreenStyles';
@@ -17,7 +16,9 @@ const SignUpOneScreen = ({navigation}) => {
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const [show, setShow] = React.useState(false);
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
+
+    const logoLeaves = require('../assets/images/logoLeaves.png');
 
     const signup = async () => {
         if (email && password && organization && username && department) {
@@ -35,7 +36,11 @@ const SignUpOneScreen = ({navigation}) => {
   
     return (
         <Flex direction="column" align="center" height="100%" marginX="4">
-            <Image source={icon} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={100}  borderRadius={100} style={styles.imagePosition} />
+            <Image source={logoLeaves} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={100}   style={styles.imagePosition} />
+
+            <Text alignSelf="flex-start" color={COLORS.primaryOrange} fontSize={30}>Hello Human,</Text>
+            <Text alignSelf="flex-start">Let's make earth a better place to live,</Text>
+            <Text alignSelf="flex-start"> one action at a time.</Text>
                     
             <SelectOrganization />
 
@@ -43,7 +48,7 @@ const SignUpOneScreen = ({navigation}) => {
                 
             <FormControl marginY="2" isRequired>
                 <FormControl.Label _text={{ bold: true,  color: 'black' }}>Email</FormControl.Label>
-                <Input placeholder="Email" value={username} onChangeText={setUsername} size="lg" marginY="1"  _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1}} />
+                <Input placeholder="Email" value={username} onChangeText={setUsername} size="lg" marginY="1"  _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1, backgroundColor: "white"}} />
             </FormControl>
 
             <FormControl marginY="2" isRequired>
@@ -53,7 +58,7 @@ const SignUpOneScreen = ({navigation}) => {
                     value={password}
                     onChangeText={setPassword} 
                     marginY="1"
-                    _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1}}
+                    _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1, backgroundColor: "white"}}
                     type={show ? "text" : "password"} 
                     InputRightElement={
                         <Pressable onPress={() => setShow(!show)}>
@@ -66,12 +71,13 @@ const SignUpOneScreen = ({navigation}) => {
                 Forgot Password? 
             </Link>
 
-            <Pressable onPress={() => navigation.push("SignUpTwo")} borderWidth={1} style={styles.button}>
-                <Flex direction="row" alignItems="center" justifyContent="center">
-                    <Text color="white" bold>Sign Up </Text>
-                    <Icon as={<MaterialIcons name="arrow-forward" />} size={5}      color="white" marginY="3" />
-                </Flex>
+            <Pressable onPress={() => navigation.push("SignUpTwo")} borderWidth={1} style={styles.button} alignItems="center" justifyContent="center">
+                <Text color="white" bold>Sign Up </Text>
             </Pressable>
+
+            <Pressable  borderWidth={1} style={styles.logInButton} alignItems="center" onPress={() => navigation.push('Login')}>
+          <Text color={COLORS.greenPrimary} bold>Log In </Text>
+        </Pressable>
 
         </Flex>
     );
