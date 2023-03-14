@@ -8,7 +8,6 @@ import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { getActionsDone, getOrgActions, getProgressData, getUserSection } from "../stores/slices/dashboardSlice";
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
 import { COLORS } from "../common/constants";
-import LeafWhite from '../assets/images/leafWhite.svg';
 import styles from '../css/DashboardScreenStyles'
 import LineGraph from "../components/LineChart";
 
@@ -25,6 +24,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
   const quizCardBackground = require('../assets/images/quizCardBackground.png');
  const impactCardBackground = require('../assets/images/impactCardBackground.png');
  const handLeaf = require('../assets/images/handLeaf.png');
+ const leafWhite = require('../assets/images/leafWhite.png');
 
   useEffect(() => {
     dispatch(getUserSection());
@@ -81,7 +81,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
           <Flex direction="row" alignItems="center">
             <HStack alignItems="center">
               <TouchableOpacity>
-                <LeafWhite fill="white" />
+                <Image source={leafWhite} alt="white leaf" size={5} />
               </TouchableOpacity>
               <Heading color={COLORS.white} marginLeft={2}>Quiz</Heading>
             </HStack>
@@ -147,7 +147,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
 
     <Box marginY={8}>
       <ImageBackground source={impactCardBackground} style={styles.bgImage} borderRadius={10}>
-        <Flex direction="row" align="center" justify="space-beween">
+        <Flex direction="row" align="center" justify="space-beween" paddingY={5}>
           <Image source={handLeaf} alt="hand icon" size={100}  marginRight="10" resizeMode="contain"/>
           <Box>
             <Text color="white">Your organisation has taken</Text>
