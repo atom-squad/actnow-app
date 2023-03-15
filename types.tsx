@@ -29,7 +29,7 @@ export type RootStackParamList = {
   ScanSearch: undefined;
   ActionsMain: undefined;
   ActionsType: {actionType: any} ;
-  ActionsCongrats: {title: string, response: any} ;
+  ActionsCongrats: {totalPoints: any, totalUserPoints: number} ;
 
 };
 
