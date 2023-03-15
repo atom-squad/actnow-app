@@ -3,6 +3,7 @@ import { Flex, Text, Pressable, Image,  Link } from "native-base";
 import icon from '../assets/images/icon.png';
 import styles from '../css/InitialScreenStyles'
 import { COLORS } from "../common/constants";
+import OneLiner from '../assets/images/oneLiner.svg';
 
 const InitialScreen = ({navigation}) => {
 
@@ -12,7 +13,7 @@ const InitialScreen = ({navigation}) => {
         <Flex direction="column" align="center" height="100%">
             <Image source={logoWithName} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={250} style={styles.imagePosition} resizeMode="contain" />
 
-            <Image source={icon} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={100}  borderRadius={100} style={styles.imagePosition} marginBottom={60} />
+            <OneLiner width={250} height={150} style={styles.quotePosition} />
 
             <Pressable onPress={() => navigation.push("LogIn")} borderWidth={1} style={styles.logInButton} alignItems="center">
                 <Text color="white" bold>Log In </Text>

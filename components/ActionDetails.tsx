@@ -1,18 +1,33 @@
 import React from "react";
-import { Box, Flex, Text, Circle } from "native-base";
+import { Box, Flex, Text } from "native-base";
+import { StyleSheet } from "react-native";
+import { COLORS } from "../common/constants";
 
-const ActionDetails = ({bgcolor, task, points}) => {
+const ActionDetails = ({task, points}) => {
     return (
-      <Box backgroundColor={bgcolor}>
-        <Flex direction='row' justifyContent="space-between" alignItems="center" padding={4}>
-          <Box paddingLeft={8}>
-            <Text bold>{task}</Text>
-            <Text bold>+{points} Points !</Text>
+      <Box style={styles.borderStyle}>
+        <Flex direction='row' alignItems="flex-start" padding={4}>
+          <Box borderWidth={1} borderColor={COLORS.darkOrange} borderRadius={12} paddingY={2} paddingX={4} marginLeft={2}>
+            <Text color={COLORS.darkOrange} bold>+{points}</Text>
+            <Text color={COLORS.darkOrange}>Pts</Text>
           </Box>
-          <Circle size="40px" bgColor="blue.100"><Text bold>&#x2713;</Text></Circle>
+          <Box paddingLeft={4}>
+            <Text bold>{task}</Text>
+            <Text color={COLORS.gray2} marginTop={2}>14 March, 2023</Text>
+          </Box>
         </Flex>
       </Box>
     );
   }
+
+  const styles = StyleSheet.create({
+
+    borderStyle: {
+      borderWidth: 1,
+      borderColor: COLORS.grayLight,
+      borderTopWidth: 0
+    }
+
+  })
 
   export default ActionDetails;

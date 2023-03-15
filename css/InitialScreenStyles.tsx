@@ -7,6 +7,10 @@ export default StyleSheet.create ({
             marginTop: 60
         },   
 
+        quotePosition: {
+            marginBottom: 50
+        },
+
         logInButton: {
             borderRadius: 12,
             borderBottomWidth: 2,

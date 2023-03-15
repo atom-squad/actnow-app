@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { getActionsDone, getOrgActions, getProgressData, getUserSection } from "../stores/slices/dashboardSlice";
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
 import { COLORS } from "../common/constants";
-import styles from '../css/DashboardScreenStyles'
+import styles from '../css/DashboardScreenStyles';
 import LineGraph from "../components/LineChart";
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
@@ -127,18 +127,18 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       </Pressable>
     </Flex>
     <Text>Review your actions logged.</Text>
-    <Box>
+    <Box marginTop={4}>
       {(actionsLogged.length > 0)?
       actionsLogged.map((action) => (
-        <ActionDetails key={`${action.id}-${Math.random().toFixed(5)}`} bgcolor="lightgrey" task={action.description} points={action.points} />
+        <ActionDetails key={`${action.id}-${Math.random().toFixed(5)}`} task={action.description} points={action.points} />
       ))
     : <Text>You don't have any action yet.</Text>
     }
       
-      <Box borderWidth={1} padding={4} marginY={2}  borderColor={COLORS.gray2} borderRadius={12} >
+      <Box borderWidth={1} paddingX={4} paddingY={6} marginBottom={2}  borderColor={COLORS.grayLight} borderBottomRadius={12} borderTopWidth={0}>
       <Pressable style={styles.button} borderBottomColor={COLORS.darkOrange} borderBottomWidth={2} width="100%">
         <Flex direction="row" alignItems="center" justifyContent="center">
-          <Text color="white" bold>Log an action  </Text>
+          <Text color="white" paddingY={2}  bold>Log an action  </Text>
           <Icon as={<MaterialIcons name="arrow-forward" />} size={5} color="white" />
         </Flex>
       </Pressable>
