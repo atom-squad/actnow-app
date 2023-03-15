@@ -8,7 +8,7 @@ import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { getActionsDone, getOrgActions, getProgressData, getUserSection } from "../stores/slices/dashboardSlice";
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
 import { COLORS } from "../common/constants";
-import styles from '../css/DashboardScreenStyles'
+import styles from '../css/DashboardScreenStyles';
 import LineGraph from "../components/LineChart";
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {

@@ -1,13 +1,15 @@
 import React from "react";
-import { Box, Flex, Text } from "native-base";
+import { Box, Flex, HStack, Text } from "native-base";
 
-const UsernameWithRank = ({bgcolor, textcolor, rank, username, points}) => {
+const UsernameWithRank = ({textcolor, rank, username, points}) => {
     return (
-        <Box backgroundColor={bgcolor} style={styles.container}>
+        <Box style={styles.container}>
           <Flex direction='row' justifyContent="space-around">
-            <Text color={textcolor} bold>#{rank}</Text>
-            <Text color={textcolor}>{username}</Text>
-            <Text color={textcolor} bold>{points}</Text>
+            <HStack>
+              <Text color={textcolor} bold>#{rank}</Text>
+              <Text color={textcolor} paddingLeft={6}>{username}</Text>
+            </HStack>
+            <Text color={textcolor}>{points} pts</Text>
           </Flex>
         </Box>
     );
@@ -17,9 +19,8 @@ const UsernameWithRank = ({bgcolor, textcolor, rank, username, points}) => {
     container: {
         paddingTop: 14,
         paddingBottom: 14,
-        borderWidth: 1,
-        borderColor: "black",
-        borderTopWidth: 0
+        borderBottomWidth: 1,
+        borderBottomColor: '#E9E9E9'
     }
   }
 
