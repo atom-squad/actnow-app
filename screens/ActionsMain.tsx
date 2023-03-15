@@ -3,10 +3,7 @@ import React, { useEffect, useState } from 'react';
 import {  TouchableOpacity} from 'react-native';
 import { useNavigation, Link } from '@react-navigation/native';
 import WeekCalendar from '../components/WeekCalendar';
-import server from '../common/server';
-import { API } from '../common/constants';
-import ActionCategory from '../components/ActionCategory';
-import { useAppDispatch } from '../stores/hooks';
+
 
 
 function ActionsMain()  {
@@ -26,28 +23,28 @@ function ActionsMain()  {
         </Text>
         <VStack style={styles.vstack as any}>
             <HStack style={styles.hstackTop as any}>
-                <View style={styles.view as any}>
+                <View>
                     <Image
                         source={require('../assets/images/test.png')} 
-                        style={{justifyContent:'center'}}
+                        style={{justifyContent:'center', width: 180,  height: 180  }}
                         resizeMode='contain'
-                        maxW='210'
+                        alt='Transport Image'
                     />
-                    <Text>Transport</Text>
+                    <Text style={styles.energyTypeText as any}>Transport</Text>
                     <TouchableOpacity onPress={() => handlePress('transport')}>
-                        <Text>See More</Text>
+                        <Text style={styles.seeMoreText as any}>See More</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
                     <Image
                         source={require('../assets/images/food.png')} 
-                        style={{justifyContent:'center'}}
+                        style={{justifyContent:'center', width: 180,  height: 180}}
                         resizeMode='contain'
-                        maxW='210'
+                        alt='Food Image'
                     />
-                    <Text>Food</Text>
+                    <Text style={styles.energyTypeText as any}>Food</Text>
                     <TouchableOpacity onPress={() => handlePress('food')}>
-                        <Text>See More</Text>
+                        <Text style={styles.seeMoreText as any}>See More</Text>
                     </TouchableOpacity>
                 </View>
             </HStack>
@@ -55,25 +52,25 @@ function ActionsMain()  {
             <View>
                     <Image
                         source={require('../assets/images/energies.png')} 
-                        style={{justifyContent:'center'}}
+                        style={{justifyContent:'center', width: 180, height: 180}}
                         resizeMode='contain'
-                        maxW='210'
+                        alt='Energies Image'
                     />
-                    <Text>Energies</Text>
+                    <Text style={styles.energyTypeText as any}>Energies</Text>
                     <TouchableOpacity onPress={() => handlePress('energies')}>
-                        <Text>See More</Text>
+                        <Text style={styles.seeMoreText as any}>See More</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
                     <Image
                         source={require('../assets/images/products.png')} 
-                        style={{justifyContent:'center'}}
+                        style={{justifyContent:'center', width: 180, height: 180}}
                         resizeMode='contain'
-                        maxW='210'
+                        alt='Products Image'
                     />
-                    <Text>Products</Text>
+                    <Text style={styles.energyTypeText as any}>Products</Text>
                     <TouchableOpacity onPress={() => handlePress('products')}>
-                        <Text>See More</Text>
+                        <Text style={styles.seeMoreText as any}>See More</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -93,21 +90,34 @@ const styles = {
       textAlign:'center',
       textTransform:'uppercase',
       fontWeight: 'bold',
-      marginTop: 20,
-      marginBottom: 20
+      marginTop: 30,
     },
     vstack: {
       alignItems: 'center',
       alignSelf: 'center',
       height: '100%',
-      width: '90%',
-      marginX: 16
+      width: '70%',
+      marginX: 16,
+    //   borderWidth: 1,
+    //   borderColor: 'black'
     },
     hstackTop: {
-      marginTop: 16
+      marginTop: 16,
+    //   borderWidth: 1,
+    //   borderColor: 'black'
     },
-    view: {
-      marginTop: 16
+    energyTypeText: {
+      textAlign: 'center',
+      fontSize: 20,
+      fontWeight: 'semibold'
+
+    },
+    seeMoreText: {
+      textAlign:'center',
+      fontSize: 16,
+      color: '#005F2C',
+      textDecorationLine: 'underline',
+      fontWeight: 'bold'
     }
   }
   
