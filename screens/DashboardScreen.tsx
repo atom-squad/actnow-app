@@ -129,8 +129,8 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     <Text>Review your actions logged.</Text>
     <Box marginTop={4}>
       {(actionsLogged.length > 0)?
-      actionsLogged.map((action) => (
-        <ActionDetails key={`${action.id}-${Math.random().toFixed(5)}`} task={action.description} points={action.points} />
+      (actionsLogged.slice(0, 3)).map((action) => (
+        <ActionDetails key={`${action.id}-${Math.random().toFixed(5)}`} task={action.description} points={action.points} date={action.txDate} />
       ))
     : <Text>You don't have any action yet.</Text>
     }
