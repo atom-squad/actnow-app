@@ -1,11 +1,13 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import userReducer from './slices/userSlice';
 import dashboardReducer from './slices/dashboardSlice';
+import leaderboardReducer from './slices/leaderboardSlice';
 
 export const store = configureStore({
   reducer: {
     user: userReducer,
     dashboard: dashboardReducer,
+    leaderboard: leaderboardReducer,
   },
 });
 
