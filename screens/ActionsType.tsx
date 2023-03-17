@@ -4,80 +4,84 @@ import {  TouchableOpacity} from 'react-native';
 import server from '../common/server';
 import { API, COLORS } from '../common/constants';
 import { useAppDispatch } from '../stores/hooks';
-import {Text, View,  Box, Radio, Button, Image, ScrollView } from 'native-base';
-import BackIcon from '../assets/images/back-icon.svg'
+import {Text, View,  Box, Radio, Button, Image, ScrollView} from 'native-base';
+import BackIcon from '../assets/images/back-icon.svg';
 import Checkbox from 'expo-checkbox';
 
 
 function ActionsType({route}) {
-  const {actionType} = route.params
-  const [results, setResults] = useState([])
+  const {actionType} = route.params;
+  const [results, setResults] = useState([]);
   const [selectedValues, setSelectedValues] = useState([]);
   const [isChecked, setChecked] = useState(false);
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   const dispatch = useAppDispatch();
 
 
   const getActionsByType = async (actionType: string) => {
     if (!actionType) return;
     const resp = await server.get(`${API.actions}/${actionType}`, {dispatch});
-    setResults(resp.data)
-    console.info('resp', JSON.stringify(resp.data));
-  }
+
+    if(resp.status === 200){
+      setResults(resp.data);
+    } else {
+      throw new Error(`Server responded with status code ${resp.status}`);
+    };
+  };
 
   const handleValueChange = (value) => {
     if (selectedValues.some((selectedValue) => selectedValue.actionId === value.actionId)) {
       setSelectedValues(selectedValues.filter((selectedValue) => selectedValue.actionId !== value.actionId));
     } else {
       setSelectedValues([...selectedValues, value]);
-    }
+    };
   };
   
   const postAllActions = async () => {
     let totalPoints = 0;
-    let totalUserPoints
+    let totalUserPoints;
   
     if (selectedValues) {
       selectedValues.map( async (value, index) => {
         await postAction(value.actionId);
         totalPoints += value.actionPoints;
         totalUserPoints = await addPoints(value.actionPoints);
-        console.log("points", totalUserPoints)
 
-        if (selectedValues.length === index + 1){
-          navigation.navigate("ActionsCongrats", {totalPoints, totalUserPoints})
-        }
+        if (selectedValues.length === index + 1 && totalUserPoints){
+          navigation.navigate("ActionsCongrats", {totalPoints, totalUserPoints});
+        };
 
       });
-    }
+    };
   };
 
 
   const postAction = async (actionId: string) => {
     const resp = await server.post(`${API.actions}/newaction`, {
       actionId: actionId,
-
-    }, {dispatch})
-
-  }
+    }, {dispatch});
+  };
 
   const addPoints = async (actionPoints : number) => {
     const resp = await server.post(`${API.user}/points`, {
       points: actionPoints,
       origin: "actions"
-    }, {dispatch})
-    const userPoints = resp.data.totalPoints
-    console.log(userPoints)
-    return userPoints
-  }
+    }, {dispatch});
+    if(resp.status === 201){
+      const userPoints = resp.data.totalPoints;
+      return userPoints;
+    } else {
+      throw new Error(`Server responded with status code ${resp.status}`);
+    };
+  };
 
   const goTo = (route) => {
-    navigation.navigate(route)
+    navigation.navigate(route);
   }
 
   useEffect(() => {
-    getActionsByType(actionType)
-  }, [actionType])
+    getActionsByType(actionType);
+  }, [actionType]);
 
 
   const renderImage = () => {
@@ -112,7 +116,7 @@ function ActionsType({route}) {
                 />;
       default:
         return null;
-    }
+    };
   };
 
 
@@ -164,7 +168,7 @@ function ActionsType({route}) {
         </ScrollView>
      </>
   );
-}
+};
 
 const styles = {
   container: {
@@ -214,6 +218,6 @@ const styles = {
     borderWidth: 1,
     alignSelf: 'center'
   }
-}
+};
 
 export default ActionsType;

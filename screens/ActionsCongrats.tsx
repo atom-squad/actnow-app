@@ -2,18 +2,18 @@ import React from 'react';
 import { Text, View, Button, Box} from 'native-base';
 import { COLORS } from '../common/constants';
 import { useNavigation } from '@react-navigation/native';
-import LeafIcon from '../assets/images/leafIcon.svg'
+import LeafIcon from '../assets/images/leafIcon.svg';
 
 
 
 
 function ActionsCongrats({route}) {
-  const {totalPoints, totalUserPoints} = route.params
-  const navigation = useNavigation()
+  const {totalPoints, totalUserPoints} = route.params;
+  const navigation = useNavigation();
 
   const goTo = (route) => {
-    navigation.navigate(route)
-  }
+    navigation.navigate(route);
+  };
   
   return (
     <View style={styles.container as any}>
@@ -43,7 +43,7 @@ function ActionsCongrats({route}) {
       </Button>
     </View>
   );
-}
+};
 
 const styles = {
   container: {
@@ -111,6 +111,6 @@ const styles = {
     marginBottom: 16,
 
   }
-}
+};
 
 export default ActionsCongrats;

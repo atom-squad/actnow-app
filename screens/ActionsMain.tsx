@@ -1,5 +1,5 @@
 import {  Flex, HStack, VStack, Text, View, Image} from 'native-base';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import {  TouchableOpacity} from 'react-native';
 import { useNavigation, Link } from '@react-navigation/native';
 import WeekCalendar from '../components/WeekCalendar';
@@ -8,12 +8,12 @@ import WeekCalendar from '../components/WeekCalendar';
 
 function ActionsMain()  {
 
-    const navigation = useNavigation()
+    const navigation = useNavigation();
 
 
    const handlePress = (type) => {
-    navigation.navigate("ActionsType", {actionType: type})
-   }
+    navigation.navigate("ActionsType", {actionType: type});
+   };
 
   return (
     <Flex style={styles.flex as any}>
@@ -98,13 +98,9 @@ const styles = {
       height: '100%',
       width: '70%',
       marginX: 16,
-    //   borderWidth: 1,
-    //   borderColor: 'black'
     },
     hstackTop: {
       marginTop: 16,
-    //   borderWidth: 1,
-    //   borderColor: 'black'
     },
     energyTypeText: {
       textAlign: 'center',
@@ -119,7 +115,7 @@ const styles = {
       textDecorationLine: 'underline',
       fontWeight: 'bold'
     }
-  }
+  };
   
 
 
