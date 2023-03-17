@@ -25,11 +25,13 @@ import SettingsScreen from '../screens/SettingsScreen';
 import ActionIcon from '../assets/images/actionIcon.svg';
 import DashboardIcon from '../assets/images/dashboardIcon.svg';
 import ScanIcon from '../assets/images/scanIcon.svg';
+import CloseIcon from '../assets/images/closeIcon.svg';
 import LeaderboardIcon from '../assets/images/leaderboardIcon.svg';
 import SettingsIcon from '../assets/images/settingsIcon.svg';
-import { Box, Button } from 'native-base';
+import { Box, Button, Icon, IconButton, Text } from 'native-base';
 import { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import QuizzModal from '../screens/QuizzModal';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -59,6 +61,7 @@ const EmptyScanTab = () => {
 };
 
 function RootNavigator() {
+  const navigation = useNavigation();
   return (
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
@@ -66,6 +69,13 @@ function RootNavigator() {
       <Stack.Screen name="ScanContainer" component={ScanScreen} options={{ title: 'Scan' }  } />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
+      </Stack.Group>
+      <Stack.Group screenOptions={{ presentation: 'fullScreenModal' }}>
+        <Stack.Screen name="QuizzModal" component={QuizzModal} options={{ title: 'Daily Quizz', headerRight: () => (
+            <Pressable onPress={() => navigation.goBack()}>
+              <CloseIcon fill={"#000"} />
+            </Pressable>
+          ), }  } />
       </Stack.Group>
     </Stack.Navigator>
   );

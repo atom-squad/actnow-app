@@ -1,17 +1,21 @@
+
+import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Platform, StyleSheet } from 'react-native';
 
-import { Text, View } from '../components/Themed';
+import { Box, Text } from 'native-base';
 
-export default function ModalScreen() {
+export default function QuizzModal() {
+  const [questions, setQuestions] = useState([]);
+
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Modal</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
+    <Box style={styles.container}>
+      <Text style={styles.title}>This is the quizzz</Text>
+      {/* <View style={styles.separator} lightColor="#eee" /> */}
 
       {/* Use a light status bar on iOS to account for the black space above the modal */}
-      <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} />
-    </View>
+      {/* <StatusBar style={Platform.OS === 'ios' ? 'light' : 'auto'} /> */}
+    </Box>
   );
 }
 
