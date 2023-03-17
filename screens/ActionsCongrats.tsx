@@ -3,7 +3,7 @@ import { Text, View, Button, Box} from 'native-base';
 import { COLORS } from '../common/constants';
 import { useNavigation } from '@react-navigation/native';
 import LeafIcon from '../assets/images/leafIcon.svg';
-
+import { StyleSheet } from 'react-native';
 
 
 
@@ -16,27 +16,27 @@ function ActionsCongrats({route}) {
   };
   
   return (
-    <View style={styles.container as any}>
-      <Text style={styles.bigCongratsText as any}>Big CONGRATS!</Text>
-      <Text style={styles.justWonText as any}>You've just won</Text>
-      <Box style={styles.pointsBox as any}>
-          <Text style={styles.pointsBoxContent as any}>
+    <View style={styles.container}>
+      <Text style={styles.bigCongratsText}>Big CONGRATS!</Text>
+      <Text style={styles.justWonText}>You've just won</Text>
+      <Box style={styles.pointsBox}>
+          <Text style={styles.pointsBoxContent}>
               + {totalPoints}
           </Text>
-          <Text style={styles.pointsBoxContent as any}>
+          <Text style={styles.pointsBoxContent}>
               pts
           </Text>
       </Box>
-      <Text style={styles.hopeText as any}>
+      <Text style={styles.hopeText}>
           We hope it helped you making better decisions in your daily life!
       </Text>
       <Box>
-        <Text style={styles.totalPointsText as any}>Now you have</Text>
-        <Box style={styles.totalPointsBox as any}>
+        <Text style={styles.totalPointsText}>Now you have</Text>
+        <Box style={styles.totalPointsBox}>
           <LeafIcon />
-          <Text style={styles.totalPointsContent as any}>{totalUserPoints}</Text>
+          <Text style={styles.totalPointsContent}>{totalUserPoints}</Text>
         </Box>
-        <Text style={styles.pointsText as any}>Points</Text>
+        <Text style={styles.pointsText}>Points</Text>
       </Box>
       <Button  alignItems="center"  backgroundColor={COLORS.primary} width="40%" onPress={() => goTo('ActionsMain')}>
               <Text color="white" bold>Submit</Text>
@@ -45,7 +45,7 @@ function ActionsCongrats({route}) {
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     width: '80%',
@@ -111,6 +111,6 @@ const styles = {
     marginBottom: 16,
 
   }
-};
+});
 
 export default ActionsCongrats;

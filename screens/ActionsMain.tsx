@@ -1,6 +1,6 @@
 import {  Flex, HStack, VStack, Text, View, Image} from 'native-base';
 import React from 'react';
-import {  TouchableOpacity} from 'react-native';
+import {  StyleSheet, TouchableOpacity} from 'react-native';
 import { useNavigation, Link } from '@react-navigation/native';
 import WeekCalendar from '../components/WeekCalendar';
 
@@ -16,13 +16,13 @@ function ActionsMain()  {
    };
 
   return (
-    <Flex style={styles.flex as any}>
+    <Flex style={styles.flex}>
         <WeekCalendar />
-        <Text style={styles.heading as any}>
+        <Text style={styles.heading}>
             Select Category
         </Text>
-        <VStack style={styles.vstack as any}>
-            <HStack style={styles.hstackTop as any}>
+        <VStack style={styles.vstack}>
+            <HStack style={styles.hstackTop}>
                 <View>
                     <Image
                         source={require('../assets/images/test.png')} 
@@ -30,9 +30,9 @@ function ActionsMain()  {
                         resizeMode='contain'
                         alt='Transport Image'
                     />
-                    <Text style={styles.energyTypeText as any}>Transport</Text>
+                    <Text style={styles.energyTypeText}>Transport</Text>
                     <TouchableOpacity onPress={() => handlePress('transport')}>
-                        <Text style={styles.seeMoreText as any}>See More</Text>
+                        <Text style={styles.seeMoreText}>See More</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
@@ -42,9 +42,9 @@ function ActionsMain()  {
                         resizeMode='contain'
                         alt='Food Image'
                     />
-                    <Text style={styles.energyTypeText as any}>Food</Text>
+                    <Text style={styles.energyTypeText}>Food</Text>
                     <TouchableOpacity onPress={() => handlePress('food')}>
-                        <Text style={styles.seeMoreText as any}>See More</Text>
+                        <Text style={styles.seeMoreText}>See More</Text>
                     </TouchableOpacity>
                 </View>
             </HStack>
@@ -56,9 +56,9 @@ function ActionsMain()  {
                         resizeMode='contain'
                         alt='Energies Image'
                     />
-                    <Text style={styles.energyTypeText as any}>Energies</Text>
+                    <Text style={styles.energyTypeText}>Energies</Text>
                     <TouchableOpacity onPress={() => handlePress('energies')}>
-                        <Text style={styles.seeMoreText as any}>See More</Text>
+                        <Text style={styles.seeMoreText}>See More</Text>
                     </TouchableOpacity>
                 </View>
                 <View>
@@ -68,9 +68,9 @@ function ActionsMain()  {
                         resizeMode='contain'
                         alt='Products Image'
                     />
-                    <Text style={styles.energyTypeText as any}>Products</Text>
+                    <Text style={styles.energyTypeText}>Products</Text>
                     <TouchableOpacity onPress={() => handlePress('products')}>
-                        <Text style={styles.seeMoreText as any}>See More</Text>
+                        <Text style={styles.seeMoreText}>See More</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -80,9 +80,9 @@ function ActionsMain()  {
   );
 }
 
-const styles = {
+const styles = StyleSheet.create({
     flex: {
-      direction:"column", 
+      flexDirection:"column", 
       height:"100%",
       backgroundColor: '#fff'
     },
@@ -97,7 +97,8 @@ const styles = {
       alignSelf: 'center',
       height: '100%',
       width: '70%',
-      marginX: 16,
+      marginLeft: 16,
+      marginRight: 16
     },
     hstackTop: {
       marginTop: 16,
@@ -105,7 +106,6 @@ const styles = {
     energyTypeText: {
       textAlign: 'center',
       fontSize: 20,
-      fontWeight: 'semibold'
 
     },
     seeMoreText: {
@@ -115,7 +115,7 @@ const styles = {
       textDecorationLine: 'underline',
       fontWeight: 'bold'
     }
-  };
+  });
   
 
 

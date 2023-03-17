@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigation, Link } from '@react-navigation/native';
-import {  TouchableOpacity} from 'react-native';
+import { StyleSheet, TouchableOpacity} from 'react-native';
 import server from '../common/server';
 import { API, COLORS } from '../common/constants';
 import { useAppDispatch } from '../stores/hooks';
@@ -127,36 +127,36 @@ function ActionsType({route}) {
                 <BackIcon fill={COLORS.white} />
             </TouchableOpacity>
         </Box>
-        <ScrollView contentContainerStyle={styles.container as any}>
+        <ScrollView contentContainerStyle={styles.container}>
 
-            <Text style={styles.actionTypeHeading as any}>{actionType}</Text>
+            <Text style={styles.actionTypeHeading}>{actionType}</Text>
 
-            <Text style={styles.text as any}>Pick the actions you did today!</Text>
+            <Text style={styles.text}>Pick the actions you did today!</Text>
 
-            <View style={styles.view as any}>{renderImage()}</View>      
+            <View style={styles.view}>{renderImage()}</View>      
 
             {results.map((action) => (
                 <Box 
                   key={action._id}
-                  style={styles.card as any}
+                  style={styles.card}
                 >
-                    <Box style={styles.pointsBox as any}>
-                        <Text style={styles.pointsBoxContent as any}> 
+                    <Box style={styles.pointsBox}>
+                        <Text style={styles.pointsBoxContent}> 
                             {action.actionPoints}
                         </Text>
-                        <Text style={styles.pointsBoxContent as any} >
+                        <Text style={styles.pointsBoxContent} >
                             pts
                         </Text>
                     </Box>
               
-                    <Text style={styles.actionDescription as any}>{action.actionDescription}</Text>
+                    <Text style={styles.actionDescription}>{action.actionDescription}</Text>
               
                     <Checkbox  
                         value={selectedValues.some((selectedValue) => selectedValue.actionId === action._id)}
                         onValueChange={() => handleValueChange({ actionId: action._id, actionPoints: action.actionPoints })}
                         accessibilityLabel={action._id}
                         color={isChecked ? '#4630EB' : undefined}
-                        style={styles.checkbox as any}
+                        style={styles.checkbox}
                     >
                     </Checkbox>
                 </Box>
@@ -170,7 +170,7 @@ function ActionsType({route}) {
   );
 };
 
-const styles = {
+const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
     alignItems: 'center',
@@ -218,6 +218,6 @@ const styles = {
     borderWidth: 1,
     alignSelf: 'center'
   }
-};
+});
 
 export default ActionsType;
