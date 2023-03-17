@@ -12,3 +12,13 @@ export const updateValues = (target, source, keys?) => {
       }
     });
 };
+
+export const formatDate = (date) => {
+  var tDate = new Date(date);
+  const MONTHS = [
+    'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+  ];
+  var str = `${tDate.getDate()} ${MONTHS[tDate.getMonth()]}, ${tDate.getFullYear()}`;
+  
+  return str;
+}

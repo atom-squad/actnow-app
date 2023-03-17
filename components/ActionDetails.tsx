@@ -2,8 +2,9 @@ import React from "react";
 import { Box, Flex, Text } from "native-base";
 import { StyleSheet } from "react-native";
 import { COLORS } from "../common/constants";
+import { formatDate } from "../common/util";
 
-const ActionDetails = ({task, points}) => {
+const ActionDetails = ({task, points, date}) => {
     return (
       <Box style={styles.borderStyle}>
         <Flex direction='row' alignItems="flex-start" padding={4}>
@@ -13,7 +14,7 @@ const ActionDetails = ({task, points}) => {
           </Box>
           <Box paddingLeft={4}>
             <Text bold>{task}</Text>
-            <Text color={COLORS.gray2} marginTop={2}>14 March, 2023</Text>
+            <Text color={COLORS.gray2} marginTop={2}>{formatDate(date)}</Text>
           </Box>
         </Flex>
       </Box>

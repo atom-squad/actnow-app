@@ -7,7 +7,7 @@ const UsernameWithRank = ({textcolor, rank, username, points}) => {
           <Flex direction='row' justifyContent="space-around">
             <HStack>
               <Text color={textcolor} bold>#{rank}</Text>
-              <Text color={textcolor} paddingLeft={6}>{username}</Text>
+              <Text color={textcolor} paddingLeft={6} w={130}>{username}</Text>
             </HStack>
             <Text color={textcolor}>{points} pts</Text>
           </Flex>
