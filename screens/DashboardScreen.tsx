@@ -148,7 +148,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
 
     <Box marginY={8}>
       <ImageBackground source={impactCardBackground} style={styles.bgImage} borderRadius={10}>
-        <Flex direction="row" align="center" justify="space-beween" paddingY={5}>
+        <Flex direction="row" align="center" justify="space-between" paddingY={5}>
           <Image source={handLeaf} alt="hand icon" size={100}  marginRight="10" resizeMode="contain"/>
           <Box>
             <Text color="white">Your organisation has taken</Text>

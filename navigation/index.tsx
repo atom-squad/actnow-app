@@ -32,6 +32,7 @@ import { Box, Button, Icon, IconButton, Text } from 'native-base';
 import { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import QuizzModal from '../screens/QuizzModal';
+import CompletionScreen from '../screens/CompletionScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -67,6 +68,7 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Screen name="ScanContainer" component={ScanScreen} options={{ title: 'Scan' }  } />
+      <Stack.Screen name="CompletionModal" component={CompletionScreen} options={{ headerShown: false, presentation: "fullScreenModal" }   } />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
       </Stack.Group>

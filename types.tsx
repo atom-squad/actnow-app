@@ -32,6 +32,7 @@ export type RootStackParamList = {
   ActionsType: {actionType: any} ;
   ActionsCongrats: {totalPoints: any, totalUserPoints: number} ;
   QuizzModal: undefined;
+  CompletionModal: { points: number };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
