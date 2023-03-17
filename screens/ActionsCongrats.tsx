@@ -1,0 +1,116 @@
+import React from 'react';
+import { Text, View, Button, Box} from 'native-base';
+import { COLORS } from '../common/constants';
+import { useNavigation } from '@react-navigation/native';
+import LeafIcon from '../assets/images/leafIcon.svg';
+import { StyleSheet } from 'react-native';
+
+
+
+function ActionsCongrats({route}) {
+  const {totalPoints, totalUserPoints} = route.params;
+  const navigation = useNavigation();
+
+  const goTo = (route) => {
+    navigation.navigate(route);
+  };
+  
+  return (
+    <View style={styles.container}>
+      <Text style={styles.bigCongratsText}>Big CONGRATS!</Text>
+      <Text style={styles.justWonText}>You've just won</Text>
+      <Box style={styles.pointsBox}>
+          <Text style={styles.pointsBoxContent}>
+              + {totalPoints}
+          </Text>
+          <Text style={styles.pointsBoxContent}>
+              pts
+          </Text>
+      </Box>
+      <Text style={styles.hopeText}>
+          We hope it helped you making better decisions in your daily life!
+      </Text>
+      <Box>
+        <Text style={styles.totalPointsText}>Now you have</Text>
+        <Box style={styles.totalPointsBox}>
+          <LeafIcon />
+          <Text style={styles.totalPointsContent}>{totalUserPoints}</Text>
+        </Box>
+        <Text style={styles.pointsText}>Points</Text>
+      </Box>
+      <Button  alignItems="center"  backgroundColor={COLORS.primary} width="40%" onPress={() => goTo('ActionsMain')}>
+              <Text color="white" bold>Submit</Text>
+      </Button>
+    </View>
+  );
+};
+
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    width: '80%',
+    height: '100%',
+    alignSelf: 'center',
+    marginTop: 100
+  },
+  bigCongratsText:{
+    height: 40,
+    width: 250,
+    fontSize: 30,
+    textAlign: 'center',
+    padding: 16,
+    marginBottom: 16,
+    marginTop: 20
+  },
+  justWonText: {
+    fontSize: 20,
+    marginBottom: 16
+  },
+  pointsBox: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    width: 100,
+    height: 100,  
+    borderRadius: 12,
+    marginRight: 12,
+    marginBottom: 16,
+  },
+  pointsBoxContent: {
+    textAlign: 'center',
+    fontSize: 30,
+    paddingTop: 10,
+  },
+  hopeText: {
+    textAlign: 'center',
+    width: '65%',
+    fontSize: 16,
+    marginBottom: 16,
+  },
+  totalPointsText:{
+    textAlign: 'center',
+    fontSize: 20,
+    marginBottom: 16
+  },
+  totalPointsBox: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  totalPointsContent: {
+    fontSize: 30,
+    padding: 10,
+    paddingTop: 25,
+    fontWeight: 'bold'
+  },
+  pointsText:{
+    textAlign: 'center',
+    textTransform: 'uppercase',
+    marginBottom: 16,
+
+  }
+});
+
+export default ActionsCongrats;
