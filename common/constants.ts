@@ -10,7 +10,7 @@ export const API = {
   dashboard: `${BASE_URL}/dashboard`,
   leaderboard: `${BASE_URL}/leaderboard`,
   scanner: `${BASE_URL}/scanner`,
-  emissions: `${BASE_URL}/scanner/emissions`,
+  emissions: `${BASE_URL}/scanner/emission`,
   factor: `${BASE_URL}/scanner/factor`,
   quizzQuestions: `${BASE_URL}/quiz/questions`,
 };
