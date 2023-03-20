@@ -17,6 +17,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Install package
+        run: sudo npm install -g @expo/ngrok@^4.1.0
+
       - name: Expo start
         run: npm run start
                 
