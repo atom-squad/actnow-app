@@ -5,12 +5,14 @@ export const API = {
   signup: `${BASE_URL}/auth/signup`,
   login: `${BASE_URL}/auth/login`,
   user: `${BASE_URL}/user`,
+  points: `${BASE_URL}/user/points`,
   actions: `${BASE_URL}/actions`,
   dashboard: `${BASE_URL}/dashboard`,
   leaderboard: `${BASE_URL}/leaderboard`,
   scanner: `${BASE_URL}/scanner`,
-  emissions: `${BASE_URL}/scanner/emissions`,
+  emissions: `${BASE_URL}/scanner/emission`,
   factor: `${BASE_URL}/scanner/factor`,
+  quizzQuestions: `${BASE_URL}/quiz/questions`,
 };
 
 export const COLORS = {

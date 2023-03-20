@@ -6,6 +6,7 @@
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import QuizzModal from './screens/QuizzModal';
 
 declare global {
   namespace ReactNavigation {
@@ -30,7 +31,8 @@ export type RootStackParamList = {
   ActionsMain: undefined;
   ActionsType: {actionType: any} ;
   ActionsCongrats: {totalPoints: any, totalUserPoints: number} ;
-
+  QuizzModal: undefined;
+  CompletionModal: { points: number };
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<

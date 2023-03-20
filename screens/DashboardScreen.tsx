@@ -89,7 +89,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
             <IconButton icon={<Icon as={<MaterialIcons name="close" />} size={9}  color= "white" />}  />
           </Flex>
           <Text color={COLORS.white}>Learn how to make better decisions in your day to day life.</Text>
-          <Pressable style={styles.quizButton} paddingX={3} paddingY={2} marginTop={4} borderBottomColor={COLORS.darkOrange} borderBottomWidth={3}>
+          <Pressable style={styles.quizButton} paddingX={3} paddingY={2} marginTop={4} borderBottomColor={COLORS.darkOrange} borderBottomWidth={3} onPress={() => navigation.navigate('QuizzModal')}>
             <Flex direction="row" alignItems="center" justifyContent="center">
               <Text color="white" bold>Start Quiz </Text>
               <Icon as={<MaterialIcons name="arrow-forward" />} size={4} color="white" />
@@ -148,7 +148,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
 
     <Box marginY={8}>
       <ImageBackground source={impactCardBackground} style={styles.bgImage} borderRadius={10}>
-        <Flex direction="row" align="center" justify="space-beween" paddingY={5}>
+        <Flex direction="row" align="center" justify="space-between" paddingY={5}>
           <Image source={handLeaf} alt="hand icon" size={100}  marginRight="10" resizeMode="contain"/>
           <Box>
             <Text color="white">Your organisation has taken</Text>

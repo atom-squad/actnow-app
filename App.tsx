@@ -25,7 +25,7 @@ function App() {
   useEffect(() => {
     (async () => {
       const storedToken = await localStorage.getItem('token');
-      dispatch(updateToken(token))
+      dispatch(updateToken(storedToken))
     })();
   }, []);
   
