@@ -7,7 +7,7 @@ import { ImageBackground, TouchableOpacity } from 'react-native';
 import { useAppDispatch, useAppSelector } from "../stores/hooks";
 import { getActionsDone, getOrgActions, getProgressData, getUserSection } from "../stores/slices/dashboardSlice";
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
-import { COLORS, LEVELS } from "../common/constants";
+import { COLORS } from "../common/constants";
 import styles from '../css/DashboardScreenStyles';
 import LineGraph from "../components/LineChart";
 
@@ -17,7 +17,6 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
   let dispatch = useAppDispatch();
   let [buttonOption, setButtonOption] = useState('Personal');
 
-  const MAX_POINT_MONTH = 500;
   const profileImage = require('../assets/images/profileImage.png');
   const badge = require('../assets/images/badge.png');
   const leafGreen = require('../assets/images/leafGreen.png');
