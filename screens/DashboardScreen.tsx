@@ -13,11 +13,10 @@ import LineGraph from "../components/LineChart";
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
 
-  let {userSection, actionsLogged, progressData, orgActions} = useAppSelector((state) => state.dashboard);
+  let {userSection, levelData, actionsLogged, progressData, orgActions} = useAppSelector((state) => state.dashboard);
   let dispatch = useAppDispatch();
   let [buttonOption, setButtonOption] = useState('Personal');
 
-  const MAX_POINT_MONTH = 500;
   const profileImage = require('../assets/images/profileImage.png');
   const badge = require('../assets/images/badge.png');
   const leafGreen = require('../assets/images/leafGreen.png');
@@ -53,24 +52,24 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       <Box  marginTop={4}>
         <Flex direction='row' alignItems="center" >
           <ImageBackground source={badge} style={styles.image}>
-            <Text color={COLORS.white} bold>{userSection.rankingPos}</Text>
+            <Text color={COLORS.white} bold>{levelData.number}</Text>
           </ImageBackground>
           <Box marginLeft={3}>
-            <Text color={COLORS.primaryOrange}>Level 2 </Text>
-            <Text bold>Amateur</Text>
+            <Text color={COLORS.primaryOrange}>Level {levelData.number} </Text>
+            <Text bold>{levelData.name}</Text>
           </Box>
         </Flex>
-        <Progress size="lg" colorScheme="warning" value={userSection.monthPoints} min={0} max={MAX_POINT_MONTH} marginTop={2} bg={COLORS.lightOrange}  _filledTrack={{
+        <Progress size="lg" colorScheme="warning" value={userSection.totalPoints} min={0} max={levelData.endLimit} marginTop={2} bg={COLORS.lightOrange}  _filledTrack={{
         bg: "#F89344"
       }}/>          
         <Flex direction='row' justifyContent={'space-between'} padding={1}>
           <HStack>
             <Image source={leafGreen} alt="leaf icon" size={5} resizeMode="contain" />
-            <Text>{userSection.monthPoints}</Text>
+            <Text>{userSection.totalPoints}</Text>
           </HStack>
           <HStack>
             <Image source={leafGreen} alt="leaf icon" size={5} resizeMode="contain" />
-            <Text>{MAX_POINT_MONTH}</Text>
+            <Text>{levelData.endLimit}</Text>
           </HStack>
         </Flex>
       </Box>

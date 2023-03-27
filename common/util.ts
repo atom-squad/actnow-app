@@ -1,3 +1,5 @@
+import { LEVELS } from "./constants";
+
 export const updateValues = (target, source, keys?) => {
     if (!source) return;
     
@@ -21,4 +23,13 @@ export const formatDate = (date) => {
   var str = `${tDate.getDate()} ${MONTHS[tDate.getMonth()]}, ${tDate.getFullYear()}`;
   
   return str;
+}
+
+export const getUserLevel = (points) => {
+  for(let level of LEVELS){
+    if(points <= level.endLimit){
+      return level;
+    }
+  }
+  return LEVELS[0];
 }

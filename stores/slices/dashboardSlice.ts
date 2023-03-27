@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { API } from "../../common/constants";
 import server from "../../common/server";
-import { updateValues } from "../../common/util";
+import { getUserLevel, updateValues } from "../../common/util";
+import { LEVELS } from "../../common/constants";
 
 const initialState = {
     userSection: {
@@ -9,8 +10,10 @@ const initialState = {
         department: 'Department',
         organization: 'Organization',
         monthPoints: 0,
+        totalPoints: 0,
         rankingPos: 0,
     },
+    levelData: LEVELS[0],
     actionsLogged: [],
     progressData: {
         personalProgress: [],
@@ -27,6 +30,7 @@ export const dashboardSlice = createSlice({
     reducers: {
         loadUserSection: (state, action) => {
             updateValues(state.userSection, action.payload);
+            updateValues(state.levelData, getUserLevel(action.payload.totalPoints));
         },
         loadActionsLogged: (state, action) => {
             updateValues(state.actionsLogged, action.payload);
