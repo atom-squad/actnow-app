@@ -1,5 +1,5 @@
 import React from "react";
-import { Input, FormControl, Flex, Text, Pressable, Image, Icon,  Link } from "native-base";
+import { Input, FormControl, Flex, Text, Pressable, Image, Icon,  Link, ScrollView } from "native-base";
 import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import SelectDepartment from "./SelectDepartment";
 import SelectOrganization from "./SelectOrganization";
@@ -35,7 +35,8 @@ const SignUpOneScreen = ({navigation}) => {
       }
   
     return (
-        <Flex direction="column" align="center" height="100%" marginX="4">
+      <ScrollView padding={4} >
+        <Flex direction="column" align="center" height="100%">
             <Image source={logoLeaves} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={100}   style={styles.imagePosition} />
 
             <Text alignSelf="flex-start" color={COLORS.primaryOrange} fontSize={30}>Hello Human,</Text>
@@ -75,11 +76,12 @@ const SignUpOneScreen = ({navigation}) => {
                 <Text color="white" bold>Sign Up </Text>
             </Pressable>
 
-            <Pressable  borderWidth={1} style={styles.logInButton} alignItems="center" onPress={() => navigation.push('Login')}>
+            <Pressable  borderWidth={1} style={styles.logInButton} alignItems="center" onPress={() => navigation.push("LogIn")}>
           <Text color={COLORS.greenPrimary} bold>Log In </Text>
         </Pressable>
 
         </Flex>
+        </ScrollView>
     );
   }
 

@@ -44,11 +44,10 @@ function App() {
         { token ? 
             <Navigation colorScheme={"light"} />
             : <>
-              {/* <SignUp /> */}
-              <LogIn setToken={(newToken) => setToken(newToken)} setScreen={setScreen} />
+               <SignUp /> 
+              {/*<LogIn setToken={(newToken) => setToken(newToken)} setScreen={setScreen} />*/}
             </>
           }
-          {/* <InitialScreen navigation={undefined} /> */}
           <StatusBar />
         </NativeBaseProvider>
       </SafeAreaProvider>

@@ -7,7 +7,7 @@ import server from '../common/server';
 import { API, COLORS } from '../common/constants';
 import { useAppDispatch } from '../stores/hooks';
 
-function Login({ setToken, setScreen }) {
+function Login({ setToken, setScreen, navigation }) {
 
     const [email, setEmail] = useState('');
     const [show, setShow] = useState(false);
@@ -66,7 +66,7 @@ function Login({ setToken, setScreen }) {
           <Text color="white" bold>Log In </Text>
         </Pressable>
 
-        <Pressable  borderWidth={1} style={styles.signUpButton} alignItems="center" onPress={() => setScreen('SignUpOne')}>
+        <Pressable  borderWidth={1} style={styles.signUpButton} alignItems="center" onPress={() => navigation.push("SignUpOne")}>
           <Text color={COLORS.greenPrimary} bold>Sign Up </Text>
         </Pressable>
 
