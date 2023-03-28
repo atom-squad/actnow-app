@@ -7,12 +7,13 @@ import server from '../common/server';
 import { API, COLORS } from '../common/constants';
 import { useAppDispatch } from '../stores/hooks';
 
-function Login({ setToken, setScreen, navigation }) {
+function Login({ navigation }) {
 
     const [email, setEmail] = useState('');
     const [show, setShow] = useState(false);
     const [password, setPassword] = useState('');
     const dispatch = useAppDispatch();
+    const [token, setToken] = useState('')
 
     const logoLeaves = require('../assets/images/logoLeaves.png');
 

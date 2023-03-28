@@ -1,42 +1,129 @@
-import React from "react";
-import { Flex, Image, Pressable, FormControl, Input, Text, Icon, Circle, IconButton } from "native-base";
+import React, { useState } from "react";
+import { Flex, Image, Pressable, FormControl, Input, Text, Icon, Circle, IconButton, Alert, AlertDialog, Button } from "native-base";
 import styles from '../css/SignUpTwoScreenStyles';
 import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
-import { COLORS } from "../common/constants";
+import { API, COLORS } from "../common/constants";
+import server from "../common/server";
+import { useAppDispatch } from "../stores/hooks";
 
-const SignUpTwoScreen = () => {
-
+const SignUpTwoScreen = ({navigation, route}) => {
+    const {department, email, password} = route.params;
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
+    const dispatch = useAppDispatch();
+    const cancelRef = React.useRef(null);
+    const [isConfirmOpen, setIsConfirmOpen] = React.useState(false);
+    const [isErrorOpen, setIsErrorOpen] = React.useState(false);
+    const [errors, setErrors] = useState({});
 
-    const profileImage = require('../assets/images/profileImage.png');
+    const logoLeaves = require('../assets/images/logoLeaves.png');
+
+    const signup = async () => {
+        if (email && password && department && firstName && lastName) {
+            setErrors({});
+            const resp = await server.post(API.signup, {
+                name: `${firstName} ${lastName}`,
+                department,
+                email,
+                password
+            }, { dispatch });
+
+            if(resp.status === 201){
+                setIsConfirmOpen(true);
+            }else{
+                setIsErrorOpen(true);
+            }
+          
+        }else{
+            if(firstName == undefined || firstName == ''){
+              setErrors({
+                firstName: 'First name not valid'
+              })
+            }else if(lastName == undefined || lastName == ''){
+              setErrors({
+                lastName: 'Last name not valid'
+              })
+            }
+          
+        }
+      }
+
+      const onClose = () => {
+        setIsConfirmOpen(false);
+        navigation.push("LogIn");
+      }
+
+      const onCloseError = () => {
+        setIsErrorOpen(false);
+        navigation.push("SignUpOne");
+      }
 
     return (
         <Flex direction="column"  align="center" height="100%"marginX="4">
 
-            <Image source={profileImage} accessibilityLabel="Default user image" alt="Default user image" size={150}  borderRadius={100} style={styles.imagePosition} resizeMode="cover" />
-
-            <Flex direction="row" alignItems="center" justifyContent="center" marginBottom="20">
-                <IconButton icon={<Icon as={<MaterialIcons name="add" />} size={5}  color={COLORS.green60} />} borderRadius="50" borderWidth="1" borderColor={COLORS.green60} marginRight="2" padding="1" />
-                <Text color={COLORS.green60} bold>Add a Picture</Text>
-            </Flex>
+            <Image source={logoLeaves} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={100} style={styles.imagePosition} />
             
-            <FormControl marginY="2" isRequired>
+            <FormControl marginY="2" isRequired isInvalid={'firstName' in errors}>
                 <FormControl.Label _text={{ bold: true,  color: 'black' }}>First Name</FormControl.Label>
-                <Input placeholder="First Name" value={firstName} onChangeText={setFirstName} size="lg" marginY="1"  _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1, backgroundColor: "white"}} />
+                <Input placeholder="First Name" onChangeText={(value) => setFirstName(value)} size="lg" marginY="1"
+                 _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1, backgroundColor: "white"}} 
+                 _invalid={{borderColor:COLORS.darkOrange}}
+                 />
+                 <FormControl.ErrorMessage _text={{
+                        fontSize: 'xs',
+                        color: COLORS.darkOrange
+                    }}>
+                    First name required
+                </FormControl.ErrorMessage>
             </FormControl>
 
-            <FormControl marginY="2" isRequired>
+            <FormControl marginY="2" isRequired isInvalid={'lastName' in errors}>
                 <FormControl.Label _text={{ bold: true,  color: 'black' }}>Last Name</FormControl.Label>
-                <Input placeholder="Last Name" value={lastName} onChangeText={setLastName} size="lg" marginY="1"  _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1, backgroundColor: "white"}} />
+                <Input placeholder="Last Name" onChangeText={(value) => setLastName(value)} size="lg" marginY="1" 
+                _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1, backgroundColor: "white"}} 
+                _invalid={{borderColor:COLORS.darkOrange}}
+                />
+                <FormControl.ErrorMessage _text={{
+                        fontSize: 'xs',
+                        color: COLORS.darkOrange
+                    }}>
+                    Last name required
+                </FormControl.ErrorMessage>
             </FormControl>
 
-            <Pressable borderWidth={1} style={styles.button}>
+            <Pressable borderWidth={1} style={styles.button} onPress={signup}>
                 <Flex direction="row" alignItems="center" justifyContent="center">
                     <Text color="white" bold>Let's Start </Text>
-                    <Icon as={<MaterialIcons name="arrow-forward" />} size={6}      color="white" marginY="3" />
+                    <Icon as={<MaterialIcons name="arrow-forward" />} size={6} color="white" marginY="3" />
                 </Flex>
             </Pressable>
+
+            <AlertDialog leastDestructiveRef={cancelRef} isOpen={isConfirmOpen}>
+                <AlertDialog.Content>
+                <AlertDialog.Header>User created</AlertDialog.Header>
+                <AlertDialog.Body>
+                    Your account was successfully created
+                </AlertDialog.Body>
+                <AlertDialog.Footer>
+                    <Button backgroundColor={COLORS.greenPrimary} onPress={onClose}>
+                        Done
+                    </Button>
+                </AlertDialog.Footer>
+                </AlertDialog.Content>
+            </AlertDialog>
+            <AlertDialog leastDestructiveRef={cancelRef} isOpen={isErrorOpen}>
+                <AlertDialog.Content>
+                <AlertDialog.Header>Error</AlertDialog.Header>
+                <AlertDialog.Body>
+                    Some of your data is wrong. Try again.
+                </AlertDialog.Body>
+                <AlertDialog.Footer>
+                    <Button backgroundColor={COLORS.primaryOrange} onPress={onCloseError}>
+                        Try Again
+                    </Button>
+                </AlertDialog.Footer>
+                </AlertDialog.Content>
+            </AlertDialog>
                   
         </Flex>
     );
