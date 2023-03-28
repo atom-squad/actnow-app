@@ -10,7 +10,6 @@ import { useAppDispatch } from "../stores/hooks";
 
 const SignUpOneScreen = ({navigation}) => {
 
-    const [username, setUsername] = React.useState('');
     const [organization, setOrganization] = React.useState('');
     const [department, setDepartment] = React.useState('');
     const [email, setEmail] = React.useState('');
