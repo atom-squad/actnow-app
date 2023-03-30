@@ -76,17 +76,15 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
 
     <Box marginY={8}>
      <ImageBackground source={quizCardBackground} style={styles.bgImage} borderRadius={10}>
+       
         <Box padding={2}>
-          <Flex direction="row" alignItems="center">
-            <HStack alignItems="center">
+            <HStack alignItems="center" marginTop={3} marginBottom={5}>
               <TouchableOpacity>
                 <Image source={leafWhite} alt="white leaf" size={5} />
               </TouchableOpacity>
               <Heading color={COLORS.white} marginLeft={2}>Quiz</Heading>
             </HStack>
-            <Spacer />
-            <IconButton icon={<Icon as={<MaterialIcons name="close" />} size={9}  color= "white" />}  />
-          </Flex>
+
           <Text color={COLORS.white}>Learn how to make better decisions in your day to day life.</Text>
           <Pressable style={styles.quizButton} paddingX={3} paddingY={2} marginTop={4} borderBottomColor={COLORS.darkOrange} borderBottomWidth={3} onPress={() => navigation.navigate('QuizzModal')}>
             <Flex direction="row" alignItems="center" justifyContent="center">
@@ -126,7 +124,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       </Pressable>
     </Flex>
     <Text>Review your actions logged.</Text>
-    <Box marginTop={4}>
+    <Box marginTop={4} borderTopColor={COLORS.grayLight} borderTopRadius={2} borderTopWidth={1}>
       {(actionsLogged.length > 0)?
       (actionsLogged.slice(0, actionsLogged.length >= 3? 3 : actionsLogged.length))
       .map((action) => (
