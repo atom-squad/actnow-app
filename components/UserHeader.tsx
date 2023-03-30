@@ -13,7 +13,7 @@ const UserHeader = ({userSection}) => {
             <Box>
                 <Text color={COLORS.darkOrange}>Rank #{userSection.rankingPos}</Text>
                 <Text bold>{userSection.name}</Text>
-                <Text>{userSection.organization} {userSection.department}</Text>
+                <Text>{userSection.organization} - {userSection.department}</Text>
             </Box>
         </Flex>
     );
