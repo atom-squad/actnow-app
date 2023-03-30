@@ -10,6 +10,7 @@ import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
 import { COLORS } from "../common/constants";
 import styles from '../css/DashboardScreenStyles';
 import LineGraph from "../components/LineChart";
+import UserHeader from "../components/UserHeader";
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
 
@@ -17,7 +18,6 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
   let dispatch = useAppDispatch();
   let [buttonOption, setButtonOption] = useState('Personal');
 
-  const profileImage = require('../assets/images/profileImage.png');
   const badge = require('../assets/images/badge.png');
   const leafGreen = require('../assets/images/leafGreen.png');
   const quizCardBackground = require('../assets/images/quizCardBackground.png');
@@ -36,18 +36,10 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     setButtonOption(option);
   }
 
+
   return (
     <ScrollView padding={4} >
-      <Flex direction='row'>
-        <Box>
-        <Image source={profileImage} alt="User Profile pic" size={70} borderRadius={100} marginRight={3} />
-        </Box>
-        <Box>
-          <Text color={COLORS.darkOrange}>Rank #{userSection.rankingPos}</Text>
-          <Text bold>{userSection.name}</Text>
-          <Text>{userSection.organization} {userSection.department}</Text>
-        </Box>
-      </Flex>
+      <UserHeader userSection={userSection} />
 
       <Box  marginTop={4}>
         <Flex direction='row' alignItems="center" >
