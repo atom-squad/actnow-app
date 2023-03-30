@@ -4,7 +4,7 @@ import { NativeBaseProvider } from "native-base";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import useCachedResources from './hooks/useCachedResources';
 import Navigation from './navigation';
-import LogIn from './components/LogIn';
+import SignUp from './screens/SignUp';
 import localStorage from './common/localStorage';
 import { useAppDispatch, useAppSelector } from "./stores/hooks";
 import { updateToken } from './stores/slices/userSlice';
@@ -13,7 +13,6 @@ import { store } from './stores/store';
 
 function App() {
   const isLoadingComplete = useCachedResources();
-  const [screen, setScreen] = useState('login')
   const [token, setToken] = useState('')
   let { token: userToken } = useAppSelector((state) => state.user);
   let dispatch = useAppDispatch();
@@ -40,12 +39,9 @@ function App() {
         <NativeBaseProvider>
         { token ? 
             <Navigation colorScheme={"light"} />
-            : <>
-              {/* <SignUp /> */}
-              <LogIn setToken={(newToken) => setToken(newToken)} setScreen={setScreen} />
-            </>
+            : 
+            <SignUp /> 
           }
-          {/* <InitialScreen navigation={undefined} /> */}
           <StatusBar />
         </NativeBaseProvider>
       </SafeAreaProvider>

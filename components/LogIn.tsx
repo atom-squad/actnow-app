@@ -1,20 +1,27 @@
 import  React,  { useState, useEffect } from 'react' ;
-import { Flex, FormControl, Input, Pressable, Icon, Text, Image, Link} from 'native-base';
+import { Flex, FormControl, Input, Pressable, Icon, Text, Image, Link, AlertDialog, Button} from 'native-base';
 import MaterialIcons from '@expo/vector-icons/build/MaterialIcons';
 import styles from '../css/LogInStyles';
 import localStorage from '../common/localStorage';
 import server from '../common/server';
 import { API, COLORS } from '../common/constants';
 import { useAppDispatch } from '../stores/hooks';
+import { updateToken } from '../stores/slices/userSlice';
 
-function Login({ setToken, setScreen }) {
-
+function Login({ navigation }) {
     const [email, setEmail] = useState('');
     const [show, setShow] = useState(false);
     const [password, setPassword] = useState('');
     const dispatch = useAppDispatch();
+    const cancelRef = React.useRef(null);
+    const [isErrorOpen, setIsErrorOpen] = React.useState(false);
+    const [errorMsg, setErrorMsg] = useState('There is a server connection problem. Try again later.');
 
     const logoLeaves = require('../assets/images/logoLeaves.png');
+
+    const onCloseError = () => {
+      setIsErrorOpen(false);
+    }
 
     const login = async () => {
       if (email && password) {
@@ -22,9 +29,18 @@ function Login({ setToken, setScreen }) {
           email,
           password
         }, { dispatch });
-        const { token } = resp.data;
-        setToken(token);
-        localStorage.setItem('token', token);
+        if(resp.status === 200){
+          const { token } = resp.data;
+          dispatch?.(updateToken(resp.data));
+          localStorage.setItem('token', token);
+        }else if(resp.status === 401){
+          setErrorMsg("Your credentials are wrong. Try again.");
+          setIsErrorOpen(true);
+        }else{
+          setErrorMsg("There is a server connection problem. Try again later.");
+          setIsErrorOpen(true);
+        }
+        
       }
     }
 
@@ -62,9 +78,23 @@ function Login({ setToken, setScreen }) {
           <Text color="white" fontFamily="albert-bold" fontSize={16}>Log In </Text>
         </Pressable>
 
-        <Pressable  borderWidth={1} style={styles.signUpButton} alignItems="center" onPress={() => setScreen('SignUpOne')}>
+        <Pressable  borderWidth={1} style={styles.signUpButton} alignItems="center" onPress={() => navigation.push("SignUpOne")}>
           <Text color={COLORS.greenPrimary} fontFamily="albert-bold" fontSize={16}>Sign Up </Text>
         </Pressable>
+
+        <AlertDialog leastDestructiveRef={cancelRef} isOpen={isErrorOpen}>
+          <AlertDialog.Content>
+            <AlertDialog.Header>Error</AlertDialog.Header>
+            <AlertDialog.Body>
+              {errorMsg}
+            </AlertDialog.Body>
+            <AlertDialog.Footer>
+              <Button backgroundColor={COLORS.primaryOrange} onPress={onCloseError}>
+                Try Again
+              </Button>
+            </AlertDialog.Footer>
+          </AlertDialog.Content>
+        </AlertDialog>
 
       </Flex>
     );

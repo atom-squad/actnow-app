@@ -20,7 +20,7 @@ export type RootStackParamList = {
   NotFound: undefined;
   SignUp: undefined;
   SignUpOne: undefined;
-  SignUpTwo: undefined;
+  SignUpTwo: { department: number, email: string, password: string };
   InitialScreen: undefined;
   LogIn: undefined;
   ScanMain: undefined;

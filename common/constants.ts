@@ -4,6 +4,7 @@ export const BASE_URL =
 export const API = {
   signup: `${BASE_URL}/auth/signup`,
   login: `${BASE_URL}/auth/login`,
+  orgDptments: `${BASE_URL}/auth/org-departments`,
   user: `${BASE_URL}/user`,
   points: `${BASE_URL}/user/points`,
   actions: `${BASE_URL}/actions`,
