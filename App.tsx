@@ -4,15 +4,12 @@ import { NativeBaseProvider } from "native-base";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import useCachedResources from './hooks/useCachedResources';
 import Navigation from './navigation';
-import SignUp from './screens/SignUp';
 import LogIn from './components/LogIn';
 import localStorage from './common/localStorage';
 import { useAppDispatch, useAppSelector } from "./stores/hooks";
 import { updateToken } from './stores/slices/userSlice';
 import { Provider } from 'react-redux';
 import { store } from './stores/store';
-import InitialScreen from './components/InitialScreen';
-
 
 function App() {
   const isLoadingComplete = useCachedResources();

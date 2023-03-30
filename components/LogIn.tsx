@@ -34,12 +34,12 @@ function Login({ setToken, setScreen }) {
         <Image source={logoLeaves} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={100} style=  {styles.imagePosition} />
 
         <FormControl marginBottom={2} isRequired>
-          <FormControl.Label _text={{ bold: true, color: 'black'  }}>Email</FormControl.Label>
+          <FormControl.Label _text={{ bold: true, color: 'black', fontFamily:"albert-semibold"  }}>Email</FormControl.Label>
           <Input placeholder="Email" value={email} onChangeText={setEmail} size="lg" marginY="1"  _focus={{borderColor: COLORS.greenPrimary , borderWidth: 1, backgroundColor: "white"}} />
         </FormControl>
 
         <FormControl marginY="2" isRequired>
-          <FormControl.Label _text={{ bold: true, color: 'black' }}>Password</FormControl.Label>
+          <FormControl.Label _text={{ bold: true, color: 'black', fontFamily:"albert-semibold" }}>Password</FormControl.Label>
           <Input placeholder="Password" 
             size="lg"  
             value={password}
@@ -54,16 +54,16 @@ function Login({ setToken, setScreen }) {
             />
         </FormControl>
 
-        <Link href="https://nativebase.io" alignSelf="flex-end" marginBottom={10} >
+        <Link href="https://nativebase.io" alignSelf="flex-end" marginBottom={10} fontFamily="albert-medium" fontSize={14} >
           Forgot Password? 
         </Link>
 
         <Pressable borderWidth={1} style={styles.logInButton} alignItems="center" onPress={login}>
-          <Text color="white" bold>Log In </Text>
+          <Text color="white" fontFamily="albert-bold" fontSize={16}>Log In </Text>
         </Pressable>
 
         <Pressable  borderWidth={1} style={styles.signUpButton} alignItems="center" onPress={() => setScreen('SignUpOne')}>
-          <Text color={COLORS.greenPrimary} bold>Sign Up </Text>
+          <Text color={COLORS.greenPrimary} fontFamily="albert-bold" fontSize={16}>Sign Up </Text>
         </Pressable>
 
       </Flex>

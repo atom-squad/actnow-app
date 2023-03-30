@@ -12,33 +12,33 @@ const TopRanking = ({ rankingList }) => {
         <Flex direction="row" justify="center">
           <Box paddingTop={20}>
             <VStack alignItems="center">
-              <Text bold>#2</Text>
-              <Text>{rankingList[1].name}</Text>
+              <Text fontFamily="albert-semibold" fontSize={16}>#2</Text>
+              <Text fontFamily="albert-medium" fontSize={16} color="#003619">{rankingList[1].name}</Text>
               <HStack alignItems="center">
                 <Image source={leafGreen} alt="leaf icon" size={5} resizeMode="contain" />
-                <Text bold>{rankingList[1].monthPoints? rankingList[1].monthPoints: rankingList[1].totalPoints? rankingList[1].totalPoints : 0}</Text>
+                <Text fontFamily="albert-semibold" fontSize={16}>{rankingList[1].monthPoints? rankingList[1].monthPoints: rankingList[1].totalPoints? rankingList[1].totalPoints : 0}</Text>
               </HStack>
             </VStack>
             <SecondPlace width={100} height={100} />
           </Box>
           <Box paddingX={3}>
             <VStack alignItems="center">
-              <Text bold>#1</Text>
-              <Text>{rankingList[0].name}</Text>
+              <Text fontFamily="albert-semibold" fontSize={16}>#1</Text>
+              <Text fontFamily="albert-medium" fontSize={16} color="#003619">{rankingList[0].name}</Text>
               <HStack alignItems="center">
                 <Image source={leafGreen} alt="leaf icon" size={5} resizeMode="contain" />
-                <Text bold>{rankingList[0].monthPoints? rankingList[0].monthPoints: rankingList[0].totalPoints? rankingList[0].totalPoints : 0}</Text>
+                <Text fontFamily="albert-semibold" fontSize={16}>{rankingList[0].monthPoints? rankingList[0].monthPoints: rankingList[0].totalPoints? rankingList[0].totalPoints : 0}</Text>
               </HStack>
             </VStack>
             <FirstPlace width={100} height={100} />
           </Box> 
           <Box paddingTop={20}>
             <VStack alignItems="center">
-              <Text bold>#3</Text>
-              <Text>{rankingList[2].name}</Text>
+              <Text fontFamily="albert-semibold" fontSize={16}>#3</Text>
+              <Text fontFamily="albert-medium" fontSize={16} color="#003619">{rankingList[2].name}</Text>
               <HStack alignItems="center">
                 <Image source={leafGreen} alt="leaf icon" size={5} resizeMode="contain" />
-                <Text bold>{rankingList[2].monthPoints? rankingList[2].monthPoints: rankingList[2].totalPoints? rankingList[2].totalPoints : 0}</Text>
+                <Text fontFamily="albert-semibold" fontSize={16}>{rankingList[2].monthPoints? rankingList[2].monthPoints: rankingList[2].totalPoints? rankingList[2].totalPoints : 0}</Text>
               </HStack>
             </VStack>
             <ThirdPlace width={100} height={100} />
