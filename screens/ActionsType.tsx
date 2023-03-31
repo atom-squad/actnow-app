@@ -4,9 +4,10 @@ import { StyleSheet, TouchableOpacity} from 'react-native';
 import server from '../common/server';
 import { API, COLORS } from '../common/constants';
 import { useAppDispatch } from '../stores/hooks';
-import {Text, View,  Box, Radio, Button, Image, ScrollView} from 'native-base';
+import {Text, View,  Box, Radio, Button, Image, ScrollView, Pressable} from 'native-base';
 import BackIcon from '../assets/images/back-icon.svg';
 import Checkbox from 'expo-checkbox';
+import dashboardStyles from '../css/DashboardScreenStyles';
 
 
 function ActionsType({route}) {
@@ -38,17 +39,17 @@ function ActionsType({route}) {
   };
   
   const postAllActions = async () => {
-    let totalPoints = 0;
+    let points = 0;
     let totalUserPoints;
   
     if (selectedValues) {
       selectedValues.map( async (value, index) => {
         await postAction(value.actionId);
-        totalPoints += value.actionPoints;
+        points += value.actionPoints;
         totalUserPoints = await addPoints(value.actionPoints);
 
         if (selectedValues.length === index + 1 && totalUserPoints){
-          navigation.navigate("ActionsCongrats", {totalPoints, totalUserPoints});
+          navigation.navigate('CompletionModal',  { points });
         };
 
       });
@@ -88,28 +89,28 @@ function ActionsType({route}) {
     switch (actionType) {
       case 'transport':
         return <Image 
-                    source={require('../assets/images/test.png')} 
+                    source={require('../assets/images/transport-test.png')} 
                     style={{justifyContent:'center'}}
                     resizeMode='contain'
                     alt="Transport Image"
                 />;
       case 'food':
         return <Image 
-                    source={require('../assets/images/food.png')} 
+                    source={require('../assets/images/food-test.png')} 
                     style={{justifyContent:'center'}}
                     resizeMode='contain'
                     alt="Food Image"
                 />;
       case 'energies':
         return <Image 
-                    source={require('../assets/images/energies.png')} 
+                    source={require('../assets/images/energy-test.png')} 
                     style={{justifyContent:'center'}}
                     resizeMode='contain'
                     alt="Energies Image"
                />;
       case 'products':
         return <Image 
-                    source={require('../assets/images/products.png')} 
+                    source={require('../assets/images/products-test.png')} 
                     style={{justifyContent:'center'}}
                     resizeMode='contain'
                     alt="Products Image"
@@ -122,49 +123,73 @@ function ActionsType({route}) {
 
   return (
       <>
-        <Box>
-            <TouchableOpacity onPress={() => {goTo("ActionsMain")}}>
+        <Box style={styles.boxHeading}>
+            <Pressable onPress={() => {goTo("ActionsMain")}} style={styles.icon}>
                 <BackIcon fill={COLORS.white} />
-            </TouchableOpacity>
+            </Pressable>
+            <Text style={styles.actionTypeHeading}>{actionType}</Text>
         </Box>
         <ScrollView contentContainerStyle={styles.container}>
-
-            <Text style={styles.actionTypeHeading}>{actionType}</Text>
 
             <Text style={styles.text}>Pick the actions you did today!</Text>
 
             <View style={styles.view}>{renderImage()}</View>      
 
             {results.map((action) => (
-                <Box 
-                  key={action._id}
-                  style={styles.card}
-                >
-                    <Box style={styles.pointsBox}>
-                        <Text style={styles.pointsBoxContent}> 
-                            {action.actionPoints}
-                        </Text>
-                        <Text style={styles.pointsBoxContent} >
-                            pts
-                        </Text>
-                    </Box>
-              
-                    <Text style={styles.actionDescription}>{action.actionDescription}</Text>
-              
-                    <Checkbox  
-                        value={selectedValues.some((selectedValue) => selectedValue.actionId === action._id)}
-                        onValueChange={() => handleValueChange({ actionId: action._id, actionPoints: action.actionPoints })}
-                        accessibilityLabel={action._id}
-                        color={isChecked ? '#4630EB' : undefined}
-                        style={styles.checkbox}
-                    >
-                    </Checkbox>
-                </Box>
+              <TouchableOpacity // use TouchableOpacity instead of Box
+              key={action._id}
+              style={styles.card}
+              onPress={() =>
+                handleValueChange({
+                  actionId: action._id,
+                  actionPoints: action.actionPoints,
+                })
+              }
+            >
+              <Box style={styles.pointsBox}>
+                <Text style={styles.pointsNumber}>+ {action.actionPoints}</Text>
+                <Text style={styles.pointsText}>pts</Text>
+              </Box>
+              <Text style={styles.actionDescription}>{action.actionDescription}</Text>
+              <Box
+                borderColor={COLORS.primaryOrange}
+                // bg={selectedValues.some(
+                //   (selectedValue) => selectedValue.actionId === action._id
+                // ) ? COLORS.primaryOrange : 'white' }
+                borderWidth={1}
+                borderRadius={12}
+                width={6}
+                height={6}
+                alignItems="center"
+                justifyContent="center"
+                marginRight={3}
+              >
+                <Box
+                  borderColor='red'
+                  bg={selectedValues.some(
+                    (selectedValue) => selectedValue.actionId === action._id
+                  ) ?  COLORS.primaryOrange : 'white' }
+                  borderRadius={12}
+                  width={3.5}
+                  height={3.5}
+                  display={ 
+                    selectedValues.some(
+                      (selectedValue) => selectedValue.actionId === action._id
+                    )
+                      ? 'flex'
+                      : 'none'
+                  }
+                />
+              </Box>
+            </TouchableOpacity>
+
             ))}
 
-            <Button  borderWidth={1} alignItems="center"  backgroundColor={COLORS.primary} width="100%" onPress={postAllActions}>
-                  <Text color="white" bold>Submit</Text>
-            </Button>
+          <Box>
+            <Pressable style={styles.button} paddingX={3} paddingY={2} marginTop={4} borderBottomColor={COLORS.greenPrimary} borderBottomWidth={3} width={350} onPress={postAllActions}>
+              <Text color="white" bold paddingX="8px" textAlign="center">Submit</Text>
+            </Pressable>
+          </Box>
         </ScrollView>
      </>
   );
@@ -176,47 +201,87 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  boxHeading: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 12,
+  },
+  icon: {
+
+  },
   actionTypeHeading: {
     textAlign: 'center',
     textTransform: 'capitalize',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    fontSize: 17,
+    marginLeft: 140,
   },
+  
   text: {
-    textAlign: 'center'
+    textAlign: 'center',
+    marginBottom: 16,
+    marginTop: 16,
+    fontSize: 16
   },
   view: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    height: 200,
+    width: 200,
   },
   card: {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    borderColor: 'black',
-    borderWidth: 1,
+    alignItems: 'center',
+    borderColor: 'rgba(0, 0, 0, 0.05)',
+    borderWidth: 0.3,
+    backgroundColor: COLORS.white,
     padding: 10,
     width: '90%',
+    height: 90,
     justifySelf: 'center',
     borderRadius: 12,
-    marginBottom: 12,
+    marginBottom: 16,
   },
   pointsBox: {
     display: 'flex', 
-    borderWidth: 1,
-    width: 50,
+    borderWidth: 2,
+    borderColor: COLORS.lightOrange,
+    width: 60,
+    height: 55,
     borderRadius: 12,
     marginRight: 12
+  },
+  pointsNumber: {
+    textAlign: 'center',
+    fontSize: 16.5,
+    fontWeight: 'bold',
+    marginTop: 5
+  },
+  pointsText: {
+    textAlign: 'center',
+    fontSize: 15,
   },
   pointsBoxContent: {
     textAlign: 'center'
   },
   actionDescription: {
     width: '70%',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontSize: 15,
   },
   checkbox: {
     borderRadius: 12,
     borderWidth: 1,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    color: 'red'
+  },
+  button:{
+    backgroundColor: COLORS.greenPrimary,
+    borderRadius: 12,
+    paddingVertical: 4,
+    marginBottom: 16
   }
 });
 

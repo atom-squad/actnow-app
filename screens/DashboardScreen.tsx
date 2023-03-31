@@ -12,6 +12,7 @@ import styles from '../css/DashboardScreenStyles';
 import LineGraph from "../components/LineChart";
 import UserHeader from "../components/UserHeader";
 
+
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
 
   let {userSection, levelData, actionsLogged, progressData, orgActions} = useAppSelector((state) => state.dashboard);
@@ -24,6 +25,9 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
  const impactCardBackground = require('../assets/images/impactCardBackground.png');
  const handLeaf = require('../assets/images/handLeaf.png');
  const leafWhite = require('../assets/images/leafWhite.png');
+
+
+
 
   useEffect(() => {
     dispatch(getUserSection());
@@ -108,7 +112,8 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
 
     <Flex direction='row' justifyContent="space-between" alignItems="center" marginTop={6}>
       <Heading fontFamily="albert-semibold" fontSize={18}>Actions Logged</Heading>
-      <Pressable>
+      <Pressable onPress={() => navigation.navigate('ActionsHistory')}>
+      
         <Flex direction="row" alignItems="center" justifyContent="center">
           <Text color="#15aa5a" fontFamily="albert-semibold" fontSize={16}>View All </Text>
           <Icon as={<MaterialIcons name="arrow-forward" />} size={5} color="#15aa5a" />
@@ -125,8 +130,8 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     : <Text>You don't have any action yet.</Text>
     }
       
-      <Box borderWidth={1} paddingX={4} paddingY={6} marginBottom={2}  borderColor={COLORS.grayLight} borderBottomRadius={12} borderTopWidth={0}>
-      <Pressable style={styles.button} borderBottomColor={COLORS.darkOrange} borderBottomWidth={2} width="100%">
+      <Box borderWidth={1} paddingX={4} paddingY={6} marginBottom={2}  borderColor={COLORS.grayLight} borderBottomRadius={12} borderTopWidth={0} >
+      <Pressable style={styles.button} borderBottomColor={COLORS.darkOrange} borderBottomWidth={2} width="100%" onPress={() => navigation.navigate('ActionsContainer')}>
         <Flex direction="row" alignItems="center" justifyContent="center">
           <Text color="white" paddingY={2}  fontFamily="albert-bold" fontSize={16}>Log an action  </Text>
           <Icon as={<MaterialIcons name="arrow-forward" />} size={5} color="white" />

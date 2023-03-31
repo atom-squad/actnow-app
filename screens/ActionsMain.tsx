@@ -1,9 +1,10 @@
-import {  Flex, HStack, VStack, Text, View, Image} from 'native-base';
+import {  Flex, HStack, VStack, Text, View, Image, Pressable, Box} from 'native-base';
 import React from 'react';
-import {  StyleSheet, TouchableOpacity} from 'react-native';
+import {  StyleSheet } from 'react-native';
 import { useNavigation, Link } from '@react-navigation/native';
 import WeekCalendar from '../components/WeekCalendar';
-
+import { API, COLORS } from '../common/constants';
+import StripCalendar from '../components/StripCalendar';
 
 
 function ActionsMain()  {
@@ -16,64 +17,72 @@ function ActionsMain()  {
    };
 
   return (
+    
     <Flex style={styles.flex}>
-        <WeekCalendar />
+        <StripCalendar />
         <Text style={styles.heading}>
-            Select Category
+            Select the Category
         </Text>
         <VStack style={styles.vstack}>
             <HStack style={styles.hstackTop}>
                 <View>
-                    <Image
-                        source={require('../assets/images/test.png')} 
-                        style={{justifyContent:'center', width: 180,  height: 180  }}
-                        resizeMode='contain'
-                        alt='Transport Image'
-                    />
-                    <Text style={styles.energyTypeText}>Transport</Text>
-                    <TouchableOpacity onPress={() => handlePress('transport')}>
-                        <Text style={styles.seeMoreText}>See More</Text>
-                    </TouchableOpacity>
+                    <Pressable onPress={() => handlePress('transport')}>
+                      <Box style={styles.box}>
+                          <Image
+                                source={require('../assets/images/transport-test.png')} 
+                                style={{justifyContent:'center'}}
+                                resizeMode='contain'
+                                alt="Energies Image"
+                          />
+                      </Box>
+                      <Text style={styles.energyTypeText}>Transport</Text>
+                      <Text style={styles.seeMoreText}>See More</Text>
+                    </Pressable>
                 </View>
                 <View>
-                    <Image
-                        source={require('../assets/images/food.png')} 
-                        style={{justifyContent:'center', width: 180,  height: 180}}
-                        resizeMode='contain'
-                        alt='Food Image'
-                    />
-                    <Text style={styles.energyTypeText}>Food</Text>
-                    <TouchableOpacity onPress={() => handlePress('food')}>
-                        <Text style={styles.seeMoreText}>See More</Text>
-                    </TouchableOpacity>
+                    <Pressable onPress={() => handlePress('food')}>
+                      <Box style={styles.box}>
+                          <Image
+                                source={require('../assets/images/food-test.png')} 
+                                style={{justifyContent:'center'}}
+                                resizeMode='contain'
+                                alt="Energies Image"
+                          />
+                      </Box>
+                      <Text style={styles.energyTypeText}>Food</Text>
+                      <Text style={styles.seeMoreText}>See More</Text>
+                    </Pressable>
                 </View>
             </HStack>
             <HStack>
-            <View>
-                    <Image
-                        source={require('../assets/images/energies.png')} 
-                        style={{justifyContent:'center', width: 180, height: 180}}
-                        resizeMode='contain'
-                        alt='Energies Image'
-                    />
-                    <Text style={styles.energyTypeText}>Energies</Text>
-                    <TouchableOpacity onPress={() => handlePress('energies')}>
+                <View>
+                    <Pressable onPress={() => handlePress('energies')}>
+                        <Box style={styles.box}>
+                            <Image
+                                  source={require('../assets/images/energy-test.png')} 
+                                  style={{justifyContent:'center'}}
+                                  resizeMode='contain'
+                                  alt="Energies Image"
+                            />
+                        </Box>
+                        <Text style={styles.energyTypeText}>Energies</Text>
                         <Text style={styles.seeMoreText}>See More</Text>
-                    </TouchableOpacity>
+                    </Pressable>
                 </View>
                 <View>
-                    <Image
-                        source={require('../assets/images/products.png')} 
-                        style={{justifyContent:'center', width: 180, height: 180}}
-                        resizeMode='contain'
-                        alt='Products Image'
-                    />
-                    <Text style={styles.energyTypeText}>Products</Text>
-                    <TouchableOpacity onPress={() => handlePress('products')}>
+                    <Pressable onPress={() => handlePress('products')}>
+                        <Box style={styles.box}>
+                            <Image
+                                  source={require('../assets/images/products-test.png')} 
+                                  style={{justifyContent:'center'}}
+                                  resizeMode='contain'
+                                  alt="Energies Image"
+                            />
+                        </Box>
+                        <Text style={styles.energyTypeText}>Products</Text>
                         <Text style={styles.seeMoreText}>See More</Text>
-                    </TouchableOpacity>
+                    </Pressable>
                 </View>
-
             </HStack>
         </VStack>
     </Flex>
@@ -91,6 +100,8 @@ const styles = StyleSheet.create({
       textTransform:'uppercase',
       fontWeight: 'bold',
       marginTop: 30,
+      marginBottom: 15,
+      fontSize: 15.5
     },
     vstack: {
       alignItems: 'center',
@@ -103,17 +114,29 @@ const styles = StyleSheet.create({
     hstackTop: {
       marginTop: 16,
     },
+    box: {
+      height: 170,
+      width: 180,
+    },
+    boxLeft:{
+      marginRight: 32
+    },
+    boxTop: {
+
+    },
     energyTypeText: {
       textAlign: 'center',
+      marginBottom: 16,
       fontSize: 20,
-
+      fontWeight: 'bold',
+      color: COLORS.darkGreen
     },
     seeMoreText: {
       textAlign:'center',
-      fontSize: 16,
-      color: '#005F2C',
+      fontSize: 17,
       textDecorationLine: 'underline',
-      fontWeight: 'bold'
+      color: COLORS.green60,
+      marginBottom: 24
     }
   });
   

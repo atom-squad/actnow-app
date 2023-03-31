@@ -1,116 +1,61 @@
-import React from 'react';
-import { Text, View, Button, Box} from 'native-base';
-import { COLORS } from '../common/constants';
-import { useNavigation } from '@react-navigation/native';
-import LeafIcon from '../assets/images/leafIcon.svg';
+import React, { useEffect } from 'react';
+import { Text, Flex, Box, HStack, Image, Pressable, Icon } from 'native-base';
 import { StyleSheet } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
+import { COLORS } from '../common/constants';
+import { useAppDispatch, useAppSelector } from '../stores/hooks';
+import { getUserSection } from '../stores/slices/dashboardSlice';
+import dashboardStyles from '../css/DashboardScreenStyles';
 
+export default function ActionsCongrats({ route, navigation }) {
+  const { params } = route;
+  const { response, points = 100 } = params;
+  const leafGreen = require('../assets/images/leafGreen.png');
+  const profileImage = require('../assets/images/profileImage.png');
+  let { userSection } = useAppSelector((state) => state.dashboard);
+  const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    dispatch(getUserSection());
+  }, [dispatch]);
 
-function ActionsCongrats({route}) {
-  const {totalPoints, totalUserPoints} = route.params;
-  const navigation = useNavigation();
-
-  const goTo = (route) => {
-    navigation.navigate(route);
-  };
-  
   return (
-    <View style={styles.container}>
-      <Text style={styles.bigCongratsText}>Big CONGRATS!</Text>
-      <Text style={styles.justWonText}>You've just won</Text>
-      <Box style={styles.pointsBox}>
-          <Text style={styles.pointsBoxContent}>
-              + {totalPoints}
-          </Text>
-          <Text style={styles.pointsBoxContent}>
-              pts
-          </Text>
-      </Box>
-      <Text style={styles.hopeText}>
-          We hope it helped you making better decisions in your daily life!
-      </Text>
-      <Box>
-        <Text style={styles.totalPointsText}>Now you have</Text>
-        <Box style={styles.totalPointsBox}>
-          <LeafIcon />
-          <Text style={styles.totalPointsContent}>{totalUserPoints}</Text>
+    <Flex direction="column" align="center"  height="100%" backgroundColor={COLORS.green20} paddingX="29px" paddingTop="30%">
+        <StatusBar style={'light'} />
+        <Box position="absolute" top="5%" zIndex={1}>
+          <Image source={profileImage} alt="User Profile pic" size={158} borderRadius={158} />
         </Box>
-        <Text style={styles.pointsText}>Points</Text>
-      </Box>
-      <Button  alignItems="center"  backgroundColor={COLORS.primary} width="40%" onPress={() => goTo('ActionsMain')}>
-              <Text color="white" bold>Submit</Text>
-      </Button>
-    </View>
+        <Box style={styles.container} paddingY="100px">
+          <Text bold fontSize="30px">Big CONGRATS! 🥳</Text>
+          <Text fontSize="20px" color={COLORS.gray4}>You just have won</Text>
+          <Flex align="center" borderColor={COLORS.primaryOrange} borderWidth="1px" borderStyle="solid" borderRadius={8} color={COLORS.primaryOrange} padding="12px" marginTop="28px">
+            <Text color={COLORS.primaryOrange} bold fontSize="30px">+{points}</Text>
+            <Text color={COLORS.primaryOrange} bold fontSize="24px">Points</Text>
+          </Flex>
+          <Text textAlign="center" marginX="50px" marginTop="28px" marginBottom="40px" fontSize="16px">We hope it help you to make better decisions in your day to day life.</Text>
+          <Text bold fontSize="20px">Now you have</Text>
+          <HStack>
+            <Image source={leafGreen} alt="leaf icon" size={5} resizeMode="contain" />
+            <Text bold fontSize="30px">{userSection.monthPoints}</Text>
+          </HStack>
+          <Text>POINTS</Text>
+          <Box>
+            <Pressable style={dashboardStyles.quizButton} paddingX={3} paddingY={2} marginTop={4} borderBottomColor={COLORS.darkOrange} borderBottomWidth={3} onPress={() => navigation.navigate('Dashboard')}>
+              <Text color="white" bold paddingX="8px">Submit</Text>
+            </Pressable>
+          </Box>
+
+        </Box>
+    </Flex>
   );
-};
+}
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     alignItems: 'center',
-    width: '80%',
-    height: '100%',
-    alignSelf: 'center',
-    marginTop: 100
-  },
-  bigCongratsText:{
-    height: 40,
-    width: 250,
-    fontSize: 30,
-    textAlign: 'center',
-    padding: 16,
-    marginBottom: 16,
-    marginTop: 20
-  },
-  justWonText: {
-    fontSize: 20,
-    marginBottom: 16
-  },
-  pointsBox: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderWidth: 1,
-    width: 100,
-    height: 100,  
-    borderRadius: 12,
-    marginRight: 12,
-    marginBottom: 16,
-  },
-  pointsBoxContent: {
-    textAlign: 'center',
-    fontSize: 30,
-    paddingTop: 10,
-  },
-  hopeText: {
-    textAlign: 'center',
-    width: '65%',
-    fontSize: 16,
-    marginBottom: 16,
-  },
-  totalPointsText:{
-    textAlign: 'center',
-    fontSize: 20,
-    marginBottom: 16
-  },
-  totalPointsBox: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  totalPointsContent: {
-    fontSize: 30,
-    padding: 10,
-    paddingTop: 25,
-    fontWeight: 'bold'
-  },
-  pointsText:{
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    marginBottom: 16,
-
+    backgroundColor: COLORS.white,
+    borderTopLeftRadius: 10,
+    borderTopRightRadius: 10,
   }
 });
-
-export default ActionsCongrats;

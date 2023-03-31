@@ -33,6 +33,7 @@ import { useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import QuizzModal from '../screens/QuizzModal';
 import CompletionScreen from '../screens/CompletionScreen';
+import ActionsHistory from '../screens/ActionsHistory';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -68,6 +69,7 @@ function RootNavigator() {
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Screen name="ScanContainer" component={ScanScreen} options={{ title: 'Scan' }  } />
+      <Stack.Screen name="ActionsContainer" component={ActionsScreen} options={{title: 'Actions'}} />
       <Stack.Screen name="CompletionModal" component={CompletionScreen} options={{ headerShown: false, presentation: "fullScreenModal" }   } />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
@@ -79,6 +81,8 @@ function RootNavigator() {
             </Pressable>
           ), }  } />
       </Stack.Group>
+      <Stack.Screen name="ActionsHistory" component={ActionsHistory} options={{title: 'History'}} />
+      <Stack.Screen name="CompletionModalActions" component={ActionsScreen} options={{ headerShown: false, presentation: "fullScreenModal" }   } />
     </Stack.Navigator>
   );
 }
