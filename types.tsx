@@ -24,6 +24,7 @@ export type RootStackParamList = {
   InitialScreen: undefined;
   LogIn: undefined;
   ScanMain: undefined;
+  ScanIntro: undefined;
   ScanContainer: undefined;
   ScanHistory: undefined;
   ScanResults: { title: string, response: any };

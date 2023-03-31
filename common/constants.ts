@@ -1,5 +1,5 @@
 export const BASE_URL =
-  process.env.NODE_ENV === 'production' ? 'https://actnow.wmdd4950.com' : 'http://localhost:3000';
+  process.env.NODE_ENV !== 'production' ? 'https://actnow.wmdd4950.com' : 'http://localhost:3000';
 
 export const API = {
   signup: `${BASE_URL}/auth/signup`,
@@ -12,6 +12,7 @@ export const API = {
   leaderboard: `${BASE_URL}/leaderboard`,
   scanner: `${BASE_URL}/scanner`,
   emissions: `${BASE_URL}/scanner/emission`,
+  history: `${BASE_URL}/scanner/history`,
   factor: `${BASE_URL}/scanner/factor`,
   quizzQuestions: `${BASE_URL}/quiz/questions`,
 };

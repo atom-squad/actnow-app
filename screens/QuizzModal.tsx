@@ -38,13 +38,15 @@ export default function QuizzModal() {
   const currentAnswer = loggedAnswers?.[currentQuestion._id];
   const questionAnswered = Number.isFinite(currentAnswer);
   const isLastQuestion = currentQuestionIdx === questions.length - 1;
+  const selectedOption = currentQuestion.answerOptions[currentAnswer];
   return (
     <Flex padding="32px 16px" backgroundColor="#41bb7b" height="100%" alignItems="center">
       <Box backgroundColor={COLORS.white} style={styles.box} borderColor="#15AA5A" borderStyle="solid" borderWidth="2" width="68px">
         <Text>{`${currentQuestionIdx + 1}/${ questions.length}`}</Text>
       </Box>
       <Box backgroundColor={COLORS.white} style={styles.box} justifyContent="center" justifyItems="center" padding="16px" height="200px" width="100%" >
-        <Text style={styles.title} textAlign="center">{currentQuestion.description}</Text>
+        { !questionAnswered && <Text style={styles.title} textAlign="center">{currentQuestion.description}</Text>}
+        { questionAnswered && <Text style={styles.title} textAlign="center">{selectedOption.feedback}</Text>}
       </Box>
       <Box marginTop="24px" width="100%">
         {currentQuestion?.answerOptions?.map((option, idx) => {
@@ -62,7 +64,7 @@ export default function QuizzModal() {
               }
             }}>
               <Box width="100%" marginBottom="16px" padding="16px" style={styles.box} backgroundColor={color}>
-                <Text color={highlightOption ? COLORS.white : "#000"} fontWeight="bold">{option.value}</Text>
+                <Text color={highlightOption ? COLORS.white : questionAnswered ? COLORS.gray1 : COLORS.black} fontWeight="bold">{option.value}</Text>
               </Box>
             </Pressable>
           )

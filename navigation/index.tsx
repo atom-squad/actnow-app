@@ -34,6 +34,7 @@ import { useNavigation } from '@react-navigation/native';
 import QuizzModal from '../screens/QuizzModal';
 import CompletionScreen from '../screens/CompletionScreen';
 import ActionsHistory from '../screens/ActionsHistory';
+import ScanIntro from '../screens/ScanIntro';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -68,8 +69,9 @@ function RootNavigator() {
     <Stack.Navigator>
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
-      <Stack.Screen name="ScanContainer" component={ScanScreen} options={{ title: 'Scan' }  } />
       <Stack.Screen name="ActionsContainer" component={ActionsScreen} options={{title: 'Actions'}} />
+      <Stack.Screen name="ScanContainer" component={ScanScreen} options={{ headerShown: false, title: 'Scan' }  } />
+      <Stack.Screen name="ScanIntro" component={ScanIntro} options={{ headerShown: false, presentation: "fullScreenModal" }  } />
       <Stack.Screen name="CompletionModal" component={CompletionScreen} options={{ headerShown: false, presentation: "fullScreenModal" }   } />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
         <Stack.Screen name="Modal" component={ModalScreen} />
@@ -125,7 +127,13 @@ function BottomTabNavigator() {
         component={EmptyScanTab}
         options={({ navigation }: RootTabScreenProps<'Scan'>) => ({
           title: 'Scan',
-          tabBarIcon: ({ color }) => <Pressable onPress={() => navigation.navigate('ScanContainer')}><TabBarIcon icon={ScanIcon} isFocussed={navigation.isFocused()}/></Pressable>,
+          tabBarIcon: ({ color }) => (
+            <Pressable onPress={() => navigation.navigate('ScanContainer')}>
+                <Box margin="10px">
+                  <TabBarIcon icon={ScanIcon} isFocussed={navigation.isFocused()}/>
+                </Box>
+            </Pressable>
+          )
         })}
       />
       <BottomTab.Screen
