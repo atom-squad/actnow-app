@@ -11,11 +11,11 @@ const UserHeader = ({userSection}) => {
                 <Image source={profileImage} alt="User Profile pic" size={70} borderRadius={100} marginRight={3} />
             </Box>
             <Box>
-                <Text color={COLORS.darkOrange}>Rank #{userSection.rankingPos}</Text>
-                <Text bold>{userSection.name}</Text>
-                <Text>{userSection.organization} - {userSection.department}</Text>
+                <Text color={COLORS.darkOrange} fontFamily="albert-medium" fontSize={12}>Rank #{userSection.rankingPos}</Text>
+                <Text  fontFamily="albert-semibold" fontSize={22}>{userSection.name}</Text>
+                <Text fontFamily="albert-medium" fontSize={12}>{userSection.organization} - {userSection.department}</Text>
             </Box>
-        </Flex>
+        </Flex> 
     );
 }
 

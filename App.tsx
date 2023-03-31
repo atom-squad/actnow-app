@@ -11,7 +11,6 @@ import { updateToken } from './stores/slices/userSlice';
 import { Provider } from 'react-redux';
 import { store } from './stores/store';
 
-
 function App() {
   const isLoadingComplete = useCachedResources();
   const [token, setToken] = useState('')
