@@ -62,16 +62,16 @@ const SignUpOneScreen = ({navigation}) => {
         <Flex direction="column" align="center" height="100%">
             <Image source={logoLeaves} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={100} style={styles.imagePosition} />
 
-            <Text alignSelf="flex-start" color={COLORS.primaryOrange} fontSize={30}>Hello Human,</Text>
-            <Text alignSelf="flex-start">Let's make earth a better place to live,</Text>
-            <Text alignSelf="flex-start"> one action at a time.</Text>
+            <Text alignSelf="flex-start" color={COLORS.primaryOrange} fontFamily="albert-medium" fontSize={32}>Hello Human,</Text>
+            <Text alignSelf="flex-start" fontFamily="albert-regular" fontSize={16}>Let's make earth a better place to live,</Text>
+            <Text alignSelf="flex-start"fontFamily="albert-regular" fontSize={16}> one action at a time.</Text>
                     
             <SelectOrganization organizationsList={organizationsList} setOrganization={setOrganization} errors={errors} />
 
             <SelectDepartment organization={organizationsList.length > 0 ? organizationsList[organization]: undefined} setDepartment={setDepartment} errors={errors} />
                 
             <FormControl marginY="2" isRequired isInvalid={'email' in errors}>
-                <FormControl.Label _text={{ bold: true,  color: 'black' }}>Email</FormControl.Label>
+                <FormControl.Label _text={{ bold: true,  color: 'black', fontFamily: 'albert-semibold' }}>Email</FormControl.Label>
                 <Input placeholder="Email" onChangeText={(value) => setEmail(value)} size="lg" marginY="1"  
                 _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1, backgroundColor: "white"}} 
                 _invalid={{borderColor:COLORS.darkOrange}}
@@ -85,7 +85,7 @@ const SignUpOneScreen = ({navigation}) => {
             </FormControl>
 
             <FormControl marginY="2" isRequired isInvalid={'password' in errors}>
-                <FormControl.Label _text={{ bold: true,  color: 'black' }}>Password</FormControl.Label>
+                <FormControl.Label _text={{ bold: true,  color: 'black', fontFamily:'albert-semibold' }}>Password</FormControl.Label>
                 <Input placeholder="Password" 
                     size="lg"  
                     onChangeText={(value) => setPassword(value)} 
@@ -107,16 +107,16 @@ const SignUpOneScreen = ({navigation}) => {
                 </FormControl.ErrorMessage>
             </FormControl>
 
-            <Link href="https://nativebase.io" alignSelf="flex-end">
+            <Link href="https://nativebase.io" alignSelf="flex-end" fontFamily="albert-medium" fontSize={14}>
                 Forgot Password? 
             </Link>
 
             <Pressable onPress={() => nextStep()} borderWidth={1} style={styles.button} alignItems="center" justifyContent="center">
-                <Text color="white" bold>Sign Up </Text>
+                <Text color="white" fontFamily="albert-bold" fontSize={16}>Sign Up </Text>
             </Pressable>
 
             <Pressable  borderWidth={1} style={styles.logInButton} alignItems="center" onPress={() => navigation.push("LogIn")}>
-          <Text color={COLORS.greenPrimary} bold>Log In </Text>
+          <Text color={COLORS.greenPrimary} fontFamily="albert-bold" fontSize={16}>Log In </Text>
         </Pressable>
 
         </Flex>

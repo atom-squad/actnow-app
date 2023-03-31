@@ -64,7 +64,7 @@ const SignUpTwoScreen = ({navigation, route}) => {
             <Image source={logoLeaves} accessibilityLabel="Act Now Logo" alt="ActNow Logo" size={100} style={styles.imagePosition} />
             
             <FormControl marginY="2" isRequired isInvalid={'firstName' in errors}>
-                <FormControl.Label _text={{ bold: true,  color: 'black' }}>First Name</FormControl.Label>
+                <FormControl.Label _text={{ bold: true,  color: 'black', fontFamily: 'albert-semibold' }}>First Name</FormControl.Label>
                 <Input placeholder="First Name" onChangeText={(value) => setFirstName(value)} size="lg" marginY="1"
                  _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1, backgroundColor: "white"}} 
                  _invalid={{borderColor:COLORS.darkOrange}}
@@ -78,7 +78,7 @@ const SignUpTwoScreen = ({navigation, route}) => {
             </FormControl>
 
             <FormControl marginY="2" isRequired isInvalid={'lastName' in errors}>
-                <FormControl.Label _text={{ bold: true,  color: 'black' }}>Last Name</FormControl.Label>
+                <FormControl.Label _text={{ bold: true,  color: 'black', fontFamily: 'albert-semibold' }}>Last Name</FormControl.Label>
                 <Input placeholder="Last Name" onChangeText={(value) => setLastName(value)} size="lg" marginY="1" 
                 _focus={{borderColor: COLORS.greenPrimary, borderWidth: 1, backgroundColor: "white"}} 
                 _invalid={{borderColor:COLORS.darkOrange}}
@@ -93,7 +93,7 @@ const SignUpTwoScreen = ({navigation, route}) => {
 
             <Pressable borderWidth={1} style={styles.button} onPress={signup}>
                 <Flex direction="row" alignItems="center" justifyContent="center">
-                    <Text color="white" bold>Let's Start </Text>
+                    <Text color="white" fontFamily= 'albert-bold' fontSize={16}>Let's Start </Text>
                     <Icon as={<MaterialIcons name="arrow-forward" />} size={6} color="white" marginY="3" />
                 </Flex>
             </Pressable>
