@@ -16,16 +16,12 @@ const InitialScreen = ({navigation}) => {
             <OneLiner width={250} height={150} style={styles.quotePosition} />
 
             <Pressable onPress={() => navigation.push("LogIn")} borderWidth={1} style={styles.logInButton} alignItems="center">
-                <Text color="white" bold>Log In </Text>
+                <Text color="white" fontFamily="albert-bold" fontSize={16}>Log In </Text>
             </Pressable>
 
             <Pressable onPress={() => navigation.push("SignUpOne")}  borderWidth={1} style={styles.signUpButton} alignItems="center">
-                <Text color={COLORS.greenPrimary} bold>Sign Up </Text>
+                <Text color={COLORS.greenPrimary} fontFamily="albert-bold" fontSize={16}>Sign Up </Text>
             </Pressable>
-
-            <Link href="https://nativebase.io" _text={{color: COLORS.green60}}>
-                Terms of Privacy
-            </Link>
 
         </Flex>
     );

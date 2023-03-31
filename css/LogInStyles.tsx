@@ -30,7 +30,7 @@ export default StyleSheet.create ({
    
        imagePosition: {
          marginTop: 80,
-         marginBottom: 80
+         marginBottom: 40
        }   
 
 });

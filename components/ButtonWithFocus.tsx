@@ -17,8 +17,10 @@ const ButtonWithFocus = ({title, style, onClickAction}) => {
         }) => {
           return <Text 
             alignSelf="center" 
+            fontFamily="albert-semibold" 
+            fontSize={18}
             color={isPressed ? COLORS.greenPrimary : isHovered ? COLORS.greenPrimary : isFocused ? COLORS.greenPrimary  : COLORS.gray2}  
-            bold>{title}</Text>
+          >{title}</Text>
           }}
       </Pressable>
     );

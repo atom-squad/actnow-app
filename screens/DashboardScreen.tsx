@@ -10,6 +10,7 @@ import MaterialIcons from "@expo/vector-icons/build/MaterialIcons";
 import { COLORS } from "../common/constants";
 import styles from '../css/DashboardScreenStyles';
 import LineGraph from "../components/LineChart";
+import UserHeader from "../components/UserHeader";
 
 
 export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard'>) {
@@ -18,7 +19,6 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
   let dispatch = useAppDispatch();
   let [buttonOption, setButtonOption] = useState('Personal');
 
-  const profileImage = require('../assets/images/profileImage.png');
   const badge = require('../assets/images/badge.png');
   const leafGreen = require('../assets/images/leafGreen.png');
   const quizCardBackground = require('../assets/images/quizCardBackground.png');
@@ -40,18 +40,10 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     setButtonOption(option);
   }
 
+
   return (
     <ScrollView padding={4} >
-      <Flex direction='row'>
-        <Box>
-        <Image source={profileImage} alt="User Profile pic" size={70} borderRadius={100} marginRight={3} />
-        </Box>
-        <Box>
-          <Text color={COLORS.darkOrange}>Rank #{userSection.rankingPos}</Text>
-          <Text bold>{userSection.name}</Text>
-          <Text>{userSection.organization} {userSection.department}</Text>
-        </Box>
-      </Flex>
+      <UserHeader userSection={userSection} />
 
       <Box  marginTop={4}>
         <Flex direction='row' alignItems="center" >
@@ -59,8 +51,8 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
             <Text color={COLORS.white} bold>{levelData.number}</Text>
           </ImageBackground>
           <Box marginLeft={3}>
-            <Text color={COLORS.primaryOrange}>Level {levelData.number} </Text>
-            <Text bold>{levelData.name}</Text>
+            <Text color={COLORS.primaryOrange} fontFamily="albert-medium" fontSize={10}>Level {levelData.number} </Text>
+            <Text fontFamily="albert-semibold" fontSize={16}>{levelData.name}</Text>
           </Box>
         </Flex>
         <Progress size="lg" colorScheme="warning" value={userSection.totalPoints} min={0} max={levelData.endLimit} marginTop={2} bg={COLORS.lightOrange}  _filledTrack={{
@@ -80,21 +72,19 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
 
     <Box marginY={8}>
      <ImageBackground source={quizCardBackground} style={styles.bgImage} borderRadius={10}>
+       
         <Box padding={2}>
-          <Flex direction="row" alignItems="center">
-            <HStack alignItems="center">
+            <HStack alignItems="center" marginTop={3} marginBottom={5}>
               <TouchableOpacity>
                 <Image source={leafWhite} alt="white leaf" size={5} />
               </TouchableOpacity>
-              <Heading color={COLORS.white} marginLeft={2}>Quiz</Heading>
+              <Heading color={COLORS.white} marginLeft={2} fontFamily="albert-medium" fontSize={20}>Quiz</Heading>
             </HStack>
-            <Spacer />
-            <IconButton icon={<Icon as={<MaterialIcons name="close" />} size={9}  color= "white" />}  />
-          </Flex>
-          <Text color={COLORS.white}>Learn how to make better decisions in your day to day life.</Text>
+
+          <Text color={COLORS.white} fontFamily="albert-medium" fontSize={16}>Learn how to make better decisions in your day to day life.</Text>
           <Pressable style={styles.quizButton} paddingX={3} paddingY={2} marginTop={4} borderBottomColor={COLORS.darkOrange} borderBottomWidth={3} onPress={() => navigation.navigate('QuizzModal')}>
             <Flex direction="row" alignItems="center" justifyContent="center">
-              <Text color="white" bold>Start Quiz </Text>
+              <Text color="white" fontFamily="albert-semibold" fontSize={16}>Start Quiz </Text>
               <Icon as={<MaterialIcons name="arrow-forward" />} size={4} color="white" />
             </Flex>
           </Pressable>
@@ -103,8 +93,8 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     </Box>
 
     <Box>
-      <Heading>Progress</Heading>
-      <Text marginBottom={8}>Review your actions progress.</Text>
+      <Heading fontFamily="albert-semibold" fontSize={18}>Progress</Heading>
+      <Text marginBottom={8} fontFamily="albert-regular" fontSize={14}>Review your actions progress.</Text>
       <Box>
        <Flex direction="row">
           <ButtonWithFocus title="Personal" style={styles.progressButton} onClickAction={onChangeGraphOption}/>
@@ -121,16 +111,17 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
     </Box>
 
     <Flex direction='row' justifyContent="space-between" alignItems="center" marginTop={6}>
-      <Heading>Actions Logged</Heading>
+      <Heading fontFamily="albert-semibold" fontSize={18}>Actions Logged</Heading>
       <Pressable onPress={() => navigation.navigate('ActionsHistory')}>
+      
         <Flex direction="row" alignItems="center" justifyContent="center">
-          <Text color="#15aa5a" bold>View All </Text>
+          <Text color="#15aa5a" fontFamily="albert-semibold" fontSize={16}>View All </Text>
           <Icon as={<MaterialIcons name="arrow-forward" />} size={5} color="#15aa5a" />
         </Flex>
       </Pressable>
     </Flex>
-    <Text>Review your actions logged.</Text>
-    <Box marginTop={4}>
+    <Text fontFamily="albert-regular" fontSize={14}>Review your actions logged.</Text>
+    <Box marginTop={4} borderTopColor={COLORS.grayLight} borderTopRadius={2} borderTopWidth={1}>
       {(actionsLogged.length > 0)?
       (actionsLogged.slice(0, actionsLogged.length >= 3? 3 : actionsLogged.length))
       .map((action) => (
@@ -142,7 +133,7 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       <Box borderWidth={1} paddingX={4} paddingY={6} marginBottom={2}  borderColor={COLORS.grayLight} borderBottomRadius={12} borderTopWidth={0} >
       <Pressable style={styles.button} borderBottomColor={COLORS.darkOrange} borderBottomWidth={2} width="100%" onPress={() => navigation.navigate('ActionsContainer')}>
         <Flex direction="row" alignItems="center" justifyContent="center">
-          <Text color="white" paddingY={2}  bold>Log an action  </Text>
+          <Text color="white" paddingY={2}  fontFamily="albert-bold" fontSize={16}>Log an action  </Text>
           <Icon as={<MaterialIcons name="arrow-forward" />} size={5} color="white" />
         </Flex>
       </Pressable>
@@ -154,10 +145,10 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
         <Flex direction="row" align="center" justify="space-between" paddingY={5}>
           <Image source={handLeaf} alt="hand icon" size={100}  marginRight="10" resizeMode="contain"/>
           <Box>
-            <Text color="white">Your organisation has taken</Text>
-            <Text color="white"> has taken</Text>
-            <Text fontSize="4xl" color="white" bold>{orgActions.orgActions}</Text>
-            <Text color="white">Actions</Text>
+            <Text color="white" fontFamily="albert-semibold" fontSize={14}>Your organisation</Text>
+            <Text color="white" fontFamily="albert-semibold" fontSize={14}> has taken</Text>
+            <Text fontSize="4xl" color="white" fontFamily="albert-bold">{orgActions.orgActions}</Text>
+            <Text color="white"fontFamily="albert-medium" fontSize={10}>Actions</Text>
           </Box>
         </Flex>
       </ImageBackground>
