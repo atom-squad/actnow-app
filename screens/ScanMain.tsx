@@ -46,17 +46,25 @@ export function ScanMain() {
       },
     })
     setLoadingResults(false);
-    navigation.navigate('ScanResults', {
-      title: 'Results',
-      response: { ...resp.data, uri: image }
-    })
+    if(resp.status === 201){
+      navigation.navigate('ScanResults', {
+        title: 'Results',
+        response: { ...resp.data, uri: image }
+      })
+    }else {
+      navigation.navigate('ScanResults', {
+        title: 'Error',
+        response: { error: resp.message, uri: image }
+      })
+    }
+   
   }
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: false,
+      allowsEditing: true,
       aspect: [4, 3],
       quality: 0,
     });
