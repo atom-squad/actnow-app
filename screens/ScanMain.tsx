@@ -7,16 +7,21 @@ import * as MediaLibrary from 'expo-media-library';
 import Button from '../components/Button';
 import GalleryIcon from '../assets/images/galleryIcon.svg'
 import SearchIcon from '../assets/images/searchIcon.svg'
-import UncheckIcon from '../assets/images/uncheckIcon.svg'
+import ScanCaptureButton from '../assets/images/scanCaptureButton.svg'
+import ScanFrame from '../assets/images/scanFrame.png'
 import * as ImagePicker from 'expo-image-picker';
 import { useAppSelector, useAppDispatch } from '../stores/hooks';
 import { useNavigation } from '@react-navigation/native';
 import { API, COLORS } from '../common/constants';
 import server from '../common/server';
+import ScanIntro from './ScanIntro';
+import ScanResultsLoading from '../components/ScanResultsLoading';
 
 
 export function ScanMain() {
   const [hasCamPermission, setHasCamPermission] = useState(null);
+  const [loadingResults, setLoadingResults] = useState(false);
+  const showScanIntro = useAppSelector(state => state.user.showScanIntro);
   const [image, setImage] = useState(null);
   // @ts-ignore
     const [type] = useState(Camera.Constants.Type.back);
@@ -33,33 +38,41 @@ export function ScanMain() {
     body.append('file', { uri: image, name: 'photo.png',filename :'imageName.png',type: 'image/png'});
     body.append('Content-Type', 'image/png');
 
+    setLoadingResults(true);
     const resp = await server.post(API.emissions, body, {
       dispatch,
       headers: {  
         "Content-Type": "multipart/form-data",
       },
     })
-    navigation.navigate('ScanResults', {
-      title: 'Results',
-      response: resp.data
-    })
+    setLoadingResults(false);
+    if(resp.status === 201){
+      navigation.navigate('ScanResults', {
+        title: 'Results',
+        response: { ...resp.data, uri: image }
+      })
+    }else {
+      navigation.navigate('ScanResults', {
+        title: 'Error',
+        response: { error: resp.message, uri: image }
+      })
+    }
+   
   }
 
   const pickImage = async () => {
     // No permissions request is necessary for launching the image library
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: false,
+      allowsEditing: true,
       aspect: [4, 3],
-      quality: 1,
+      quality: 0,
     });
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
-      sendRequest();
     }
   };
-
 
   useEffect(() => {
     (async () => {
@@ -68,6 +81,11 @@ export function ScanMain() {
       setHasCamPermission(cameraStatus.status === 'granted');
     })()
   }, []);
+
+  useEffect(() => {
+    sendRequest();
+  }, [image]);
+
 
   const takePicture = async () => {
     if (cameraRef) {
@@ -101,43 +119,33 @@ export function ScanMain() {
     return <Box {...styles.container}><Text>No access to camera</Text></Box>
   }
 
+  if (showScanIntro) {
+    return <ScanIntro/>
+  }
+
+  if (loadingResults) {
+    return <ScanResultsLoading />
+  }
+
   return (
     <View {...styles.container}>
-      {!image ? (
       <Box width="100%" height="85%">
-        <Box { ...styles.scanTopActionsContainer}>
-          <TouchableOpacity onPress={() => goTo('ScanHistory')}>
-            <Text color={COLORS.white}>History</Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => goTo('Dashboard')}>
-            <UncheckIcon fill={COLORS.white} />
-          </TouchableOpacity>
-        </Box>
         <Camera style={styles.camera} type={type} flashMode={flash} ref={cameraRef} />
         <Box {...styles.scanBottomActionsContainer}>
+          {/* <Image src={ScanFrame} alt="frame" zIndex={100} width="100%" style={styles.scanFrame}/> */}
           <TouchableOpacity onPress={pickImage} style={styles.actionContainer}>
-            <GalleryIcon fill={COLORS.primary} />
-            <Text color={COLORS.primary} >Gallery</Text>
+            <GalleryIcon fill={COLORS.darkOrange} />
+            <Text color={COLORS.black} bold>Gallery</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={takePicture} style={styles.captureButton}></TouchableOpacity>
+          <TouchableOpacity onPress={takePicture}>
+            <ScanCaptureButton />
+          </TouchableOpacity>
           <TouchableOpacity style={styles.actionContainer} onPress={() => goTo('ScanSearch')}>
-            <SearchIcon fill={COLORS.primary} />
-            <Text color={COLORS.primary}>Text Search</Text>
+            <SearchIcon fill={COLORS.darkOrange} />
+            <Text color={COLORS.black} bold>Text Search</Text>
           </TouchableOpacity>
         </Box>
-      </Box>) : (
-      <>
-        <Image source={{uri: image}} {...styles.camera} alt="capture"/>
-        <View style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          paddingHorizontal: 50
-        }}>
-          <Button title={'Re-take'} icon="retweet" onPress={() => setImage(null)} color={undefined} />
-          <Button title={'Save'} icon="check" onPress={savePicture} color={undefined} />
-        </View>
-      </>
-      )}
+      </Box>
     </View>
   );
 }
@@ -152,12 +160,6 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     width: '100%',
   },
-  captureButton: {
-    width: 62,
-    height: 62,
-    borderRadius: 50,
-    backgroundColor: COLORS.primary,
-  },
   scanBottomActionsContainer: {
     display: 'flex',
     flexDirection: 'row',
@@ -165,9 +167,9 @@ const styles = StyleSheet.create({
     alignContent: 'center',
     justifyContent: 'space-evenly',
     position: 'absolute',
-    top: '103%',
-    left: 0,
-    right: 0,
+    top: '100%',
+    left: '0%',
+    right: '0%',
     zIndex: 100,
   },
   actionContainer: {
@@ -177,17 +179,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  scanFrame: {
+    position: 'absolute',
+    top: '0%',
+    left: '0%',
+    right: '0%',
+    bottom: '0%',
+  },
   scanTopActionsContainer: {
     display: 'flex',
     flexDirection: 'row',
     alignContent: 'center',
     justifyContent: 'space-between',
     position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
+    top: '0%',
+    left: '0%',
+    right: '0%',
     zIndex: 100,
     margin: 5,
   }
-
 });
