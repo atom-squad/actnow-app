@@ -38,7 +38,7 @@ export default function QuizzModal() {
   const currentAnswer = loggedAnswers?.[currentQuestion._id];
   const questionAnswered = Number.isFinite(currentAnswer);
   const isLastQuestion = currentQuestionIdx === questions.length - 1;
-  const selectedOption = currentQuestion.answerOptions[currentAnswer];
+  const selectedOption = currentQuestion?.answerOptions?.[currentAnswer];
   return (
     <Flex padding="32px 16px" backgroundColor="#41bb7b" height="100%" alignItems="center">
       <Box backgroundColor={COLORS.white} style={styles.box} borderColor="#15AA5A" borderStyle="solid" borderWidth="2" width="68px">
