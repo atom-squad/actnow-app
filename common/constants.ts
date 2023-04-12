@@ -1,5 +1,5 @@
 export const BASE_URL =
-  process.env.NODE_ENV === 'production' ? 'https://actnow.wmdd4950.com' : 'http://localhost:3000';
+  'https://actnow.wmdd4950.com'; //'http://localhost:3000';
 
 export const API = {
   signup: `${BASE_URL}/auth/signup`,
