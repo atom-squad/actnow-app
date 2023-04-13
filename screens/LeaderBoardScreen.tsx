@@ -7,6 +7,7 @@ import styles from '../css/DashboardScreenStyles';
 import { useAppDispatch, useAppSelector } from '../stores/hooks';
 import { getDepartmentsRanking, getPersonalRanking } from '../stores/slices/leaderboardSlice';
 import TopRanking from '../components/TopRanking';
+import { COLORS } from '../common/constants';
 
 export default function LeaderboardScreen({ navigation }: RootTabScreenProps<'Leaderboard'>) {
 
@@ -29,8 +30,8 @@ export default function LeaderboardScreen({ navigation }: RootTabScreenProps<'Le
     <ScrollView padding={4}>
 
        <Flex direction="row">
-          <ButtonWithFocus title="Personal" style={styles.progressButton} onClickAction={onChangeRankingOption} />
-          <ButtonWithFocus title="Department" style={styles.progressButton} onClickAction={onChangeRankingOption} />
+          <ButtonWithFocus title="Personal" style={styles.progressButton} onClickAction={onChangeRankingOption} selected={buttonOption==='Personal'} />
+          <ButtonWithFocus title="Department" style={styles.progressButton} onClickAction={onChangeRankingOption} selected={buttonOption!=='Personal'} />
         </Flex>
 
         { personalRanking.usersRanking.length>0?
@@ -40,8 +41,11 @@ export default function LeaderboardScreen({ navigation }: RootTabScreenProps<'Le
               <TopRanking rankingList={personalRanking.usersRanking} />
               { personalRanking.usersRanking.length>3?
                 <Box paddingY={5}>
-                  { personalRanking.usersRanking.map((userRank) => (
-                      <UsernameWithRank textcolor="black" key={userRank.id} rank={pos++} username={userRank.name} points={userRank.monthPoints} />
+                  { personalRanking.usersRanking.slice(3).map((userRank) => (
+                    personalRanking.userPosition == pos? 
+                      <UsernameWithRank textcolor={COLORS.darkOrange} key={userRank.id} rank={pos++} username={userRank.name} points={userRank.monthPoints} />
+                      :
+                      <UsernameWithRank textcolor={COLORS.black} key={userRank.id} rank={pos++} username={userRank.name} points={userRank.monthPoints} />
                   ))
                   }
                 </Box>

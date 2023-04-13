@@ -31,8 +31,6 @@ function ActionsHistory () {
         return groups;
       }, {});
 
-    console.log("transaction groups:",dateGroups)
-
     useEffect(() => {
         getUserActions()
       }, []) 

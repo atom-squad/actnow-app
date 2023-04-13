@@ -7,7 +7,7 @@ import { formatDate } from "../common/util";
 const ActionDetails = ({task, points, date}) => {
     return (
       <Box style={styles.borderStyle}>
-        <Flex direction='row' alignItems="flex-start" padding={4}>
+        <Flex direction='row' alignItems="flex-start" padding={4} width={300}>
           <Box borderWidth={1} borderColor={COLORS.darkOrange} borderRadius={12} paddingY={2} paddingX={4} marginLeft={2}>
             <Text color={COLORS.darkOrange} fontFamily="albert-semibold" fontSize={18}>+{points}</Text>
             <Text color={COLORS.darkOrange} fontFamily="albert-regular" fontSize={8}>Pts</Text>

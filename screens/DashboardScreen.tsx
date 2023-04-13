@@ -97,8 +97,8 @@ export default function HomeScreen({ navigation }: RootTabScreenProps<'Dashboard
       <Text marginBottom={8} fontFamily="albert-regular" fontSize={14}>Review your actions progress.</Text>
       <Box>
        <Flex direction="row">
-          <ButtonWithFocus title="Personal" style={styles.progressButton} onClickAction={onChangeGraphOption}/>
-          <ButtonWithFocus title="Department" style={styles.progressButton} onClickAction={onChangeGraphOption} />
+          <ButtonWithFocus title="Personal" style={styles.progressButton} onClickAction={onChangeGraphOption} selected={buttonOption==='Personal'}/>
+          <ButtonWithFocus title="Department" style={styles.progressButton} onClickAction={onChangeGraphOption} selected={buttonOption!=='Personal'} />
         </Flex>
         { progressData.personalProgress.length>0?
           buttonOption=='Personal'?
