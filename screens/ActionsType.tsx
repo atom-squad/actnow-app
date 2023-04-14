@@ -49,7 +49,7 @@ function ActionsType({route}) {
         totalUserPoints = await addPoints(value.actionPoints);
 
         if (selectedValues.length === index + 1 && totalUserPoints){
-          navigation.navigate('CompletionModal',  { points });
+          navigation.navigate('ActionsCongrats',  { points });
         };
 
       });
@@ -138,7 +138,7 @@ function ActionsType({route}) {
             {results.map((action) => (
               <TouchableOpacity // use TouchableOpacity instead of Box
               key={action._id}
-              style={styles.card}
+              style={styles.card }
               onPress={() =>
                 handleValueChange({
                   actionId: action._id,
@@ -152,7 +152,7 @@ function ActionsType({route}) {
               </Box>
               <Text style={styles.actionDescription}>{action.actionDescription}</Text>
               <Box
-                borderColor={COLORS.primaryOrange}
+                borderColor={COLORS.darkOrange}
                 // bg={selectedValues.some(
                 //   (selectedValue) => selectedValue.actionId === action._id
                 // ) ? COLORS.primaryOrange : 'white' }
@@ -162,13 +162,14 @@ function ActionsType({route}) {
                 height={6}
                 alignItems="center"
                 justifyContent="center"
-                marginRight={3}
+                marginRight={6}
+
               >
                 <Box
-                  borderColor='red'
+                  borderColor={COLORS.darkOrange}
                   bg={selectedValues.some(
                     (selectedValue) => selectedValue.actionId === action._id
-                  ) ?  COLORS.primaryOrange : 'white' }
+                  ) ?  COLORS.darkOrange : 'white' }
                   borderRadius={12}
                   width={3.5}
                   height={3.5}
@@ -200,22 +201,28 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: COLORS.white
   },
   boxHeading: {
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 12,
+    paddingTop: 12,
+    paddingBottom:12,
+    backgroundColor: COLORS.white,
+    position: 'relative', 
   },
   icon: {
-
+    position: 'absolute', // Position the icon absolutely within the boxHeading container
+    left: 16, // Adjust the left value to position the icon in the desired corner
+    top: 12,
   },
   actionTypeHeading: {
     textAlign: 'center',
     textTransform: 'capitalize',
     fontWeight: 'bold',
     fontSize: 17,
-    marginLeft: 140,
   },
   
   text: {
@@ -234,7 +241,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: 'rgba(0, 0, 0, 0.05)',
+    borderColor: COLORS.lightOrange,
     borderWidth: 0.3,
     backgroundColor: COLORS.white,
     padding: 10,
@@ -243,19 +250,26 @@ const styles = StyleSheet.create({
     justifySelf: 'center',
     borderRadius: 12,
     marginBottom: 16,
+    shadowColor: COLORS.grayLight,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.5,
+    shadowRadius: 20,
+    elevation: 4,
   },
   pointsBox: {
     display: 'flex', 
+    flexBasis: '20%',
     borderWidth: 2,
     borderColor: COLORS.lightOrange,
-    width: 60,
+    width: 65,
     height: 55,
     borderRadius: 12,
-    marginRight: 12
+    marginLeft: 26,
+    marginRight: 16,
   },
   pointsNumber: {
     textAlign: 'center',
-    fontSize: 16.5,
+    fontSize: 18,
     fontWeight: 'bold',
     marginTop: 5
   },
@@ -267,15 +281,18 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   actionDescription: {
-    width: '70%',
+    width: '65%',
     alignSelf: 'center',
     fontSize: 15,
+    marginRight: 16,
+    flexBasis: '60%',
   },
   checkbox: {
     borderRadius: 12,
     borderWidth: 1,
     alignSelf: 'center',
-    color: 'red'
+    color: 'red',
+    
   },
   button:{
     backgroundColor: COLORS.greenPrimary,
