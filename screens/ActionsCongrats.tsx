@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { COLORS } from '../common/constants';
 import { useAppDispatch, useAppSelector } from '../stores/hooks';
-import { getUserSection } from '../stores/slices/dashboardSlice';
+import { getActionsDone, getProgressData, getUserSection } from '../stores/slices/dashboardSlice';
 import dashboardStyles from '../css/DashboardScreenStyles';
 
 export default function ActionsCongrats({ route, navigation }) {
@@ -17,6 +17,8 @@ export default function ActionsCongrats({ route, navigation }) {
 
   useEffect(() => {
     dispatch(getUserSection());
+    dispatch(getProgressData());
+    dispatch(getActionsDone());
   }, [dispatch]);
 
   return (

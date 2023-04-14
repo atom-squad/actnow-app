@@ -58,7 +58,7 @@ export default function LeaderboardScreen({ navigation }: RootTabScreenProps<'Le
             <TopRanking rankingList={departmentsRank.departmentsRanking} />
             { departmentsRank.departmentsRanking.length>3?
                 <Box paddingY={5}>
-                  { departmentsRank.departmentsRanking.map((dptmRank) => (
+                  { departmentsRank.departmentsRanking.slice(3).map((dptmRank) => (
                       <UsernameWithRank textcolor="black" key={dptmRank._id} rank={pos++} username={dptmRank.name} points={dptmRank.totalPoints} />
                   ))
                   }

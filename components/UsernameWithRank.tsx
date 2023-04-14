@@ -9,7 +9,7 @@ const UsernameWithRank = ({textcolor, rank, username, points}) => {
               <Text color={textcolor} fontFamily="albert-extrabold" fontSize={12}>#{rank}</Text>
               <Text color={textcolor} paddingLeft={6} w={130} fontFamily="albert-regular" fontSize={14}>{username}</Text>
             </HStack>
-            <Text color={textcolor} fontFamily="albert-regular" fontSize={14}>{points} pts</Text>
+            <Text color={textcolor} fontFamily="albert-regular" fontSize={14}>{points? points: 0} pts</Text>
           </Flex>
         </Box>
     );
