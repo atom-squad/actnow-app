@@ -32,7 +32,7 @@ export type RootStackParamList = {
   ActionsContainer: undefined;
   ActionsMain: undefined;
   ActionsType: {actionType: any} ;
-  ActionsCongrats: {totalPoints: any, totalUserPoints: number} ;
+  ActionsCongrats: {points: number} ;
   ActionsHistory: undefined;
   QuizzModal: undefined;
   CompletionModal: { points: number };

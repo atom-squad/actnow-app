@@ -1,4 +1,4 @@
-import {  Flex, HStack, VStack, Text, View, Image, Pressable, Box} from 'native-base';
+import {  Flex, HStack, VStack, Text, View, Image, Pressable, Box, ScrollView} from 'native-base';
 import React from 'react';
 import {  StyleSheet } from 'react-native';
 import { useNavigation, Link } from '@react-navigation/native';
@@ -18,74 +18,76 @@ function ActionsMain()  {
 
   return (
     
-    <Flex style={styles.flex}>
-        <StripCalendar />
-        <Text style={styles.heading}>
-            Select the Category
-        </Text>
-        <VStack style={styles.vstack}>
-            <HStack style={styles.hstackTop}>
-                <View>
-                    <Pressable onPress={() => handlePress('transport')}>
-                      <Box style={styles.box}>
-                          <Image
-                                source={require('../assets/images/transport-test.png')} 
-                                style={{justifyContent:'center'}}
-                                resizeMode='contain'
-                                alt="Energies Image"
-                          />
-                      </Box>
-                      <Text style={styles.energyTypeText}>Transport</Text>
-                      <Text style={styles.seeMoreText}>See More</Text>
-                    </Pressable>
-                </View>
-                <View>
-                    <Pressable onPress={() => handlePress('food')}>
-                      <Box style={styles.box}>
-                          <Image
-                                source={require('../assets/images/food-test.png')} 
-                                style={{justifyContent:'center'}}
-                                resizeMode='contain'
-                                alt="Energies Image"
-                          />
-                      </Box>
-                      <Text style={styles.energyTypeText}>Food</Text>
-                      <Text style={styles.seeMoreText}>See More</Text>
-                    </Pressable>
-                </View>
-            </HStack>
-            <HStack>
-                <View>
-                    <Pressable onPress={() => handlePress('energies')}>
+    <ScrollView>
+      <Flex style={styles.flex}>
+          <StripCalendar />
+          <Text style={styles.heading}>
+              Select the Category
+          </Text>
+          <VStack style={styles.vstack}>
+              <HStack style={styles.hstackTop}>
+                  <View>
+                      <Pressable onPress={() => handlePress('transport')}>
                         <Box style={styles.box}>
                             <Image
-                                  source={require('../assets/images/energy-test.png')} 
-                                  style={{justifyContent:'center'}}
+                                  source={require('../assets/images/transport-test.png')}
+                                  style={{justifyContent:'center', height: 150}}
                                   resizeMode='contain'
                                   alt="Energies Image"
                             />
                         </Box>
-                        <Text style={styles.energyTypeText}>Energies</Text>
+                        <Text style={styles.energyTypeText}>Transport</Text>
                         <Text style={styles.seeMoreText}>See More</Text>
-                    </Pressable>
-                </View>
-                <View>
-                    <Pressable onPress={() => handlePress('products')}>
+                      </Pressable>
+                  </View>
+                  <View>
+                      <Pressable onPress={() => handlePress('food')}>
                         <Box style={styles.box}>
                             <Image
-                                  source={require('../assets/images/products-test.png')} 
-                                  style={{justifyContent:'center'}}
+                                  source={require('../assets/images/food-test.png')}
+                                  style={{justifyContent:'center', height: 150}}
                                   resizeMode='contain'
                                   alt="Energies Image"
                             />
                         </Box>
-                        <Text style={styles.energyTypeText}>Products</Text>
+                        <Text style={styles.energyTypeText}>Food</Text>
                         <Text style={styles.seeMoreText}>See More</Text>
-                    </Pressable>
-                </View>
-            </HStack>
-        </VStack>
-    </Flex>
+                      </Pressable>
+                  </View>
+              </HStack>
+              <HStack>
+                  <View>
+                      <Pressable onPress={() => handlePress('energies')}>
+                          <Box style={styles.box}>
+                              <Image
+                                    source={require('../assets/images/energy-test.png')}
+                                    style={{justifyContent:'center', height: 150}}
+                                    resizeMode='contain'
+                                    alt="Energies Image"
+                              />
+                          </Box>
+                          <Text style={styles.energyTypeText}>Energies</Text>
+                          <Text style={styles.seeMoreText}>See More</Text>
+                      </Pressable>
+                  </View>
+                  <View>
+                      <Pressable onPress={() => handlePress('products')}>
+                          <Box style={styles.box}>
+                              <Image
+                                    source={require('../assets/images/products-test.png')}
+                                    style={{justifyContent:'center', height: 150}}
+                                    resizeMode='contain'
+                                    alt="Energies Image"
+                              />
+                          </Box>
+                          <Text style={styles.energyTypeText}>Products</Text>
+                          <Text style={styles.seeMoreText}>See More</Text>
+                      </Pressable>
+                  </View>
+              </HStack>
+          </VStack>
+      </Flex>
+    </ScrollView>
   );
 }
 
@@ -99,8 +101,8 @@ const styles = StyleSheet.create({
       textAlign:'center',
       textTransform:'uppercase',
       fontWeight: 'bold',
-      marginTop: 30,
-      marginBottom: 15,
+      marginTop: 15,
+      marginBottom: 8,
       fontSize: 15.5
     },
     vstack: {
@@ -115,8 +117,8 @@ const styles = StyleSheet.create({
       marginTop: 16,
     },
     box: {
-      height: 170,
-      width: 180,
+      height: 160,
+      width: 175,
     },
     boxLeft:{
       marginRight: 32

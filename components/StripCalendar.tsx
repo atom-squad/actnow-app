@@ -4,6 +4,7 @@ import CalendarStrip from 'react-native-calendar-strip';
 import { API, COLORS } from '../common/constants';
 import server from '../common/server';
 import { useAppDispatch } from '../stores/hooks';
+import moment from 'moment';
 
 const StripCalendar = () => {
   const currentDate = new Date();
@@ -29,67 +30,126 @@ const StripCalendar = () => {
   const txDates = results.map(item => item.txDate)
   const uniqueDates = [...new Set(txDates)];
   
+
+  const customDatesStylesFunc = date => {
+    const currentDate = moment(); // Get the current date
+  
+    if (date.isSame(currentDate, 'day')) { // Check if date is current date
+      return {
+        dateContainerStyle: {
+          backgroundColor: COLORS.primaryOrange,
+          height: 60,
+          width: 40,
+        },
+      };
+    }
+  
+    if (date.isBefore(currentDate)) { // Check if date is before current date
+      return {
+        dateContainerStyle: {
+          backgroundColor: COLORS.greenPrimary,
+          height: 34,
+          width: 34,
+          padding: 3
+        },
+        dateNumberStyle: {
+          textAlign: 'center',
+          fontSize: 11,
+          color: 'white',
+          fontWeight: 'light'
+        },
+        dateNameStyle: {
+          color: 'white'
+        },
+      };
+    }
+
+    if (date.isAfter(currentDate)) { // Check if date is in the future
+      return {
+        dateContainerStyle: {
+          backgroundColor: COLORS.grayLight,
+          height: 34,
+          width: 34,
+          padding: 3
+        },
+        dateNumberStyle: {
+          textAlign: 'center',
+          fontSize: 11,
+          color: 'black',
+          fontWeight: 'light'
+        },
+        dateNameStyle: {
+          color: 'black'
+        },
+      };
+    }
+    
+
+    
+  };
+  
+  
+  
   console.log(uniqueDates)
   return (
-    <View style={styles.container}>
-      <CalendarStrip
-        style={styles.calendar}
-        calendarHeaderStyle={styles.calendarHeader}
-        calendarColor={'#fff'}
-        calendarHeaderFormat={'MMMM'}
-        dateNumberStyle={styles.dateNumber}
-        dateNameStyle={styles.dateName}
-        highlightDateNumberStyle={styles.highlightDateNumber}
-        highlightDateNameStyle={styles.highlightDateName}
-        disabledDateNameStyle={styles.disabledDateName}
-        disabledDateNumberStyle={styles.disabledDateNumber}
-        iconStyle={{display: 'none'}}
-        customDatesStyles={[
-          {
-            startDate: currentDate,
-            endDate: currentDate,
-            dateContainerStyle: styles.currentDate,
-          },
-        ]}
-      />
+    <View>
+      <View style={styles.container}>
+        <CalendarStrip
+          style={styles.calendar}
+          calendarHeaderStyle={styles.calendarHeader}
+          calendarColor={'#fff'}
+          dateNumberStyle={styles.dateNumber}
+          dateNameStyle={styles.dateName}
+          disabledDateNumberStyle={styles.disabledDateNumber}
+          iconStyle={{display: 'none'}}
+          customDatesStyles={customDatesStylesFunc}
+        />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    height: 90,
+    borderWidth: 0.5,
+    marginTop: 20,
+    marginLeft: 20,
+    marginRight: 20,
+    marginBottom: 20,
+    borderRadius: 12,
+    alignContent: 'center',
+    justifyContent: 'center',
     backgroundColor: '#fff',
-    borderBottomColor: '#ccc',
+    borderColor: COLORS.grayLight,
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 4,
   },
   calendar: {
-    height: 80, 
-    marginTop: 30,
-    paddingTop: 10, 
-    paddingBottom: 10, 
-    borderWidth: 0.5, 
-    width: '90%', 
+    marginTop: 16,
+    height: 75,
+    paddingLeft: 10, 
+    paddingBottom: 15,
+    paddingRight: 10, 
+    width: '95%', 
     alignSelf: 'center', 
     borderRadius: 12,
     backgroundColor: 'white',
     borderColor: '#DBE1E3',
+    shadowColor: '#000',
+
   },
   calendarHeader: {
     display: 'none'
   },
   dateNumber: {
-    color: '#333',
+    color: COLORS.white,
   },
   dateName: {
-    color: '#333',
-  },
-  highlightDateNumber: {
-    color: '#fff',
-  },
-  highlightDateName: {
-    color: '#fff',
-  },
-  disabledDateName: {
-    color: '#999',
+    color: 'white',
+    fontWeight: 'bold'
   },
   disabledDateNumber: {
     color: '#999',
@@ -97,7 +157,9 @@ const styles = StyleSheet.create({
   currentDate: {
     backgroundColor: COLORS.primaryOrange,
     borderRadius: 25,
-    height: 70,
+    height: 60,
+    width: 40,
+    
   } 
 });
 
