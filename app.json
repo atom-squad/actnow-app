@@ -8,7 +8,7 @@
     "scheme": "actnow",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/splashV2.gif",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
