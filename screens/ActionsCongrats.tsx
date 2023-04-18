@@ -29,21 +29,21 @@ export default function ActionsCongrats({ route, navigation }) {
             <Image source={profileImage} alt="User Profile pic" size={158} borderRadius={158} />
           </Box>
           <Box style={styles.container} paddingY="100px">
-            <Text bold fontSize="30px">Big CONGRATS! 🥳</Text>
-            <Text fontSize="20px" color={COLORS.gray4}>You just have won</Text>
+            <Text bold fontSize="30px" fontFamily="albert-bold">Big CONGRATS! 🥳</Text>
+            <Text fontSize="20px" color={COLORS.gray4} fontFamily="albert-medium">You just have won</Text>
             <Flex align="center" borderColor={COLORS.primaryOrange} borderWidth="1px" borderStyle="solid" borderRadius={8} color={COLORS.primaryOrange} padding="12px" marginTop="28px">
-              <Text color={COLORS.primaryOrange} bold fontSize="30px">+{points}</Text>
-              <Text color={COLORS.primaryOrange} bold fontSize="24px">Points</Text>
+              <Text color={COLORS.primaryOrange} bold fontSize="30px" fontFamily="albert-bold">+{points}</Text>
+              <Text color={COLORS.primaryOrange} bold fontSize="24px" fontFamily="albert-bold">Points</Text>
             </Flex>
-            <Text textAlign="center" marginX="50px" marginTop="28px" marginBottom="40px" fontSize="16px">We hope it help you to make better decisions in your day to day life.</Text>
-            <Text bold fontSize="20px">Now you have</Text>
+            <Text textAlign="center" marginX="50px" marginTop="28px" marginBottom="40px" fontSize="16px" fontFamily="albert-medium">We hope it help you to make better decisions in your day to day life.</Text>
+            <Text bold fontSize="20px" fontFamily="albert-medium">Now you have</Text>
             <HStack>
                 <Box style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
                   <Image source={leafGreen} alt="leaf icon" size={5} resizeMode="contain" />
                   <Text bold fontSize="30px">{userSection.monthPoints}</Text>
                 </Box>
             </HStack>
-          <Text>POINTS</Text>
+          <Text fontFamily="albert-medium">POINTS</Text>
             <Box>
               <Pressable style={dashboardStyles.quizButton} paddingX={3} paddingY={2} marginTop={4} borderBottomColor={COLORS.darkOrange} borderBottomWidth={3} onPress={() => navigation.navigate('Dashboard')}>
                 <Text color="white" bold paddingX="8px">Submit</Text>
