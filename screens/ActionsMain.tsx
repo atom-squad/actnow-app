@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
     heading: {
       textAlign:'center',
       textTransform:'uppercase',
+      fontFamily: 'albert-bold',
       fontWeight: 'bold',
       marginTop: 15,
       marginBottom: 8,
@@ -130,7 +131,7 @@ const styles = StyleSheet.create({
       textAlign: 'center',
       marginBottom: 16,
       fontSize: 20,
-      fontWeight: 'bold',
+      fontFamily: 'albert-semibold',
       color: COLORS.darkGreen
     },
     seeMoreText: {
@@ -138,7 +139,8 @@ const styles = StyleSheet.create({
       fontSize: 17,
       textDecorationLine: 'underline',
       color: COLORS.green60,
-      marginBottom: 24
+      marginBottom: 24,
+      fontFamily: 'albert-medium'
     }
   });
   

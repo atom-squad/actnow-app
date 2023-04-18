@@ -223,13 +223,15 @@ const styles = StyleSheet.create({
     textTransform: 'capitalize',
     fontWeight: 'bold',
     fontSize: 17,
+    fontFamily: 'albert-semibold'
   },
   
   text: {
     textAlign: 'center',
     marginBottom: 16,
     marginTop: 16,
-    fontSize: 16
+    fontSize: 16,
+    fontFamily: 'albert-medium'
   },
   view: {
     alignSelf: 'center',
@@ -271,11 +273,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 18,
     fontWeight: 'bold',
-    marginTop: 5
+    marginTop: 5,
+    fontFamily: 'albert-semibold'
   },
   pointsText: {
     textAlign: 'center',
     fontSize: 15,
+    fontFamily: 'albert-medium'
   },
   pointsBoxContent: {
     textAlign: 'center'
@@ -286,6 +290,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     marginRight: 16,
     flexBasis: '60%',
+    fontFamily: 'albert-medium'
   },
   checkbox: {
     borderRadius: 12,
